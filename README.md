@@ -58,8 +58,8 @@ I (cadox8) updated the code and created the Java API.
 [Cadox8](https://cadox8.github.io) © 2018
 
 ## TODO
-* [ ] Add a proper copyright header to all files.
+* [x] Add a proper copyright header to all files.
 * [ ] Deploy to a public maven repo.
 * [ ] Update to Xenforo 2.0
 * [ ] Better and more documentation
-* [ ] More functionabilities
+* [ ] More functionalists

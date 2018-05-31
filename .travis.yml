@@ -1,6 +1,10 @@
+before_install: cd Java-API
 language: java
+
 install: mvn clean install
+
 jdk:
   - oraclejdk8
+  
 notifications:
   email: false

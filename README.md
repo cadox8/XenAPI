@@ -1,5 +1,11 @@
 ![Logo](http://i.imgur.com/1qYuVcr.png)
 
+[![Build Status](https://travis-ci.org/cadox8/XenAPI.svg?branch=master)](https://travis-ci.org/cadox8/XenAPI)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI.svg?type=small)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI?ref=badge_small)
+
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/powered-by-oxygen.svg)](https://forthebadge.com)
+
 ### This is a simple Xenforo API for Java and PHP.
 -----
 

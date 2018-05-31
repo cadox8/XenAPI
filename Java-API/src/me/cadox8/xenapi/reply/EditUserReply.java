@@ -1,6 +1,5 @@
 package me.cadox8.xenapi.reply;
 
-import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import lombok.Getter;
 import me.cadox8.xenapi.request.RequestType;

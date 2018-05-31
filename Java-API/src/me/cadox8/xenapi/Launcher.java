@@ -7,7 +7,6 @@ import me.cadox8.xenapi.request.RequestParam;
 import me.cadox8.xenapi.request.RequestType;
 import me.cadox8.xenapi.utils.Callback;
 
-//ToDo: Complete
 public class Launcher {
 
     public static void main(String... args) {

@@ -1,3 +1,22 @@
+/*
+ *  Copyright (c) 2018.
+ *
+ *  This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
+ *
+ *  XenAPI is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  XenAPI is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package me.cadox8.xenapi.request;
 
 import lombok.AllArgsConstructor;
@@ -8,6 +27,9 @@ import java.util.function.Function;
 @AllArgsConstructor
 public enum RequestParam {
 
+    // Global Params
+
+    // Specific Params
     AUTH_USER(RequestType.AUTHENTICATE, "username", String.class),
     AUTH_PASS(RequestType.AUTHENTICATE, "password", String.class),
 
@@ -45,7 +67,6 @@ public enum RequestParam {
     POST_ID(RequestType.GET_POST, "value", Integer.class),
 
     //ToDo: getPosts by values
-
 
     AVATAR_USER(RequestType.AVATAR, "value", String.class),
     AVATAR_SIZE(RequestType.AVATAR, "size", Character.class);

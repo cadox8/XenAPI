@@ -1,3 +1,22 @@
+/*
+ *  Copyright (c) 2018.
+ *
+ *  This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
+ *
+ *  XenAPI is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  XenAPI is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package me.cadox8.xenapi;
 
 import com.google.gson.Gson;
@@ -27,7 +46,7 @@ public class XenAPI {
 
     @Getter private static XenAPI instance;
     @Getter private final Gson gson;
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     private final ExecutorService exService = Executors.newCachedThreadPool();
 
@@ -37,7 +56,6 @@ public class XenAPI {
         instance = this;
 
         httpClient = HttpClientBuilder.create().build();
-
         gson = new GsonBuilder().create();
     }
 
@@ -45,11 +63,17 @@ public class XenAPI {
     /**
      * Sets the API token
      *
-     * @param token API Token
+     * @param token API Token (String)
      */
     public void setToken(String token) {
         setToken(UUID.fromString(token));
     }
+
+    /**
+     * Sets the API token
+     *
+     * @param token API Token (UUID)
+     */
     public void setToken(UUID token) {
         this.token = token;
     }
@@ -61,9 +85,7 @@ public class XenAPI {
      * @param url Base URL to the forum
      */
     public void setBaseURL(String url) {
-        if (!url.startsWith("h")) url = url.replaceAll(url, "http://" + url);
         if (!url.endsWith("/")) url = url.replaceAll(url, url + "/");
-
         Request.setBASE_URL(url);
     }
 

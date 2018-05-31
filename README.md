@@ -6,7 +6,7 @@ This is a simple Xenforo API for Java and PHP.
 
 ### Documentation
 XenAPI documentation can be found in the [Documentation](https://github.com/cadox8/XenAPI/wiki).
-Java documentation can be found mostly in the code or [JavaDocs](https://xenapi.github.io/javadocs/).
+Java documentation can be found mostly in the code or [JavaDocs](https://cadox8.github.io/XenAPI/).
 
 ### Instalation
 The api.php goes in the root of the XenForo installation.

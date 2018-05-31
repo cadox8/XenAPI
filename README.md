@@ -1,4 +1,5 @@
 ![Logo](http://i.imgur.com/1qYuVcr.png)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI?ref=badge_shield)
 
 [![Build Status](https://travis-ci.org/cadox8/XenAPI.svg?branch=master)](https://travis-ci.org/cadox8/XenAPI)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI.svg?type=small)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI?ref=badge_small)
@@ -62,6 +63,9 @@ I (cadox8) updated the code and created the Java API.
 
 [Contex](https://github.com/Contex) © 2012-2014<br>
 [Cadox8](https://cadox8.github.io) © 2018
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI?ref=badge_large)
 
 ## TODO
 * [x] Add a proper copyright header to all files.

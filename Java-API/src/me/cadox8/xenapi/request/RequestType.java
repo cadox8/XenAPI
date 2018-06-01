@@ -27,7 +27,15 @@ import me.cadox8.xenapi.reply.*;
 public enum RequestType {
 
     AUTHENTICATE("authenticate", AuthenticateReply.class),
+    LOGOUT("logout", LogoutReply.class),
+    REGISTER("register", RegisterReply.class),
+
+    UPGRADE_USER("upgradeuser"),
+
+    SEARCH("search"),
+
     EDIT_USER("editUser", EditUserReply.class),
+
     GET_ADDON("getAddon", AddonReply.class),
     GET_ADDONS("getAddons", AddonsReply.class),
     GET_ACCTIONS("getActions", ActionsReply.class),
@@ -37,13 +45,13 @@ public enum RequestType {
     GET_NODE("getNode", NodeReply.class),
     GET_NODES("getNodes"),
     GET_POST("getPost", PostReply.class),
-    AVATAR("getAvatar", AvatarReply.class);
+    GET_AVATAR("getAvatar", AvatarReply.class);
+
 
     @Getter private final String key;
     @Getter private final Class<? extends AbstractReply> replyClass;
 
     RequestType(String key) {
-        this.key = key;
-        this.replyClass = null;
+        this(key, null);
     }
 }

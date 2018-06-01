@@ -59,7 +59,7 @@ public class RequestBuilder {
      */
     private boolean validate(RequestParam param, Object value) {
         if (value != null && value.getClass().equals(param.getValueClass())) {
-            return param.getRequestType() == requestType;
+            return param.getRequestType() == requestType || param.getRequestType2() == requestType;
         }
         return false;
     }

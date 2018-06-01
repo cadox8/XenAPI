@@ -27,9 +27,6 @@ import java.util.function.Function;
 @AllArgsConstructor
 public enum RequestParam {
 
-    // Global Params
-
-    // Specific Params
     AUTH_USER(RequestType.AUTHENTICATE, "username", String.class),
     AUTH_PASS(RequestType.AUTHENTICATE, "password", String.class),
 
@@ -60,6 +57,7 @@ public enum RequestParam {
     CONVER_USER(RequestType.GET_CONVERSATIONS, "value", String.class),
 
     GROUP_ID(RequestType.GET_GROUP, "value", String.class),
+    GROUP_ID_INT(RequestType.GET_GROUP, "value", Integer.class),
 
     NODE_ID(RequestType.GET_NODE, "value", Integer.class),
     NODE_TYPE(RequestType.GET_NODES, "node_type", String.class),

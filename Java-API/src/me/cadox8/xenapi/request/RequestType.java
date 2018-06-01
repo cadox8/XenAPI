@@ -30,13 +30,13 @@ public enum RequestType {
     EDIT_USER("editUser", EditUserReply.class),
     GET_ADDON("getAddon", AddonReply.class),
     GET_ADDONS("getAddons", AddonsReply.class),
-    //GET_ACCTIONS("getActions"), Nope :D
+    GET_ACCTIONS("getActions", ActionsReply.class),
     GET_ALERTS("getAlerts"),
     GET_CONVERSATIONS("getConversations"),
-    GET_GROUP("getGroup"),
+    GET_GROUP("getGroup", GroupReply.class),
     GET_NODE("getNode", NodeReply.class),
     GET_NODES("getNodes"),
-    GET_POST("getPost"),
+    GET_POST("getPost", PostReply.class),
     AVATAR("getAvatar", AvatarReply.class);
 
     @Getter private final String key;

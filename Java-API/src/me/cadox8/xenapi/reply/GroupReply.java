@@ -22,25 +22,16 @@ package me.cadox8.xenapi.reply;
 import lombok.Getter;
 import me.cadox8.xenapi.request.RequestType;
 
-import java.util.ArrayList;
+public class GroupReply extends AbstractReply {
 
-public class AddonsReply extends AbstractReply {
-
-    @Getter private int count;
-    @Getter private ArrayList<Addon> addons;
+    @Getter private String title;
+    @Getter private String display_style_priority;
+    @Getter private String username_css;
+    @Getter private String user_title;
+    @Getter private String user_group_id;
 
     @Override
     public RequestType getRequestType() {
-        return RequestType.GET_ADDON;
-    }
-
-
-    public class Addon {
-
-        @Getter private int id;
-        @Getter private String title;
-        @Getter private String version;
-        @Getter private boolean enabled;
-        @Getter private String url;
+        return RequestType.GET_GROUP;
     }
 }

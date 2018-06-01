@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class RequestBuilder {
 
-    private RequestType requestType = null;
+    private RequestType requestType;
     private Map<RequestParam, Object> params = new HashMap<>();
 
     private RequestBuilder(RequestType requestType) {
@@ -69,5 +69,9 @@ public class RequestBuilder {
      */
     public Request createRequest() {
         return new Request(requestType, params);
+    }
+
+    public Request createRequest(String username) {
+        return new Request(requestType, params).withGrab_As(username);
     }
 }

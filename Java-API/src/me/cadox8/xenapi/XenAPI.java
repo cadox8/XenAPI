@@ -91,13 +91,13 @@ public class XenAPI {
 
 
     /**
-     * Execute Request asynchronously, executes Callback when finished
+     * Execute Request, executes Callback when finished
      *
      * @param request  Request to get
      * @param callback Callback to execute
      * @param <R>      Class of the reply
      */
-    public <R extends AbstractReply> void getAsync(Request request, Callback<R> callback) {
+    public <R extends AbstractReply> void getReply(Request request, Callback<R> callback) {
         if (getToken() == null) return;
         get(request, callback);
     }
@@ -117,7 +117,6 @@ public class XenAPI {
             try {
                 String content = EntityUtils.toString(obj.getEntity(), "UTF-8");
                 value = gson.fromJson(content, (Type) request.getRequestType().getReplyClass());
-
             } catch (Throwable t) {
                 callback.callback(t, null);
                 return obj;

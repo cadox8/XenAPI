@@ -32,9 +32,24 @@ public class Request {
     @Getter private final RequestType requestType;
     @Getter private final Map<RequestParam, Object> params;
 
+    @Getter private String grab_as;
+
     public Request(RequestType requestType, Map<RequestParam, Object> params) {
         this.requestType = requestType;
         this.params = params;
+
+        grab_as = "mp2d2rf";
+    }
+
+    /**
+     * Allows to getResponse a Reply with one username
+     *
+     * @param username The username to grab
+     * @return A Request
+     */
+    public Request withGrab_As(String username) {
+        grab_as = username;
+        return this;
     }
 
     /**
@@ -52,6 +67,9 @@ public class Request {
             url += entry.getKey().getQueryField() + "=" + entry.getKey().serialize(entry.getValue()) + "&";
         }
         url += "hash=" + xenAPI.getToken();
+
+        if (!grab_as.equalsIgnoreCase("mp2d2rf")) url += "&grab_as=" + grab_as;
+
         return url;
     }
 }

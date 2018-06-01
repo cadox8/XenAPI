@@ -28,7 +28,7 @@ public abstract class AbstractReply {
     @Getter protected String message;
 
     /**
-     * Gets the type of requests to get the Reply Class
+     * Gets the type of requests to getResponse the Reply Class
      *
      * @return Returns the type of Request
      *

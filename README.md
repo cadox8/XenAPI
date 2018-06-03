@@ -1,4 +1,4 @@
-![Logo](http://i.imgur.com/1qYuVcr.png)
+![Logo](docs/img/logo.png)
 
 [![Build Status](https://travis-ci.org/cadox8/XenAPI.svg?branch=master)](https://travis-ci.org/cadox8/XenAPI)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI.svg?type=small)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI?ref=badge_small)

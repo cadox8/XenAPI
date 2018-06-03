@@ -12,6 +12,6 @@ XenAPI was created in 2012 by [Contex](https://github.com/Contex) and it was "ab
 All downloads are hosted in [Github](https://github.com/cadox8/XenAPI/releases).
 
 ## Documentation
-**Web-API:** You can get the PHP/Web documentation [here](rest-api.md).
-**Java-API:** You can get the Java documentation [here](java-api.md).
+**Web-API:** You can get the PHP/Web documentation [here](rest-api.md).<br>
+**Java-API:** You can get the Java documentation [here](java-api.md).<br>
 **Javadocs:** You can check the Javadocs [here](https://cadox8.github.io/XenAPI/javadocs).

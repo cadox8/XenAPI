@@ -13,9 +13,8 @@
 All downloads are hosted in [Github](https://github.com/cadox8/XenAPI/releases).
 
 ## Documentation
-**Web-API:** You can get the PHP/Web documentation [here](https://github.com/cadox8/XenAPI/wiki/REST-API).<br>
-**Java-API:** You can get the Java documentation [here](https://github.com/cadox8/XenAPI/wiki/Java-API).<br>
-**Javadocs:** You can check the Javadocs [here](https://cadox8.github.io/XenAPI/).
+**Web-API & Java-API:** You can get the documentation [here](**Javadocs:** You can check the Javadocs [here](https://cadox8.github.io/XenAPI).<br>
+**Javadocs:** You can check the Javadocs [here](https://cadox8.github.io/XenAPI/javadocs).
 
 ## Instalation
 The api.php goes in the root of the XenForo installation.

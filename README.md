@@ -13,7 +13,7 @@
 All downloads are hosted in [Github](https://github.com/cadox8/XenAPI/releases).
 
 ## Documentation
-**Web-API & Java-API:** You can get the documentation [here](**Javadocs:** You can check the Javadocs [here](https://cadox8.github.io/XenAPI).<br>
+**Web-API & Java-API:** You can get the documentation [here](https://cadox8.github.io/XenAPI).<br>
 **Javadocs:** You can check the Javadocs [here](https://cadox8.github.io/XenAPI/javadocs).
 
 ## Instalation

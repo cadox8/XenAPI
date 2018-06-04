@@ -11,6 +11,7 @@ Grabs the alerts from the specified user, if type is not specified, default (rec
 | getAlerts | 1.1 | <a href="#per">performance</a>, <a href="#grab">grab_as</a> |
 
 #### Aditional Parameters
+
 | Parameter value | Description |
 | :-: | :-: |
 | fetchPopupItems | Fetch alerts viewed in the last options:alertsPopupExpiryHours hours. |
@@ -20,6 +21,7 @@ Grabs the alerts from the specified user, if type is not specified, default (rec
 For more information, see /library/XenForo/Model/Alert.php.
 
 #### Error Codes
+
 | ErrorID | Cause of Error |
 | :-: | :-: |
 | 1 | The “value” parameter was set but empty |

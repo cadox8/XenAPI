@@ -18,6 +18,7 @@ Edit the specified user.
 
 
 #### Error Codes
+
 | ErrorID | Cause of Error |
 | :-: | :-: |
 | 1 | The “user” parameter was set but empty |
@@ -27,11 +28,13 @@ Edit the specified user.
 | 10 | API key was not used |
 
 #### Required Parameters
+
 | Parameter Value | Description | Example |
 | :-: | :-: | :-: |
 | user | The user to edit | cadox8 |
 
 #### Additional Parameters
+
 | Parameter Value | Description | Example |
 | :-: | :-: | :-: |
 | username | The new username | cadox |

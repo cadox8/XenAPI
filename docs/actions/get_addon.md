@@ -8,6 +8,7 @@ Returns any relevant addon information about the specified by the **“value”*
 | getAddon | 1.2 | <a href="#per">performance</a> |
 
 #### Error Codes
+
 | ErrorID | Cause of Error |
 | :-: | :-: |
 | 1 | The “value” parameter was set but empty |

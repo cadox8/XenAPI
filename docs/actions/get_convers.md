@@ -8,6 +8,7 @@ Grabs the alerts from the specified user.
 | getConversations | 1.4 | <a href="#per">performance</a>, <a href="#limit">limit</a>, <a href="#grab">grab_as</a> |
 
 #### Error Codes
+
 | ErrorID | Cause of Error |
 | :-: | :-: |
 | 1 | The “value” parameter was set but empty |

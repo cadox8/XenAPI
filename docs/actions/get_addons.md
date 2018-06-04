@@ -8,6 +8,7 @@ Returns all the installed addons, if type is not specified, default (all) is use
 | getAddons | 1.2 | <a href="#per">performance</a> |
 
 #### Aditional Parameters
+
 | Parameter value | Description |
 | :-: | :-: |
 | all | This is default, and will return all the addons, ignoring if they are installed or not. |
@@ -15,6 +16,7 @@ Returns all the installed addons, if type is not specified, default (all) is use
 | disabled | Fetches all the addons that are disabled, ignoring the enabled ones. |
 
 #### Error Codes
+
 | ErrorID | Cause of Error |
 | :-: | :-: |
 | 1 | The “type” parameter was set but empty |

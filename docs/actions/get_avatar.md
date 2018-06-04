@@ -11,6 +11,7 @@ Returns the avatar of user specified by the “value” parameter, if size is no
 | getAvatar | 1.0 | <a href="#per">performance</a>, <a href="#grab">grab_as</a> |
 
 #### Aditional Parameters
+
 | Parameter value | Description |
 | :-: | :-: |
 | s | Small avatar (48px * 48px) |
@@ -18,6 +19,7 @@ Returns the avatar of user specified by the “value” parameter, if size is no
 | l | Large avatar (192px * 192px) |
 
 #### Error Codes
+
 | ErrorID | Cause of Error |
 | :-: | :-: |
 | 1 | The “value” parameter was set but empty |

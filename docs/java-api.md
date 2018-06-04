@@ -14,8 +14,7 @@ First, you must have the new API Key setted in api.php and the file in Xenforo r
 
 In a new program, you have to instance the XenAPI class like this:
 ```java
-XenAPI api = new XenAPI();
-api.setToken("YOUR_API_KEY"); //I recomend to have a [Version 4 UUID](http://uuidgenerator.net) as the Key
+XenAPI api = new XenAPI("YOUR_API_KEY"); //I recomend to have a [Version 4 UUID](http://uuidgenerator.net) as the Key
 api.setBaseURL("YOUR_FORUM_URL"); //Must have http:// | https://
 ```
 
@@ -42,18 +41,19 @@ But XenAPI has some classes to get the Reply. In this case, you will need to use
 This is a example of how to get the reply (for > Java 1.8) and how to handle if we have an error code:
 
 ```java
-api.get(request, (Callback<AuthenticateReply>) (failCause, result)-> {
-    if (result.getError() != 0) {
-        System.out.println("Error (" + result.getError() + "): " + result.getMessage());
-        return;
-    }
-
-    if (failCause != null) {
-        failCause.printStackTrace();
-    } else {
-        System.out.println("Result: " + result.getHash());
-    }
-});
+        api.getReply(r, (Callback<AuthenticateReply>) (failCause, result)-> {
+            try {
+                result.checkError();
+                
+                if (failCause != null) {
+                    failCause.printStackTrace();
+                } else {
+                    System.out.println("Result: " + result.getHash());
+                }
+            } catch (ArgsErrorException e) {
+                e.printStackTrace();
+            }
+        });
 ```
 
 As you can see, we have ``Callback<AuthenticateReply>`` which allows you to use the methods of these class. You will need to change the class between the ``< >`` when you change your RequestType.

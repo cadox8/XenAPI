@@ -37,8 +37,6 @@ public class Request {
     public Request(RequestType requestType, Map<RequestParam, Object> params) {
         this.requestType = requestType;
         this.params = params;
-
-        grab_as = "mp2d2rf";
     }
 
     /**
@@ -68,7 +66,7 @@ public class Request {
         }
         url += "hash=" + xenAPI.getToken();
 
-        if (!grab_as.equalsIgnoreCase("mp2d2rf")) url += "&grab_as=" + grab_as;
+        if (!grab_as.equalsIgnoreCase("")) url += "&grab_as=" + grab_as;
 
         return url;
     }

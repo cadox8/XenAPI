@@ -37,7 +37,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.URL;
-import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -45,37 +44,26 @@ import java.util.concurrent.Future;
 public class XenAPI {
 
     @Getter private static XenAPI instance;
-    @Getter private final Gson gson;
+    private final Gson gson;
     private final HttpClient httpClient;
 
     private final ExecutorService exService = Executors.newCachedThreadPool();
 
-    @Getter private UUID token;
+    @Getter private final String token;
 
-    public XenAPI() {
+
+    /**
+     * Default constructor
+     *
+     * @param token The API token
+     */
+    public XenAPI(String token) {
         instance = this;
+
+        this.token = token;
 
         httpClient = HttpClientBuilder.create().build();
         gson = new GsonBuilder().create();
-    }
-
-
-    /**
-     * Sets the API token
-     *
-     * @param token API Token (String)
-     */
-    public void setToken(String token) {
-        setToken(UUID.fromString(token));
-    }
-
-    /**
-     * Sets the API token
-     *
-     * @param token API Token (UUID)
-     */
-    public void setToken(UUID token) {
-        this.token = token;
     }
 
 

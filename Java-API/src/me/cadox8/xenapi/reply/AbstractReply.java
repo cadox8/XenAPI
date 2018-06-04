@@ -20,6 +20,7 @@
 package me.cadox8.xenapi.reply;
 
 import lombok.Getter;
+import me.cadox8.xenapi.exceptions.ArgsErrorException;
 import me.cadox8.xenapi.request.RequestType;
 
 public abstract class AbstractReply {
@@ -36,6 +37,15 @@ public abstract class AbstractReply {
      * @see RequestType#getReplyClass()
      */
     public abstract RequestType getRequestType();
+
+    /**
+     * Check if you miss any args in the request
+     *
+     * @throws ArgsErrorException
+     */
+    public void checkError() throws ArgsErrorException {
+        if (getError() != 0) throw new ArgsErrorException(getError(), getMessage(), getRequestType());
+    }
 
     @Override
     public String toString() {

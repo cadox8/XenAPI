@@ -9,6 +9,22 @@
 ### This is a simple Xenforo API for Java and PHP.
 -----
 
+## Summary
+* [Downloads](#downloads)
+* [Documentation](#documentation)
+* [Bug Reporting](#bug-reporting)
+* [Contributing](#contributing)
+* [Instalation](#installation)
+* [Usage & API Key](#usage--api-key)
+  - [For PHP](#for-php)
+  - [For Java](#for-java)
+* [Dependencies](#dependencies)
+* [Bug Reporting](#bug-reporting)
+* [License & Copyright](#license--copyright)
+* [Donations](#donations)
+* [TODO](#todo)
+-----
+
 ## Downloads
 All downloads are hosted in [Github](https://github.com/cadox8/XenAPI/releases).
 
@@ -16,12 +32,18 @@ All downloads are hosted in [Github](https://github.com/cadox8/XenAPI/releases).
 **Web-API & Java-API:** You can get the documentation [here](https://cadox8.github.io/XenAPI).<br>
 **Javadocs:** You can check the Javadocs [here](https://cadox8.github.io/XenAPI/javadocs).
 
+## Bug Reporting
+You can create an issue here on GitHub to report a bug with the API or to suggest enhancements.
+
+## Contributing
+If you want to contribute to the project, you must accept and follow our [Code Of Conduct](CODE_OF_CONDUCT.md) and our [guides for contributing](CONTRIBUTING.md).
+
 ## Instalation
-The api.php goes in the root of the XenForo installation.
+The api.php goes in the root folder of the XenForo installation.
 
-Then, you will need to **Obtain the API Key**
+Then, you will need to [Set an API Key](#usage--api-key)
 
-## Obtaining an API Key
+## Usage & API Key
 
 **NOTE:** I recomend a Version 4 UUID for the API Key (really recomended). You can generate one [here](https://www.uuidgenerator.net).
 
@@ -31,33 +53,30 @@ To run change the API key by replace the ``xenapi`` with your desired API key (U
 $restAPI = new RestAPI('NEW_API_KEY');
 ```
 
-or send hash in format: username:hash, where hash is result authenticate action.
+or send hash in format: ``username:hash`` , where hash is result authenticate action.
 
 ### For Java
-Open api.php and change ``xenapi`` with your API Key (UUID).
+**You need to set the new API Key in PHP before doing this!**
 
 ```java
-XenAPI api = new XenAPI();
-api.setToken("NEW_API_KEY");
+XenAPI api = new XenAPI("YOUR_API_KEY"); // Setted in api.php
+api.setBaseURL("YOUR_FORUM_URL"); // Must be http(s)://link.extension or http(s)://ip
 ```
 
 Then, you will use that Key in the program.
 
 ## Dependencies
-The XenAPI has the following dependencies:
+The XenAPI (Java) has the following dependencies:
 * [Google Gson library](https://mvnrepository.com/artifact/com.google.code.gson/gson)
 * [Project Lombok](https://projectlombok.org)
 * [Apache HttpClient](https://hc.apache.org)
-
-## Bug Reporting
-You can create an issue here on GitHub to report a bug with the API or to suggest enhancements.
 
 ## License & Copyright
 XenAPI is licensed under [GNU LESSER GENERAL PUBLIC LICENSE Version 3](LICENSE.txt).
 
 The logo and some parts of the PHP Code is property of [Contex](https://github.com/Contex/XenAPI).
 
-I (cadox8) updated the code and created the Java API.
+Cadox8 updated the code and created the Java API.
 
 [Contex](https://github.com/Contex) © 2012-2014<br>
 [Cadox8](https://cadox8.github.io) © 2018
@@ -65,9 +84,15 @@ I (cadox8) updated the code and created the Java API.
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI?ref=badge_large)
 
+## Donations
+Building an Open Source Project is hard. You have to invert time and resources. And you won't be paid for that, that's why I'm putting a donation link here. :money_with_wings: :money_with_wings:
+
+If you appreciate my work and want to help me maintaining this or other projects, you can donate me through [PayPal](https://paypal.me/Cadox8) or you can just [Buy Me a Coffee](https://ko-fi.com/devcadox).
+
 ## TODO
 * [x] Add a proper copyright header to all files.
 * [ ] Deploy to a public maven repo.
 * [ ] Update to Xenforo 2.0
 * [ ] Better and more documentation
-* [ ] More functionalists
+* [ ] Build a full Java-api
+* [x] Feed the Cat

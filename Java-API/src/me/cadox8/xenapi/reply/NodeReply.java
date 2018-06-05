@@ -20,8 +20,10 @@
 package me.cadox8.xenapi.reply;
 
 import lombok.Getter;
+import lombok.ToString;
 import me.cadox8.xenapi.request.RequestType;
 
+@ToString
 public class NodeReply extends AbstractReply {
 
     @Getter private int node_id;

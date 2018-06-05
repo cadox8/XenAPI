@@ -20,9 +20,11 @@
 package me.cadox8.xenapi.reply;
 
 import lombok.Getter;
+import lombok.ToString;
 import me.cadox8.xenapi.exceptions.ArgsErrorException;
 import me.cadox8.xenapi.request.RequestType;
 
+@ToString
 public abstract class AbstractReply {
 
     @Getter protected int error = 0;
@@ -45,10 +47,5 @@ public abstract class AbstractReply {
      */
     public void checkError() throws ArgsErrorException {
         if (getError() != 0) throw new ArgsErrorException(getError(), getMessage(), getRequestType());
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractReply{error=" + error + ", message=" + message + "'}";
     }
 }

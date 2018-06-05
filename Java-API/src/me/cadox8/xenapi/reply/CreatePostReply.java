@@ -23,26 +23,29 @@ import lombok.Getter;
 import lombok.ToString;
 import me.cadox8.xenapi.request.RequestType;
 
-import java.util.ArrayList;
-
 @ToString
-public class AddonsReply extends AbstractReply {
+public class CreatePostReply extends AbstractReply {
 
-    @Getter private int count;
-    @Getter private ArrayList<Addon> addons;
+    @Getter private String position;
+    @Getter private String warning_message;
+    @Getter private String last_edit_date;
+    @Getter private String like_users;
+    @Getter private String post_id;
+    @Getter private String message;
+    @Getter private String username;
+    @Getter private String last_edit_user_id;
+    @Getter private String attach_count;
+    @Getter private String likes;
+    @Getter private String user_id;
+    @Getter private String message_state;
+    @Getter private String warning_id;
+    @Getter private String thread_id;
+    @Getter private String edit_count;
+    @Getter private String post_date;
+    @Getter private String ip_id;
 
     @Override
     public RequestType getRequestType() {
-        return RequestType.GET_ADDON;
-    }
-
-
-    public class Addon {
-
-        @Getter private int id;
-        @Getter private String title;
-        @Getter private String version;
-        @Getter private boolean enabled;
-        @Getter private String url;
+        return RequestType.CREATE_ALERT;
     }
 }

@@ -21,10 +21,12 @@ package me.cadox8.xenapi.reply;
 
 import com.google.gson.reflect.TypeToken;
 import lombok.Getter;
+import lombok.ToString;
 import me.cadox8.xenapi.request.RequestType;
 
 import java.lang.reflect.Type;
 
+@ToString
 public class EditUserReply extends AbstractReply {
 
     @Getter private Type type = new TypeToken<String>() {}.getType();

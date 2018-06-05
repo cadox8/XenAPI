@@ -20,10 +20,9 @@
 package me.cadox8.xenapi;
 
 import me.cadox8.xenapi.exceptions.ArgsErrorException;
-import me.cadox8.xenapi.reply.AuthenticateReply;
+import me.cadox8.xenapi.reply.ActionsReply;
 import me.cadox8.xenapi.request.Request;
 import me.cadox8.xenapi.request.RequestBuilder;
-import me.cadox8.xenapi.request.RequestParam;
 import me.cadox8.xenapi.request.RequestType;
 import me.cadox8.xenapi.utils.Callback;
 
@@ -33,19 +32,19 @@ public class Launcher {
         XenAPI api = new XenAPI("e65ef8da-ca6a-437c-ab8b-4b2e9e86cd10");
         api.setBaseURL("http://192.168.1.2/foro");
 
-        Request r = RequestBuilder.newBuilder(RequestType.AUTHENTICATE).addParam(RequestParam.AUTH_PASS, "ivan00").createRequest();
+        Request r = RequestBuilder.newBuilder(RequestType.GET_ACCTIONS).createRequest();
 
         System.out.println("URL: " + r.getURL(api));
         System.out.println("Raw: " + XenAPI.getWebInfo(r.getURL(api)) + "\n\n");
 
 
-        api.getReply(r, (Callback<AuthenticateReply>) (failCause, result)-> {
+        api.getReply(r, (Callback<ActionsReply>) (failCause, result)-> {
             try {
                 result.checkError();
                 if (failCause != null) {
                     failCause.printStackTrace();
                 } else {
-                    System.out.println("Result: " + result.getHash());
+                    System.out.println("Result: " + result.toString());
                 }
             } catch (ArgsErrorException e) {
                 e.printStackTrace();

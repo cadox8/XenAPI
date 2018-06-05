@@ -30,6 +30,10 @@ public enum RequestType {
     LOGOUT("logout", LogoutReply.class),
     REGISTER("register", RegisterReply.class),
 
+    CREATE_ALERT("createAlert", CreateAlertReply.class),
+    CREATE_POST("createPost", CreatePostReply.class),
+    CREATE_THREAD("createThread", CreateThreadReply.class),
+
     UPGRADE_USER("upgradeuser"),
 
     SEARCH("search"),

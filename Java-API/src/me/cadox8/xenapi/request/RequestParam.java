@@ -30,6 +30,23 @@ public enum RequestParam {
     AUTH_USER(RequestType.AUTHENTICATE, "username", String.class),
     AUTH_PASS(RequestType.AUTHENTICATE, "password", String.class),
 
+    CREATE_ALERT_USER(RequestType.CREATE_ALERT, "user", String.class),
+    CREATE_ALERT_CAUSE_USER(RequestType.CREATE_ALERT, "cause_user", String.class),
+    CREATE_ALERT_CONTENT_TYPE(RequestType.CREATE_ALERT, "content_type", String.class),
+    CREATE_ALERT_CONTENT_ID(RequestType.CREATE_ALERT, "content_id", Integer.class),
+    CREATE_ALERT_ALERT_ACTION(RequestType.CREATE_ALERT, "alert_action", String.class),
+
+    CREATE_POST_THREAD_ID(RequestType.CREATE_POST, "thread_id", Integer.class),
+    CREATE_POST_MESSAGE(RequestType.CREATE_POST, "message", String.class),
+
+    CREATE_THREAD_TITLE(RequestType.CREATE_THREAD, "title", String.class),
+    CREATE_THREAD_MESSAGE(RequestType.CREATE_THREAD, "message", String.class),
+    CREATE_THREAD_NODE_ID(RequestType.CREATE_THREAD, "node_id", Integer.class),
+    CREATE_THREAD_PREFIX_ID(RequestType.CREATE_THREAD, "prefix_id", Integer.class),
+    CREATE_THREAD_DISCUSSION_OPEN(RequestType.CREATE_THREAD, "discussion_open", Integer.class),
+    CREATE_THREAD_DISCUSSION_STATE(RequestType.CREATE_THREAD, "discussion_state", String.class),
+    CREATE_THREAD_STICKY(RequestType.CREATE_THREAD, "sticky", Integer.class),
+
     EDIT_USER(RequestType.EDIT_USER, RequestType.REGISTER, "username", String.class),
     EDIT_PASS(RequestType.EDIT_USER, RequestType.REGISTER, "password", String.class),
     EDIT_EMAIL(RequestType.EDIT_USER, RequestType.REGISTER, "email", String.class),

@@ -32,7 +32,7 @@ public class Request {
     @Getter private final RequestType requestType;
     @Getter private final Map<RequestParam, Object> params;
 
-    @Getter private String grab_as;
+    @Getter private String grab_as = "";
 
     public Request(RequestType requestType, Map<RequestParam, Object> params) {
         this.requestType = requestType;

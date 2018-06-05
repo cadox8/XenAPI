@@ -20,8 +20,10 @@
 package me.cadox8.xenapi.reply;
 
 import lombok.Getter;
+import lombok.ToString;
 import me.cadox8.xenapi.request.RequestType;
 
+@ToString
 public class RegisterReply extends AbstractReply {
 
     @Getter private String avatar_crop_x;

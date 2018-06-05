@@ -19,13 +19,14 @@
 
 package me.cadox8.xenapi.reply;
 
-import com.google.gson.JsonElement;
 import lombok.Getter;
+import lombok.ToString;
 import me.cadox8.xenapi.request.RequestType;
 
+@ToString
 public class AuthenticateReply extends AbstractReply {
 
-    @Getter private JsonElement hash;
+    @Getter private String hash;
 
     @Override
     public RequestType getRequestType() {

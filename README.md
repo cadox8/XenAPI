@@ -10,7 +10,7 @@
 -----
 
 ## Summary
-* [Downloads](#downloads)
+* [Downloads & Repo](#downloads--repo)
 * [Documentation](#documentation)
 * [Bug Reporting](#bug-reporting)
 * [Contributing](#contributing)
@@ -25,8 +25,29 @@
 * [TODO](#todo)
 -----
 
-## Downloads
+## Downloads & Repo
 All downloads are hosted in [Github](https://github.com/cadox8/XenAPI/releases).
+
+For the Java-API, you can add it on Maven:
+
+```xml
+    <repositories>
+        <repository>
+            <id>XenAPI Repo</id>
+            <url>https://cadox8.github.io/repo/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>me.cadox8</groupId>
+            <artifactId>XenAPI</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+    </dependencies>
+```
+
+**NOTE:** You can use ``RELEASE`` as version or you can use the version number (you can check all versions [here](https://github.com/cadox8/XenAPI/releases))
 
 ## Documentation
 **Web-API & Java-API:** You can get the documentation [here](https://cadox8.github.io/XenAPI).<br>

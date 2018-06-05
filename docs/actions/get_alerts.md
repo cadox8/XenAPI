@@ -28,7 +28,7 @@ For more information, see /library/XenForo/Model/Alert.php.
 | 1 | The “type” parameter was set but empty |
 | 3 | Neither of the “value” and “hash” parameters were set |
 | 3 | The “hash” parameter was an API key but the “value” parameter was not set |
-| 5 | The “value” parameter was not a valid user (not registered) |
+| 4 | The “value” parameter was not a valid user (not registered) |
 
 #### Requests
 ```php

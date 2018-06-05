@@ -14,6 +14,9 @@ For these examples I’m using these the following values:
 
 ## Actions
 * [Authenticate](actions/authenticate.md)
+* [Create Alert](actions/create_alert.md)
+* [Create Post](actions/create_post.md)
+* [Create Thread](actions/create_thread.md)
 * [Edit User](actions/edit_user.md)
 * [Get Addon](actions/get_addon.md)
 * [Get Addons](actions/get_addons.md)

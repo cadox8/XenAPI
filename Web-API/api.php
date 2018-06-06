@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of XenAPI.
+ * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
  * XenAPI is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -16,13 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// To change the API key, replace the REPLACE_THIS_WITH_AN_API_KEY with your desired API key.
+// To change the API key, replace the xenapi with your desired API key.
 $restAPI = new RestAPI('xenapi');
 
 # DO NOT CHANGE ANYTHING BELOW THIS LINE UNLESS
 # YOU REALLY KNOW WHAT ARE YOU DOING
-
-# REALLY, DO NOT CHANGE ANYTHING
 
 // Process the request
 if ($restAPI->getAPIKey() !== NULL && $restAPI->isDefaultAPIKey()) {
@@ -58,8 +56,8 @@ if ($restAPI->getAPIKey() !== NULL && $restAPI->isDefaultAPIKey()) {
 $restAPI->processRequest();
 
 class RestAPI {
-    const VERSION = '1.4.4';
-    const DEFAULT_APIKEY = 'xenapi'; # Do not change this
+    const VERSION = '1.5';
+    const DEFAULT_APIKEY = 'xenapi'; # DO NOT CHANGE THIS
     const GENERAL_ERROR = 0x201;
     const USER_ERROR = 0x202;
     const THREAD_ERROR = 0x203;
@@ -129,11 +127,14 @@ class RestAPI {
         'logout'                   => 'public',
         'register'                 => 'api_key',
         'search'                   => 'public',
-        'upgradeuser'              => 'api_key'
+				'searchthreads'            => 'authenticated',
+        'upgradeuser'              => 'api_key',
+				'getunreadposts'           => 'authenticated',
+				'editusermod'              => 'authenticated',
     );
 
     // Array of actions that are user specific and require an username, ID or email for the 'value' parameter.
-    private $user_actions = array('getalerts', 'getavatar', 'getconversation', 'getconversations', 'createprofilepost', 'getuser');
+    private $user_actions = array('getalerts', 'getavatar', 'getconversation', 'getconversations', 'createprofilepost', 'getuser', 'getunreadposts', 'editusermod');
 
     // List of general errors, this is where the 'throwError' function gets the messages from.
     private $general_errors = array(
@@ -161,7 +162,9 @@ class RestAPI {
         21 => 'The "{ERROR}" argument has to be a number',
         22 => 'The argument for "order_by", "{ERROR}", was not found in the list available order by list: "({ERROR2})"',
         23 => 'The argument for "node_type", "{ERROR}", was not found in the list available node type list: "({ERROR2})"',
-        24 => 'The argument for "discussion_state", "{ERROR}", was not found in the list available discussion state list: "({ERROR2})"'
+        24 => 'The argument for "discussion_state", "{ERROR}", was not found in the list available discussion state list: "({ERROR2})"',
+				25 => 'Arguments "{ERROR}" and "{ERROR2}" conflict. Only one allowed',
+				26 => 'Table "{ERROR}" don\'t have column "{ERROR2}"',
     );
 
     // Specific errors related to user actions.
@@ -1657,7 +1660,7 @@ class RestAPI {
                 }
 
                 // List of fields that are accepted to be edited.
-                $edit_fields = array('username', 'password', 'email', 'gender', 'custom_title', 'style_id', 'timezone', 'visible', 'dob_day', 'dob_month', 'dob_year', 'user_state', 'trophy_points');
+                $edit_fields = array('username', 'password', 'email', 'gender', 'custom_title', 'style_id', 'timezone', 'visible', 'dob_day', 'dob_month', 'dob_year', 'user_state', 'trophy_points','signature','about');
 
                 // List of fields that the request should ignore.
                 $ignore_fields = array('hash', 'action', 'user');
@@ -2610,6 +2613,94 @@ class RestAPI {
 
                 // Send the response.
                 $this->sendResponse(array('count' => count($threads), 'threads' => $threads));
+
+						case 'searchthreads':
+								 $conditions = array();
+								 /**
+								 * Return a list of threads
+								 *
+								 * EXAMPLES:
+								 * - api.php?action=searchThreads&title=Some*&state=visible&open=1&type=team&inc_nodes=1,2&ex_nodes=3,4&hash=API_KEY
+								 */
+								 // Check node list to search (include and exclude nodes)
+								 foreach(Array('inc_nodes', 'ex_nodes') AS $node_search_type) {
+									 		if ($this->hasRequest($node_search_type)) {
+								 	 			// Throw error if the $node_search_type argument is set but empty.
+								 				if ($this->getRequest($node_search_type) != '') {
+								 					$this->throwError(1, $node_search_type);
+								 				}
+								 				// Only numbers allowed
+								 				$_node = explode(',', $this->getRequest($node_search_type));
+								 				$_node = array_filter($_node, "ctype_digit");
+								 				if (empty($_node)) {
+								 					$this->throwError(1, $node_search_type);
+								 			}
+								 			// TODO: add `$this->xenAPI->getNode()` test? I'm think: NO, because this is dictionary argument.
+								 			$conditions[$node_search_type] = $_node;
+								 		}
+								 }
+								 if ($this->hasRequest('value')) {
+								 		// Throw error if the 'title' argument is set but empty.
+								 		if ($this->getRequest('value') == '') {
+								 			$this->throwError(1, 'value');
+								 		}
+								 		$conditions['title'] = $this->getRequest('value');
+								 }
+								 //discussion_open
+								 if ($this->hasRequest('open')) {
+								 		if (in_array(strtolower($this->getRequest('open')), Array('n','no','false','0',''))) {
+								 		$conditions['open'] = 0;
+								 		} else {
+								 		$conditions['open'] = 1;
+								 		}
+								 }
+
+								 // discussion_state
+								 if ($this->hasRequest('state')) {
+								 if(!in_array(strtolower($this->getRequest('state')), Array('visible', 'moderated', 'deleted'))) {
+								 $this->throwError(1, 'state');
+								 }
+								 $conditions['state'] = strtolower($this->getRequest('state'));
+								 }
+
+								 //discussion_type
+								 if ($this->hasRequest('type')) {
+								 $conditions['type'] = strtolower($this->getRequest('type'));
+								 }
+
+								 if (empty($conditions)) {
+								 $this->throwError(8, 'value, state, open, type, inc_nodes, ex_nodes');
+								 }
+
+								 // Generate where condition
+								 $where = Array();
+								 if (isset($conditions['inc_nodes'])) {
+								 $where[] = "t.node_id IN(".join(",", $conditions['inc_nodes']).")";
+								 }
+								 if (isset($conditions['ex_nodes'])) {
+								 $where[] = "t.node_id NOT IN(".join(",", $conditions['ex_nodes']).")";
+								 }
+								 if (isset($conditions['title'])) {
+								 $where[] = "t.title LIKE ".strtr($this->xenAPI->getDatabase()->quote($conditions['title']),"*","%");
+								 }
+								 if (isset($conditions['open'])) {
+								 $where[] = "t.discussion_open = ".$conditions['open'];
+								 }
+								 if (isset($discussion_state['state'])) {
+								 $where[] = "t.discussion_open = ".$this->xenAPI->getDatabase()->quote($conditions['state']);
+								 }
+								 if (isset($discussion_state['type'])) {
+								 $where[] = "t.discussion_type = ".$this->xenAPI->getDatabase()->quote($conditions['type']);
+								 }
+
+								 $q = " SELECT t.thread_id, t.node_id, t.title, t.discussion_open, t.last_post_id, n.title AS node_title, node_name FROM xf_thread AS t LEFT JOIN xf_node AS n ON t.node_id = n.node_id WHERE ".join(' AND ', $where) ." ORDER BY t.title";
+
+								 // Perform the SQL query
+								 $results = $this->xenAPI->getDatabase()->fetchAll($q);
+
+								 // Send the response.
+								 $this->sendResponse($results);
+
             case 'getuser':
                 /**
                 * Grabs and returns an user object.
@@ -3166,6 +3257,40 @@ class RestAPI {
                     $type = $this->getRequest('type');
                 }
                 $this->sendResponse($this->getXenAPI()->search($this->getRequest('value'), $order, $type));
+						case 'editusermod':
+                $edit_data = Array();
+                /**
+                  * for error
+                  */
+                $available_fields = "add_points, points_column";
+
+                if ($this->getXenAPI()->hasAddon('dbtech_shop')){
+                    if ($this->checkIntParameter('add_points', $add_points)) {
+                        if($this->baseCheckParameter('points_column', $points_column, true)) {
+                            if(!isset($user->$points_column)) {
+                                $this->throwError(26, 'xf_user', $points_column);
+                            }
+                            $edit_data[$points_column] = ($add_points + intval($user->$points_column));
+                        }
+                    }
+                }
+                if (empty($edit_data)) {
+                    $this->throwError(8, $available_fields);
+                }
+                $smt = $this->xenAPI->getDatabase()->update('xf_user', $edit_data, 'user_id = '. $user->user_id);
+
+                $this->sendResponse(['updated'=>$smt->rowCount(),'values'=>$edit_data]);
+
+						case 'getteams':
+								if (!$this->getXenAPI()->hasAddon('nobita_Teams')){
+									$this->throwError(27, 'nobita_Teams');
+								}
+								$cond = Array(
+									//'privacy_state' => 'open',
+									'team_state' => 'visible',
+								);
+								$rows = $this->xenAPI->getTeams($cond);
+								$this->sendResponse(['count'=>count($rows),'values'=>$rows]);
             default:
                 // Action was supported but has not yet been added to the switch statement, throw error.
                 $this->throwError(11, $this->getAction());

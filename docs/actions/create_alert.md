@@ -7,6 +7,15 @@ Creates an alert for the specified user.
 | :-: | :-: | :-: |
 | createAlert | 1.4 | <a href="#per">performance</a> |
 
+#### Required Parameters
+
+| Parameter Value | Description | Example |
+| :-: | :-: | :-: |
+| user | The user from | cadox8 |
+| cause_user | The user to send the alert | Wikijito7 |
+| content_type | Type of alert | user |
+| content_id | Content ID | 1 |
+| alert_action | Type of alert | warning(?) |
 
 #### Error Codes
 
@@ -26,16 +35,6 @@ Creates an alert for the specified user.
 | 4 | The “cause_user” parameter was not a valid user (not registered) |
 | 13 | user is required to create an alert. |
 | 13 | cause_user is required to create an alert. |
-
-#### Required Parameters
-
-| Parameter Value | Description | Example |
-| :-: | :-: | :-: |
-| user | The user from | cadox8 |
-| cause_user | The user to send the alert | Wikijito7 |
-| content_type | Type of alert | user |
-| content_id | Content ID | 1 |
-| alert_action | Type of alert | warning(?) |
 
 
 #### Request

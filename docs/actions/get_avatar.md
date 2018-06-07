@@ -48,22 +48,19 @@ api.php?action=getAvatar&value=USERNAME&size=SIZE&hash=API_KEY
 ```
 #### Examples
 ```php
-api.php?action=getAvatar&hash=Contex:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15dc15b0f00a08
+api.php?action=getAvatar&hash=cadox8:JDJhJDEwJEd4U2xRQUNNTVJnTzFOM282anZYd08wRk1DTC52NFJtYWtDVHZaNHo1SUZvR0hzUVpLTkU2
 ```
 ```php
-api.php?action=getAvatar&size=M&hash=Contex:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+api.php?action=getAvatar&size=M&hash=cadox8:JDJhJDEwJEd4U2xRQUNNTVJnTzFOM282anZYd08wRk1DTC52NFJtYWtDVHZaNHo1SUZvR0hzUVpLTkU2
 ```
 ```php
-api.php?action=getAvatar&value=Contex&hash=Contex:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+api.php?action=getAvatar&value=Test&hash=cadox8:JDJhJDEwJEd4U2xRQUNNTVJnTzFOM282anZYd08wRk1DTC52NFJtYWtDVHZaNHo1SUZvR0hzUVpLTkU2
 ```
 ```php
-api.php?action=getAvatar&value=Contex&hash=d8e8fca2dc0f896fd7cb4cb0031ba249
+api.php?action=getAvatar&value=cadox8&hash=e65ef8da-ca6a-437c-ab8b-4b2e9e86cd10
 ```
 ```php
-api.php?action=getAvatar&value=Contex&size=M&hash=Contex:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
-```
-```php
-api.php?action=getAvatar&value=Contex&size=M&hash=d8e8fca2dc0f896fd7cb4cb0031ba249
+api.php?action=getAvatar&value=cadox8&size=M&hash=e65ef8da-ca6a-437c-ab8b-4b2e9e86cd10
 ```
 
 #### Reply

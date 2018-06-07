@@ -29,5 +29,5 @@ For these examples I’m using these the following values:
 * [Get Conversations](actions/get_convers.md)
 * [Get Stats](actions/get_stats.md)
 * [Get User](actions/get_user.md)
-* [Login](action/login.md)
-* [Logout](action/logout.md)
+* [Login](actions/login.md)
+* [Logout](actions/logout.md)

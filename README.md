@@ -23,6 +23,7 @@
 * [License & Copyright](#license--copyright)
 * [Donations](#donations)
 * [TODO](#todo)
+  - [TODO Docs](#todo-docs)
 -----
 
 ## Downloads & Repo
@@ -117,3 +118,51 @@ If you appreciate my work and want to help me maintaining this or other projects
 * [ ] Better and more documentation
 * [ ] Build a full Java-api
 * [x] Feed the Cat
+
+### TODO Docs
+* [x] Authenticate
+* [x] Create Alert
+* [x] Create Conversation
+* [x] Create Conversation Reply
+* [x] Create Post
+* [ ] Create Profile Post
+* [ ] Create Profile Post Reply
+* [x] Create Thread
+* [x] Delete Post
+* [ ] Delete User
+* [ ] Downgrade User
+* [ ] Edit Post
+* [ ] Edit Thread
+* [x] Edit User
+* [x] Get Actions
+* [x] Get Addon
+* [x] Get Addons
+* [x] Get Alerts
+* [x] Get Avatar
+* [ ] Get Conversation
+* [ ] Get Conversations
+* [ ] Get Group
+* [ ] Get Node
+* [ ] Get Nodes
+* [ ] Get Post
+* [ ] Get Posts
+* [ ] Get Profile Post
+* [ ] Get Profile Posts
+* [ ] Get Resource
+* [ ] Get Resources
+* [ ] Get Resource Categories
+* [x] Get Stats
+* [ ] Get Thread
+* [ ] Get Threads
+* [x] Get User
+* [ ] Get Users
+* [ ] Get User Upgrade
+* [ ] Get User Upgrades
+* [x] Login
+* [x] Logout
+* [ ] Register
+* [ ] Search
+* [ ] Search Threads
+* [ ] Upgrade User
+* [ ] Get Unread Posts
+* [ ] Edit User Mod

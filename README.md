@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/cadox8/XenAPI.svg?branch=master)](https://travis-ci.org/cadox8/XenAPI)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI.svg?type=small)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI?ref=badge_small)
+[![Documentation Status](https://readthedocs.org/projects/xenapi/badge/?version=latest)](https://xenapi.readthedocs.io/en/latest/?badge=latest)
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-oxygen.svg)](https://forthebadge.com)
@@ -51,7 +52,7 @@ For the Java-API, you can add it on Maven:
 **NOTE:** You can use ``RELEASE`` as version or you can use the version number (you can check all versions [here](https://github.com/cadox8/XenAPI/releases))
 
 ## Documentation
-**Web-API & Java-API:** You can get the documentation [here](https://cadox8.github.io/XenAPI).<br>
+**Web-API & Java-API:** You can get the documentation [here](https://xenapi.readthedocs.io/en/latest/).<br>
 **Javadocs:** You can check the Javadocs [here](https://cadox8.github.io/XenAPI/javadocs).
 
 ## Bug Reporting

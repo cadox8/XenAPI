@@ -2,6 +2,23 @@
 
 **NOTE:** You must have **XenAPI.jar** as dependency.
 
+```xml
+    <repositories>
+        <repository>
+            <id>XenAPI Repo</id>
+            <url>https://cadox8.github.io/repo/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>me.cadox8</groupId>
+            <artifactId>XenAPI</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+    </dependencies>
+```
+
 For these examples I’m using these the following values:
 
 | Username | Cadox8 |
@@ -44,7 +61,7 @@ This is a example of how to get the reply (for > Java 1.8) and how to handle if 
         api.getReply(r, (Callback<AuthenticateReply>) (failCause, result)-> {
             try {
                 result.checkError();
-                
+
                 if (failCause != null) {
                     failCause.printStackTrace();
                 } else {

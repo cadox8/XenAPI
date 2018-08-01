@@ -11,7 +11,7 @@
 -----
 
 ## Summary
-* [XenAPI for Xenforo 2.X]()
+* [XenAPI for Xenforo 2.X](#xenapi-for-xenforo-2x)
 * [Downloads & Repo](#downloads--repo)
 * [Documentation](#documentation)
 * [Bug Reporting](#bug-reporting)
@@ -30,6 +30,7 @@
 
 ## XenAPI for Xenforo 2.X
 This repo contains the Java and the Web API for Xenforo 1.X.
+
 A Java version for Xenforo 2.X is being developed, but I recommend you to use [this](https://xfrocks.com/resources/bd-api-for-xenforo-2-0.36/) for the WebAPI.
 
 ## Downloads & Repo

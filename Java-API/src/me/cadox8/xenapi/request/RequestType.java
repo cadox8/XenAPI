@@ -27,6 +27,7 @@ import me.cadox8.xenapi.reply.*;
 public enum RequestType {
 
     AUTHENTICATE("authenticate", AuthenticateReply.class),
+    LOGIN("login", LoginReply.class),
     LOGOUT("logout", LogoutReply.class),
     REGISTER("register", RegisterReply.class),
 

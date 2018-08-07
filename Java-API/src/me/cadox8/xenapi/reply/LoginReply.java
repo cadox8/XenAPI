@@ -21,31 +21,15 @@ package me.cadox8.xenapi.reply;
 
 import lombok.Getter;
 import lombok.ToString;
-import me.cadox8.xenapi.exceptions.ArgsErrorException;
 import me.cadox8.xenapi.request.RequestType;
 
 @ToString
-public abstract class AbstractReply {
+public class LoginReply extends AbstractReply {
 
-    @Getter protected int error = 0;
-    @Getter protected String message;
+    @Getter private String hash;
 
-    /**
-     * Gets the type of requests to getResponse the Reply Class
-     *
-     * @return Returns the type of Request
-     *
-     * @see RequestType
-     * @see RequestType#getReplyClass()
-     */
-    public abstract RequestType getRequestType();
-
-    /**
-     * Check if you miss any args in the request
-     *
-     * @throws ArgsErrorException(Integer, String, RequestType)
-     */
-    public void checkError() throws ArgsErrorException {
-        if (getError() != 0) throw new ArgsErrorException(getError(), getMessage(), getRequestType());
+    @Override
+    public RequestType getRequestType() {
+        return RequestType.AUTHENTICATE;
     }
 }

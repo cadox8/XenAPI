@@ -27,8 +27,9 @@ import java.util.function.Function;
 @AllArgsConstructor
 public enum RequestParam {
 
-    AUTH_USER(RequestType.AUTHENTICATE, "username", String.class),
-    AUTH_PASS(RequestType.AUTHENTICATE, "password", String.class),
+    AUTH_USER(RequestType.LOGIN, RequestType.AUTHENTICATE, "username", String.class),
+    AUTH_PASS(RequestType.LOGIN, RequestType.AUTHENTICATE, "password", String.class),
+    AUTH_IP(RequestType.AUTHENTICATE, RequestType.LOGIN, "ip_address", String.class),
 
     CREATE_ALERT_USER(RequestType.CREATE_ALERT, "user", String.class),
     CREATE_ALERT_CAUSE_USER(RequestType.CREATE_ALERT, "cause_user", String.class),
@@ -85,9 +86,6 @@ public enum RequestParam {
 
     AVATAR_USER(RequestType.GET_AVATAR, "value", String.class),
     AVATAR_SIZE(RequestType.GET_AVATAR, "size", Character.class);
-
-
-    private static final RequestParam[] v = values();
 
     @Getter private final RequestType requestType;
     @Getter private final RequestType requestType2;

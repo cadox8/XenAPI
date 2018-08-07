@@ -51,15 +51,26 @@ public class XenAPI {
 
     @Getter private final String token;
 
+    /**
+     * Default constructor
+     *
+     * @param token The API token
+     * @apiNote Default url is http://localhost
+     */
+    public XenAPI(String token) {
+        this(token, "http://localhost");
+    }
 
     /**
      * Default constructor
      *
      * @param token The API token
+     * @param url The URL to the forum
      */
-    public XenAPI(String token) {
+    public XenAPI(String token, String url) {
         instance = this;
 
+        setBaseURL(url);
         this.token = token;
 
         httpClient = HttpClientBuilder.create().build();
@@ -72,8 +83,8 @@ public class XenAPI {
      *
      * @param url Base URL to the forum
      */
-    public void setBaseURL(String url) {
-        if (!url.endsWith("/")) url = url.replaceAll(url, url + "/");
+    private void setBaseURL(String url) {
+        if (!url.endsWith("/")) url += "/";
         Request.setBASE_URL(url);
     }
 

@@ -89,7 +89,8 @@ or send hash in format: ``username:hash`` , where hash is result authenticate ac
 
 ```java
 XenAPI api = new XenAPI("YOUR_API_KEY"); // Setted in api.php
-api.setBaseURL("YOUR_FORUM_URL"); // Must be http(s)://link.extension or http(s)://ip
+
+XenAPI api = new XenAPI("YOUR_API_KEY", "YOUR_FORUM_URL"); // Setted in api.php / Must have http:// | https://
 ```
 
 Then, you will use that Key in the program.

@@ -29,23 +29,15 @@ import me.cadox8.xenapi.utils.Callback;
 public class Launcher {
 
     public static void main(String... args) {
-        XenAPI api = new XenAPI("e65ef8da-ca6a-437c-ab8b-4b2e9e86cd10");
-        api.setBaseURL("http://192.168.1.2/foro");
+        XenAPI api = new XenAPI("e65ef8da-ca6a-437c-ab8b-4b2e9e86cd10", "http://192.168.1.2/foro");
 
-        Request r = RequestBuilder.newBuilder(RequestType.GET_ACCTIONS).createRequest();
+        Request r = RequestBuilder.newRequest(RequestType.GET_ACCTIONS).createRequest();
 
-        System.out.println("URL: " + r.getURL(api));
-        System.out.println("Raw: " + XenAPI.getWebInfo(r.getURL(api)) + "\n\n");
-
-
-        api.getReply(r, (Callback<ActionsReply>) (failCause, result)-> {
+        api.getReply(r, (Callback<ActionsReply>) (failCause, result) -> {
             try {
                 result.checkError();
-                if (failCause != null) {
-                    failCause.printStackTrace();
-                } else {
-                    System.out.println("Result: " + result.toString());
-                }
+                if (failCause != null) failCause.printStackTrace();
+                System.out.println("Result: " + result.toString());
             } catch (ArgsErrorException e) {
                 e.printStackTrace();
             }

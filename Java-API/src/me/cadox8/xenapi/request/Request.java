@@ -45,7 +45,7 @@ public class Request {
      * @param username The username to grab
      * @return A Request
      */
-    public Request withGrab_As(String username) {
+    public Request grab_as(String username) {
         grab_as = username;
         return this;
     }

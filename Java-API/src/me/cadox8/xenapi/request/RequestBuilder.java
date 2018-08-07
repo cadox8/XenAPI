@@ -42,7 +42,7 @@ public class RequestBuilder {
      *
      * @see RequestType
      */
-    public static RequestBuilder newBuilder(RequestType requestType) {
+    public static RequestBuilder newRequest(RequestType requestType) {
         return new RequestBuilder(requestType);
     }
 
@@ -72,6 +72,6 @@ public class RequestBuilder {
     }
 
     public Request createRequest(String username) {
-        return new Request(requestType, params).withGrab_As(username);
+        return new Request(requestType, params).grab_as(username);
     }
 }

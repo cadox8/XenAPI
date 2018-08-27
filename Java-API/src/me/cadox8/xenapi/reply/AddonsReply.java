@@ -23,13 +23,11 @@ import lombok.Getter;
 import lombok.ToString;
 import me.cadox8.xenapi.request.RequestType;
 
-import java.util.ArrayList;
-
 @ToString
 public class AddonsReply extends AbstractReply {
 
     @Getter private int count;
-    @Getter private ArrayList<Addon> addons;
+    @Getter private Addon[] addons;
 
     @Override
     public RequestType getRequestType() {

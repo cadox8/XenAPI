@@ -59,18 +59,26 @@ public class RequestBuilder {
      */
     private boolean validate(RequestParam param, Object value) {
         if (value != null && value.getClass().equals(param.getValueClass())) {
-            return param.getRequestType() == requestType || param.getRequestType2() == requestType;
+            return param.getRequestsType().contains(requestType);
         }
         return false;
     }
 
     /**
      * Builds a request from the builder
+     *
+     * @return The Request
      */
     public Request createRequest() {
         return new Request(requestType, params);
     }
 
+    /**
+     * Builds a request from the builder with an username
+     *
+     * @param username to grab content as
+     * @return The Request
+     */
     public Request createRequest(String username) {
         return new Request(requestType, params).grab_as(username);
     }

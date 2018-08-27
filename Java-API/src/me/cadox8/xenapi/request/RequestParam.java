@@ -19,86 +19,73 @@
 
 package me.cadox8.xenapi.request;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
-@AllArgsConstructor
 public enum RequestParam {
 
-    AUTH_USER(RequestType.LOGIN, RequestType.AUTHENTICATE, "username", String.class),
-    AUTH_PASS(RequestType.LOGIN, RequestType.AUTHENTICATE, "password", String.class),
-    AUTH_IP(RequestType.AUTHENTICATE, RequestType.LOGIN, "ip_address", String.class),
+    AUTH_USER("username", String.class, RequestType.LOGIN, RequestType.AUTHENTICATE),
+    AUTH_PASS("password", String.class, RequestType.LOGIN, RequestType.AUTHENTICATE),
+    AUTH_IP("ip_address", String.class, RequestType.LOGIN, RequestType.AUTHENTICATE),
 
-    CREATE_ALERT_USER(RequestType.CREATE_ALERT, "user", String.class),
-    CREATE_ALERT_CAUSE_USER(RequestType.CREATE_ALERT, "cause_user", String.class),
-    CREATE_ALERT_CONTENT_TYPE(RequestType.CREATE_ALERT, "content_type", String.class),
-    CREATE_ALERT_CONTENT_ID(RequestType.CREATE_ALERT, "content_id", Integer.class),
-    CREATE_ALERT_ALERT_ACTION(RequestType.CREATE_ALERT, "alert_action", String.class),
+    CREATE_ALERT_USER("user", String.class, RequestType.CREATE_ALERT),
+    CREATE_ALERT_CAUSE_USER("cause_user", String.class, RequestType.CREATE_ALERT),
+    CREATE_ALERT_CONTENT_TYPE("content_type", String.class, RequestType.CREATE_ALERT),
+    CREATE_ALERT_CONTENT_ID("content_id", Integer.class, RequestType.CREATE_ALERT),
+    CREATE_ALERT_ALERT_ACTION("alert_action", String.class, RequestType.CREATE_ALERT),
 
-    CREATE_POST_THREAD_ID(RequestType.CREATE_POST, "thread_id", Integer.class),
-    CREATE_POST_MESSAGE(RequestType.CREATE_POST, "message", String.class),
+    CREATE_POST_THREAD_ID("thread_id", Integer.class, RequestType.CREATE_POST),
+    CREATE_POST_MESSAGE("message", String.class, RequestType.CREATE_POST),
 
-    CREATE_THREAD_TITLE(RequestType.CREATE_THREAD, "title", String.class),
-    CREATE_THREAD_MESSAGE(RequestType.CREATE_THREAD, "message", String.class),
-    CREATE_THREAD_NODE_ID(RequestType.CREATE_THREAD, "node_id", Integer.class),
-    CREATE_THREAD_PREFIX_ID(RequestType.CREATE_THREAD, "prefix_id", Integer.class),
-    CREATE_THREAD_DISCUSSION_OPEN(RequestType.CREATE_THREAD, "discussion_open", Integer.class),
-    CREATE_THREAD_DISCUSSION_STATE(RequestType.CREATE_THREAD, "discussion_state", String.class),
-    CREATE_THREAD_STICKY(RequestType.CREATE_THREAD, "sticky", Integer.class),
+    CREATE_THREAD_TITLE("title", String.class, RequestType.CREATE_THREAD),
+    CREATE_THREAD_MESSAGE("message", String.class, RequestType.CREATE_THREAD),
+    CREATE_THREAD_NODE_ID("node_id", Integer.class, RequestType.CREATE_THREAD),
+    CREATE_THREAD_PREFIX_ID("prefix_id", Integer.class, RequestType.CREATE_THREAD),
+    CREATE_THREAD_DISCUSSION_OPEN("discussion_open", Integer.class, RequestType.CREATE_THREAD),
+    CREATE_THREAD_DISCUSSION_STATE("discussion_state", String.class, RequestType.CREATE_THREAD),
+    CREATE_THREAD_STICKY("sticky", Integer.class, RequestType.CREATE_THREAD),
 
-    EDIT_USER(RequestType.EDIT_USER, RequestType.REGISTER, "username", String.class),
-    EDIT_PASS(RequestType.EDIT_USER, RequestType.REGISTER, "password", String.class),
-    EDIT_EMAIL(RequestType.EDIT_USER, RequestType.REGISTER, "email", String.class),
-    EDIT_GROUP(RequestType.EDIT_USER, RequestType.REGISTER, "group", String.class),
-    EDIT_GENDER(RequestType.EDIT_USER, RequestType.REGISTER, "gender", String.class),
-    EDIT_TITLE(RequestType.EDIT_USER, RequestType.REGISTER, "custom_title", String.class),
-    EDIT_STYLE(RequestType.EDIT_USER, RequestType.REGISTER, "style_id", Integer.class),
-    EDIT_TIMEZONE(RequestType.EDIT_USER, RequestType.REGISTER, "timezone", String.class),
-    EDIT_VISIBLE(RequestType.EDIT_USER, RequestType.REGISTER, "visible", Integer.class),
-    EDIT_DOB_DAY(RequestType.EDIT_USER, RequestType.REGISTER, "dob_day", Integer.class),
-    EDIT_DOB_MONTH(RequestType.EDIT_USER, RequestType.REGISTER, "dob_month", Integer.class),
-    EDIT_DOB_YEAR(RequestType.EDIT_USER, RequestType.REGISTER, "dob_year", Integer.class),
-    EDIT_STATE(RequestType.EDIT_USER, RequestType.REGISTER, "user_state", String.class),
-    EDIT_FIELDS(RequestType.EDIT_USER, RequestType.REGISTER, "custom_fields", String.class),
-    EDIT_ADD_GROUPS(RequestType.EDIT_USER, RequestType.REGISTER, "add_groups", String.class),
-    EDIT_REM_GROUPS(RequestType.EDIT_USER, RequestType.REGISTER, "remove_groups", String.class),
-    EDIT_TROPHY(RequestType.EDIT_USER, RequestType.REGISTER, "trophy_points", String.class),
+    EDIT_USER("username", String.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_PASS("password", String.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_EMAIL("email", String.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_GROUP("group", String.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_GENDER("gender", String.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_TITLE("custom_title", String.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_STYLE("style_id", Integer.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_TIMEZONE("timezone", String.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_VISIBLE("visible", Integer.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_DOB_DAY("dob_day", Integer.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_DOB_MONTH("dob_month", Integer.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_DOB_YEAR("dob_year", Integer.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_STATE("user_state", String.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_FIELDS("custom_fields", String.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_ADD_GROUPS("add_groups", String.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_REM_GROUPS("remove_groups", String.class, RequestType.EDIT_USER, RequestType.REGISTER),
+    EDIT_TROPHY("trophy_points", String.class, RequestType.EDIT_USER, RequestType.REGISTER),
 
-    ADDON_NAME(RequestType.GET_ADDON, "value", String.class),
-    ADDONS_TYPE(RequestType.GET_ADDONS, "type", String.class),
+    VALUE_STRING("value", String.class, RequestType.GET_ADDON, RequestType.GET_ALERTS, RequestType.GET_CONVERSATIONS, RequestType.GET_GROUP, RequestType.GET_AVATAR),
+    VALUE_INTEGER("value", Integer.class, RequestType.GET_NODE, RequestType.GET_GROUP),
 
-    ALERT_USER(RequestType.GET_ALERTS, "value", String.class),
-    ALERT_TYPE(RequestType.GET_ALERTS, "type", String.class),
+    TYPE_STRING("type", String.class, RequestType.GET_ADDONS, RequestType.GET_ALERTS),
 
-    CONVER_USER(RequestType.GET_CONVERSATIONS, "value", String.class),
-
-    GROUP_ID(RequestType.GET_GROUP, "value", String.class),
-    GROUP_ID_INT(RequestType.GET_GROUP, "value", Integer.class),
-
-    NODE_ID(RequestType.GET_NODE, "value", Integer.class),
-    NODE_TYPE(RequestType.GET_NODES, "node_type", String.class),
-
-    POST_ID(RequestType.GET_POST, "value", Integer.class),
+    AVATAR_SIZE("size", Character.class, RequestType.GET_AVATAR);
 
     //ToDo: getPosts by values
 
-    AVATAR_USER(RequestType.GET_AVATAR, "value", String.class),
-    AVATAR_SIZE(RequestType.GET_AVATAR, "size", Character.class);
 
-    @Getter private final RequestType requestType;
-    @Getter private final RequestType requestType2;
+    @Getter private final List<RequestType> requestsType;
     @Getter private final String queryField;
     @Getter private final Class valueClass;
     private final Function<Object, String> valueSerializer;
 
-    RequestParam(RequestType requestType, RequestType requestType2, String queryField, Class<?> valueClass) {
-        this(requestType, requestType2, queryField, valueClass, null);
-    }
-
-    RequestParam(RequestType requestType, String queryField, Class<?> valueClass) {
-        this(requestType, null, queryField, valueClass, null);
+    RequestParam(String queryField, Class<?> valueClass, RequestType... requestType) {
+        this.requestsType = Arrays.asList(requestType);
+        this.queryField = queryField;
+        this.valueClass = valueClass;
+        this.valueSerializer = null;
     }
 
     public String serialize(Object value) {

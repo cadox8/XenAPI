@@ -60,10 +60,7 @@ public class Request {
         String url = BASE_URL + "api.php?action=";
 
         url += requestType.getKey() + "&";
-
-        for (Map.Entry<RequestParam, Object> entry : params.entrySet()) {
-            url += entry.getKey().getQueryField() + "=" + entry.getKey().serialize(entry.getValue()) + "&";
-        }
+        for (Map.Entry<RequestParam, Object> entry : params.entrySet()) url += entry.getKey().getQueryField() + "=" + entry.getKey().serialize(entry.getValue()) + "&";
         url += "hash=" + xenAPI.getToken();
 
         if (!grab_as.equalsIgnoreCase("")) url += "&grab_as=" + grab_as;

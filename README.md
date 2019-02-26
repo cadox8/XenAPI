@@ -121,9 +121,9 @@ If you appreciate my work and want to help me maintaining this or other projects
 
 ## TODO
 * [x] Add a proper copyright header to all files.
-* [ ] Deploy to a public maven repo.
-* [ ] Update to Xenforo 2.0
-* [ ] Better and more documentation
+* [x] Deploy to a public maven repo.
+* [x] Update to Xenforo 2.0
+* [x] Better and more documentation
 * [ ] Build a full Java-api
 * [x] Feed the Cat
 
@@ -150,10 +150,10 @@ If you appreciate my work and want to help me maintaining this or other projects
 * [ ] Get Conversation
 * [ ] Get Conversations
 * [ ] Get Group
-* [ ] Get Node
-* [ ] Get Nodes
-* [ ] Get Post
-* [ ] Get Posts
+* [x] Get Node
+* [x] Get Nodes
+* [x] Get Post
+* [x] Get Posts
 * [ ] Get Profile Post
 * [ ] Get Profile Posts
 * [ ] Get Resource

@@ -50,6 +50,7 @@ public enum RequestType {
     GET_NODE("getNode", NodeReply.class),
     GET_NODES("getNodes", NodesReply.class),
     GET_POST("getPost", PostReply.class),
+    GET_POSTS("getPosts", PostsReply.class),
     GET_AVATAR("getAvatar", AvatarReply.class);
 
 

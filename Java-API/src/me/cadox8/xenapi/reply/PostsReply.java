@@ -24,10 +24,10 @@ import lombok.ToString;
 import me.cadox8.xenapi.request.RequestType;
 
 @ToString
-public class NodesReply extends AbstractReply {
+public class PostsReply extends AbstractReply {
 
     @Getter private int count;
-    @Getter private NodesReply[] nodes;
+    @Getter private PostReply posts[];
 
     @Override
     public RequestType getRequestType() {

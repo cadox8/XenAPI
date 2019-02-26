@@ -24,7 +24,7 @@
     <groupId>me.cadox8</groupId>
     <artifactId>XenAPI</artifactId>
     <packaging>jar</packaging>
-    <version>0.4.3</version>
+    <version>0.4.4</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

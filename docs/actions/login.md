@@ -1,8 +1,7 @@
-*[<- Go Back](../rest-api.md)*
-
 ### Login
 Authenticates the user and returns the hash that the user has to use for future requests.
 
+This also sets a cookie for future sessions.
 
 | Action | Version | Supported |
 | :-: | :-: | :-: |
@@ -16,7 +15,7 @@ Authenticates the user and returns the hash that the user has to use for future 
 | 1 | The “password” parameter was set but empty |
 | 1 | The “ip_address” parameter was set but empty |
 | 3 | The “username” parameter was not set |
-| 3 | The “passsword” parameter was not set |
+| 3 | The “password” parameter was not set |
 | 3 | The “ip_address” parameter was not set |
 | 4 | The “username” parameter is not a registered user |
 | 5 | Wrong username or password |
@@ -34,6 +33,25 @@ api.php?action=authenticate&username=cadox8&password=password&ip_address=127.0.0
 ```
 ```php
 api.php?action=authenticate&username=cadox8&password=password
+```
+```java
+public class Xen {
+    public static void main(String... args) {
+        final XenAPI api = new XenAPI("e65ef8da-ca6a-437c-ab8b-4b2e9e86cd10", "http://localhost/forum");
+
+        final Request r = RequestBuilder.newRequest(RequestType.LOGIN).addParam(RequestParam.AUTH_USER, "cadox8").addParam(RequestParam.AUTH_PASS, "password").createRequest();
+
+        api.getReply(r, (Callback<LoginReply>) (failCause, result) -> {
+            try {
+                result.checkError();
+                if (failCause != null) failCause.printStackTrace();
+                System.out.println("Result: " + result.toString());
+            } catch (ArgsErrorException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+}
 ```
 #### Reply
 ```json

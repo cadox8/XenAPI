@@ -1,4 +1,4 @@
-*[<- Go Back](../rest-api.md)*
+
 
 ### Get User
 Returns the avatar of user specified by the “value” parameter, if size is not specified or unknown, default (medium) is used instead.
@@ -42,7 +42,7 @@ api.php?action=getUser&value=Test&hash=cadox8:JDJhJDEwJEd4U2xRQUNNTVJnTzFOM282an
 api.php?action=getUser&hash=e65ef8da-ca6a-437c-ab8b-4b2e9e86cd10
 ```
 ```php
-api.php?action=getUser&value=xenapi@xenapi.net&hash=e65ef8da-ca6a-437c-ab8b-4b2e9e86cd10
+api.php?action=getUser&value=me.cadox8.xenapi@me.cadox8.xenapi.net&hash=e65ef8da-ca6a-437c-ab8b-4b2e9e86cd10
 ```
 #### Reply
 ```json

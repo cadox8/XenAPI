@@ -1,4 +1,4 @@
-*[<- Go Back](../rest-api.md)*
+
 
 ### Creates Conversation
 Creates a conversation as the specified user

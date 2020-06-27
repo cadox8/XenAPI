@@ -1,4 +1,4 @@
-*[<- Go Back](../rest-api.md)*
+
 
 ### Get Stats
 Returns a list of relevant stats items

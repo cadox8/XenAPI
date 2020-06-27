@@ -1,4 +1,4 @@
-*[<- Go Back](../rest-api.md)*
+
 
 ### Get Addons
 Returns all the installed addons, if type is not specified, default (all) is used instead.

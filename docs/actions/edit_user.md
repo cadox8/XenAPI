@@ -1,4 +1,4 @@
-*[<- Go Back](../rest-api.md)*
+
 
 ### Edit User
 Edit the specified user.

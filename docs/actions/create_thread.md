@@ -1,4 +1,4 @@
-*[<- Go Back](../rest-api.md)*
+
 
 ### Create Thread
 Creates a new thread and first post as the specified user

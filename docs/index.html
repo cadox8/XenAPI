@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>XenAPI Docs</title>
+
+  <meta name="description" content="Krork Engine Documentation">
+  <meta name="author" content="AthoneDevs">
+
+  <!-- Theme: Simple Dark -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
+  <!--<link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/buble.css">-->
+
+  <link rel="icon" type="image/png" href="img/logo.png">
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+      homepage: 'index.md',
+      repo: 'cadox8/XenAPI',
+      maxLevel: 3,
+      coverpage: true,
+      name: 'XenAPI',
+      alias: {
+        '/.*/_navbar.md': '/_navbar.md'
+      },
+      loadNavbar: true,
+      mergeNavbar: true,
+      loadSidebar: true,
+      auto2top: true,
+      logo: 'img/krork.png',
+      themeColor: '#3F51B5',
+      autoHeader: true,
+      formatUpdated: '{DD}/{MM}/{YY} {HH}:{mm}',
+      formatUpdated: function(time) {return time;},
+      notFoundPage: true,
+      notFoundPage: {
+        '/': '_404.md',
+      },
+      pagination: {
+        previousText: 'Previous',
+        nextText: 'Next',
+        crossChapter: true,
+        crossChapterText: true,
+      }
+    }
+  </script>
+  <script>
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('sw.js')
+    }
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/emoji.min.js"></script>
+  <script src="//unpkg.com/docsify-copy-code"></script>
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-java.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-xml.min.js"></script>
+</body>
+</html>

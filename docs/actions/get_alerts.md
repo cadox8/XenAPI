@@ -1,4 +1,4 @@
-*[<- Go Back](../rest-api.md)*
+
 
 ### Get Alerts
 Grabs the alerts from the specified user, if type is not specified, default (recent alerts) is used instead.

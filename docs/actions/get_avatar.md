@@ -1,4 +1,4 @@
-*[<- Go Back](../rest-api.md)*
+
 
 ### Get Avatar
 Returns the avatar of user specified by the “value” parameter, if size is not specified or unknown, default (medium) is used instead.

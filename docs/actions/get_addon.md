@@ -1,4 +1,4 @@
-*[<- Go Back](../rest-api.md)*
+
 
 ### Get Addon
 Returns any relevant addon information about the specified by the **“value”** parameter.

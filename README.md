@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/cadox8/XenAPI.svg?branch=master)](https://travis-ci.org/cadox8/XenAPI)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI.svg?type=small)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI?ref=badge_small)
-[![Documentation Status](https://readthedocs.org/projects/xenapi/badge/?version=latest)](https://xenapi.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/me.cadox8.xenapi/badge/?version=latest)](https://me.cadox8.xenapi.readthedocs.io/en/latest/?badge=latest)
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-oxygen.svg)](https://forthebadge.com)
@@ -11,7 +11,7 @@
 -----
 
 ## Summary
-* [XenAPI for Xenforo 2.X](#xenapi-for-xenforo-2x)
+* [XenAPI for Xenforo 2.X](#me.cadox8.xenapi-for-xenforo-2x)
 * [Downloads & Repo](#downloads--repo)
 * [Documentation](#documentation)
 * [Bug Reporting](#bug-reporting)
@@ -58,14 +58,14 @@ For the Java-API, you can add it on Maven:
 **NOTE:** You can use ``RELEASE`` as version or you can use the version number (you can check all versions [here](https://github.com/cadox8/XenAPI/releases))
 
 ## Documentation
-**Web-API & Java-API:** You can get the documentation [here](https://xenapi.readthedocs.io/en/latest/).<br>
+**Web-API & Java-API:** You can get the documentation [here](https://me.cadox8.xenapi.readthedocs.io/en/latest/).<br>
 **Javadocs:** You can check the Javadocs [here](https://cadox8.github.io/XenAPI/javadocs).
 
 ## Bug Reporting
 You can create an issue here on GitHub to report a bug with the API or to suggest enhancements.
 
 ## Contributing
-If you want to contribute to the project, you must accept and follow our [Code Of Conduct](CODE_OF_CONDUCT.md) and our [guides for contributing](CONTRIBUTING.md).
+If you want to contribute to the project, you must accept and follow our [Code Of Conduct](.github/CODE_OF_CONDUCT.md) and our [guides for contributing](.github/CONTRIBUTING.md).
 
 ## Instalation
 The api.php goes in the root folder of the XenForo installation.
@@ -77,7 +77,7 @@ Then, you will need to [Set an API Key](#usage--api-key)
 **NOTE:** I recomend a Version 4 UUID for the API Key (really recomended). You can generate one [here](https://www.uuidgenerator.net).
 
 ### For PHP
-To run change the API key by replace the ``xenapi`` with your desired API key (UUID).
+To run change the API key by replace the ``me.cadox8.xenapi`` with your desired API key (UUID).
 ```javascript
 $restAPI = new RestAPI('NEW_API_KEY');
 ```
@@ -102,7 +102,7 @@ The XenAPI (Java) has the following dependencies:
 * [Apache HttpClient](https://hc.apache.org)
 
 ## License & Copyright
-XenAPI is licensed under [GNU LESSER GENERAL PUBLIC LICENSE Version 3](LICENSE.txt).
+XenAPI is licensed under [GNU LESSER GENERAL PUBLIC LICENSE Version 3](LICENSE.md).
 
 The logo and some parts of the PHP Code is property of [Contex](https://github.com/Contex/XenAPI).
 

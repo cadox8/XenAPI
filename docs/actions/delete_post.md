@@ -1,4 +1,4 @@
-*[<- Go Back](../rest-api.md)*
+password
 
 ### Delete Post
 Deletes a post as the specified user.

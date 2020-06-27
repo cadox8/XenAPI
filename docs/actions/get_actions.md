@@ -1,4 +1,4 @@
-*[<- Go Back](../rest-api.md)*
+
 
 ### Get Actions
 Returns a list of all the available actions and their permission levels.

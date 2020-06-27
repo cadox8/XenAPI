@@ -1,12 +1,10 @@
-*[<- Go Back](index.md)*
-
 **NOTE:** You must have **XenAPI.jar** as dependency.
 
 ```xml
     <repositories>
         <repository>
             <id>XenAPI Repo</id>
-            <url>https://cadox8.github.io/repo/</url>
+            <url>https://cadox8.es/repo/</url>
         </repository>
     </repositories>
 
@@ -21,7 +19,7 @@
 
 For these examples I’m using these the following values:
 
-| Username | Cadox8 |
+| Type | Values |
 | --- | --- |
 | User Hash | JDJhJDEwJEd4U2xRQUNNTVJnTzFOM282anZYd08wRk1DTC52NFJtYWtDVHZaNHo1SUZvR0hzUVpLTkU2 |
 | API Key | e65ef8da-ca6a-437c-ab8b-4b2e9e86cd10 |
@@ -31,9 +29,7 @@ First, you must have the new API Key setted in api.php and the file in Xenforo r
 
 In a new program, you have to instance the XenAPI class like this:
 ```java
-XenAPI api = new XenAPI("YOUR_API_KEY"); //I recomend to have a [Version 4 UUID](http://uuidgenerator.net) as the Key / Forum url will be localhost
-
-XenAPI api = new XenAPI("YOUR_API_KEY", "YOUR_FORUM_URL"); //I recomend to have a [Version 4 UUID](http://uuidgenerator.net) as the Key / Must have http:// | https://
+final XenAPI api = new XenAPI("YOUR_API_KEY", "YOUR_FORUM_URL"); //I recommend to have a [Version 4 UUID](http://uuidgenerator.net) as the Key / Must have http:// | https://
 ```
 
 With this, you will be able to send Requests and get the Reply 💃.
@@ -43,7 +39,7 @@ You will need to check the Actions and the Params first.
 
 Example of Authentificate request
 ```java
-Request request = RequestBuilder.newBuilder(RequestType.AUTHENTICATE)
+final Request request = RequestBuilder.newBuilder(RequestType.AUTHENTICATE)
 .addParam(RequestParam.AUTH_USER, "cadox8")
 .addParam(RequestParam.AUTH_PASS, "password").createRequest();
 ```

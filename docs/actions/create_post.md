@@ -1,4 +1,4 @@
-*[<- Go Back](../rest-api.md)*
+
 
 ### Create Post
 Creates a new post as the specified user (Replies to a existing post)

@@ -23,8 +23,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.Getter;
 import me.cadox8.xenapi.reply.AbstractReply;
+import me.cadox8.xenapi.reply.AlertsReply;
 import me.cadox8.xenapi.request.Request;
+import me.cadox8.xenapi.request.RequestType;
 import me.cadox8.xenapi.utils.Callback;
+import me.cadox8.xenapi.utils.Log;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -44,7 +47,7 @@ import java.util.concurrent.Future;
 public class XenAPI {
 
     @Getter private static XenAPI instance;
-    private final Gson gson;
+    private Gson gson;
     private final HttpClient httpClient;
 
     private final ExecutorService exService = Executors.newCachedThreadPool();
@@ -94,8 +97,17 @@ public class XenAPI {
             T value;
             try {
                 final String content = EntityUtils.toString(obj.getEntity(), "UTF-8");
-                System.out.println(content);
-                value = gson.fromJson(content, (Type) request.getRequestType().getReplyClass());
+                Log.debug(content);
+
+                if (request.getRequestType() == RequestType.GET_ALERTS) {
+                    final GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
+                    builder.registerTypeAdapter(AlertsReply.Alerts.class, new AlertsReply.AlertListDeserializer());
+                    value = builder.create().fromJson(content, (Type) AlertsReply.Alerts.class);
+                } else {
+                    value = gson.fromJson(content, (Type) request.getRequestType().getReplyClass());
+                }
+                value.setJson(content);
+                value.setUrl(request.getURL(this));
             } catch (Throwable t) {
                 callback.callback(t, null);
                 return obj;

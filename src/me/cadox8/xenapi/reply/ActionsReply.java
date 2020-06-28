@@ -73,6 +73,6 @@ public class ActionsReply extends AbstractReply {
 
     @Override
     public RequestType getRequestType() {
-        return RequestType.GET_ACCTIONS;
+        return RequestType.GET_ACTIONS;
     }
 }

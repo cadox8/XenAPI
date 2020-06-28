@@ -27,7 +27,7 @@ import me.cadox8.xenapi.request.RequestType;
 public class NodesReply extends AbstractReply {
 
     @Getter private int count;
-    @Getter private NodesReply[] nodes;
+    @Getter private NodeReply[] nodes;
 
     @Override
     public RequestType getRequestType() {

@@ -25,6 +25,6 @@ public class ArgsErrorException extends XenAPIException {
 
     public ArgsErrorException(int errorID, String message, RequestType requestType) {
         super("Error ID: " + errorID + "\nMessage -> " + message +
-                "\nCheck https://cadox8.github.io/XenAPI/actions/" + requestType.toString().toLowerCase() + ".html for details");
+                "\nCheck https://cadox8.github.io/XenAPI/#/actions/" + requestType.toString().toLowerCase() + " for details");
     }
 }

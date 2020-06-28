@@ -1,13 +1,8 @@
 ![Logo](docs/img/logo.png)
 
 [![Build Status](https://travis-ci.org/cadox8/XenAPI.svg?branch=master)](https://travis-ci.org/cadox8/XenAPI)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI.svg?type=small)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI?ref=badge_small)
-[![Documentation Status](https://readthedocs.org/projects/me.cadox8.xenapi/badge/?version=latest)](https://me.cadox8.xenapi.readthedocs.io/en/latest/?badge=latest)
 
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/powered-by-oxygen.svg)](https://forthebadge.com)
-
-### This is a simple Xenforo API for Java and PHP.
+### This is a simple XenForo API for Java and PHP.
 -----
 
 ## Summary
@@ -58,7 +53,8 @@ For the Java-API, you can add it on Maven:
 **NOTE:** You can use ``RELEASE`` as version or you can use the version number (you can check all versions [here](https://github.com/cadox8/XenAPI/releases))
 
 ## Documentation
-**Web-API & Java-API:** You can get the documentation [here](https://me.cadox8.xenapi.readthedocs.io/en/latest/).<br>
+**Web-API & Java-API:** You can get the documentation [here](https://cadox8.github.io/XenAPI/#/).
+
 **Javadocs:** You can check the Javadocs [here](https://cadox8.github.io/XenAPI/javadocs).
 
 ## Bug Reporting
@@ -108,21 +104,17 @@ The logo and some parts of the PHP Code is property of [Contex](https://github.c
 
 Cadox8 updated the code and created the Java API.
 
-[Contex](https://github.com/Contex) © 2012-2014<br>
-[Cadox8](https://cadox8.github.io) © 2018
+[Contex](https://github.com/Contex) © 2012-2014
 
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcadox8%2FXenAPI?ref=badge_large)
+[Cadox8](https://cadox8.github.io) © 2018-2020
 
 ## Donations
-Building an Open Source Project is hard. You have to invert time and resources. And you won't be paid for that, that's why I'm putting a donation link here. :money_with_wings: :money_with_wings:
-
-If you appreciate my work and want to help me maintaining this or other projects, you can donate me through [PayPal](https://paypal.me/Cadox8) or you can just [Buy Me a Coffee](https://ko-fi.com/devcadox).
+Building an Open Source Project is hard. You have to invert time and resources. :money_with_wings: :money_with_wings:
 
 ## TODO
 * [x] Add a proper copyright header to all files.
 * [x] Deploy to a public maven repo.
-* [x] Update to Xenforo 2.0
+* [ ] Update to Xenforo 2.0
 * [x] Better and more documentation
 * [ ] Build a full Java-api
 * [x] Feed the Cat

@@ -4,7 +4,12 @@ language: java
 install: mvn clean install
 
 jdk:
-  - oraclejdk8
+  - openjdk10
+  - oraclejdk11
   
 notifications:
-  email: false
+  email:
+    recipients:
+      - cadox8@gmail.com
+    on_success: never
+    on_failure: always

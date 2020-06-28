@@ -73,7 +73,7 @@ public class Xen {
     public static void main(String... args) {
         final XenAPI api = new XenAPI("e65ef8da-ca6a-437c-ab8b-4b2e9e86cd10", "http://localhost/forum");
 
-        final Request r = RequestBuilder.newRequest(RequestType.GET_ALERTS).addParam(RequestParam.VALUE_STRING, "cadox8").addParam(RequestParam.TYPE_STRING, "fetchAll").addParam(RequestParam.HASH, "cadox8:JDJhJDEwJEd4U2xRQUNNTVJnTzFOM282anZYd08wRk1DTC52NFJtYWtDVHZaNHo1SUZvR0hzUVpLTkU2").createRequest();
+        final Request r = RequestBuilder.newRequest(RequestType.GET_ALERTS).addParam(RequestParam.VALUE_STRING, "cadox8").addParam(RequestParam.TYPE_STRING, "fetchAll").createRequest();
 
         api.getReply(r, (Callback<AlertsReply>) (failCause, result) -> {
             try {

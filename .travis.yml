@@ -1,4 +1,3 @@
-before_install: cd Java-API
 language: java
 
 install: mvn clean install
@@ -6,7 +5,7 @@ install: mvn clean install
 jdk:
   - openjdk10
   - oraclejdk11
-  
+
 notifications:
   email:
     recipients:

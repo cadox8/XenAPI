@@ -1,0 +1,290 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>xenapi</title>
+	<meta name="description" content="Documentation for xenapi">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">xenapi</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>xenapi</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><img src="docs/img/logo.png" alt="Logo"></p>
+				<p><a href="https://travis-ci.org/cadox8/XenAPI"><img src="https://travis-ci.org/cadox8/XenAPI.svg?branch=master" alt="Build Status"></a></p>
+				<a href="#this-is-a-simple-xenforo-api-for-java-and-php" id="this-is-a-simple-xenforo-api-for-java-and-php" style="color: inherit; text-decoration: none;">
+					<h3>This is a simple XenForo API for Java and PHP.</h3>
+				</a>
+				<hr>
+				<a href="#summary" id="summary" style="color: inherit; text-decoration: none;">
+					<h2>Summary</h2>
+				</a>
+				<ul>
+					<li><a href="#me.cadox8.xenapi-for-xenforo-2x">XenAPI for Xenforo 2.X</a></li>
+					<li><a href="#downloads--repo">Downloads &amp; Repo</a></li>
+					<li><a href="#documentation">Documentation</a></li>
+					<li><a href="#bug-reporting">Bug Reporting</a></li>
+					<li><a href="#contributing">Contributing</a></li>
+					<li><a href="#installation">Instalation</a></li>
+					<li><a href="#usage--api-key">Usage &amp; API Key</a><ul>
+							<li><a href="#for-php">For PHP</a></li>
+							<li><a href="#for-java">For Java</a></li>
+						</ul>
+					</li>
+					<li><a href="#dependencies">Dependencies</a></li>
+					<li><a href="#bug-reporting">Bug Reporting</a></li>
+					<li><a href="#license--copyright">License &amp; Copyright</a></li>
+					<li><a href="#donations">Donations</a></li>
+					<li><a href="#todo">TODO</a><ul>
+							<li><a href="#todo-docs">TODO Docs</a></li>
+						</ul>
+					</li>
+				</ul>
+				<hr>
+				<a href="#xenapi-for-xenforo-2x" id="xenapi-for-xenforo-2x" style="color: inherit; text-decoration: none;">
+					<h2>XenAPI for Xenforo 2.X</h2>
+				</a>
+				<p>This repo contains the Java and the Web API for Xenforo 1.X.</p>
+				<p>A Java version for Xenforo 2.X is being developed, but I recommend you to use <a href="https://xfrocks.com/resources/bd-api-for-xenforo-2-0.36/">this</a> for the WebAPI.</p>
+				<a href="#downloads-amp-repo" id="downloads-amp-repo" style="color: inherit; text-decoration: none;">
+					<h2>Downloads &amp; Repo</h2>
+				</a>
+				<p>All downloads are hosted in <a href="https://github.com/cadox8/XenAPI/releases">Github</a>.</p>
+				<p>For the Java-API, you can add it on Maven:</p>
+				<pre><code class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">repositories</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">repository</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>XenAPI Repo<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>https://cadox8.github.io/repo/<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">repository</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">repositories</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>me.cadox8<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>XenAPI<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></code></pre>
+				<p><strong>NOTE:</strong> You can use <code>RELEASE</code> as version or you can use the version number (you can check all versions <a href="https://github.com/cadox8/XenAPI/releases">here</a>)</p>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h2>Documentation</h2>
+				</a>
+				<p><strong>Web-API &amp; Java-API:</strong> You can get the documentation <a href="https://cadox8.github.io/XenAPI/#/">here</a>.</p>
+				<p><strong>Javadocs:</strong> You can check the Javadocs <a href="https://cadox8.github.io/XenAPI/javadocs">here</a>.</p>
+				<a href="#bug-reporting" id="bug-reporting" style="color: inherit; text-decoration: none;">
+					<h2>Bug Reporting</h2>
+				</a>
+				<p>You can create an issue here on GitHub to report a bug with the API or to suggest enhancements.</p>
+				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+					<h2>Contributing</h2>
+				</a>
+				<p>If you want to contribute to the project, you must accept and follow our <a href=".github/CODE_OF_CONDUCT.md">Code Of Conduct</a> and our <a href=".github/CONTRIBUTING.md">guides for contributing</a>.</p>
+				<a href="#instalation" id="instalation" style="color: inherit; text-decoration: none;">
+					<h2>Instalation</h2>
+				</a>
+				<p>The api.php goes in the root folder of the XenForo installation.</p>
+				<p>Then, you will need to <a href="#usage--api-key">Set an API Key</a></p>
+				<a href="#usage-amp-api-key" id="usage-amp-api-key" style="color: inherit; text-decoration: none;">
+					<h2>Usage &amp; API Key</h2>
+				</a>
+				<p><strong>NOTE:</strong> I recomend a Version 4 UUID for the API Key (really recomended). You can generate one <a href="https://www.uuidgenerator.net">here</a>.</p>
+				<a href="#for-php" id="for-php" style="color: inherit; text-decoration: none;">
+					<h3>For PHP</h3>
+				</a>
+				<p>To run change the API key by replace the <code>me.cadox8.xenapi</code> with your desired API key (UUID).</p>
+				<pre><code class="language-javascript">$restAPI = <span class="hljs-keyword">new</span> RestAPI(<span class="hljs-string">&#x27;NEW_API_KEY&#x27;</span>);</code></pre>
+				<p>or send hash in format: <code>username:hash</code> , where hash is result authenticate action.</p>
+				<a href="#for-java" id="for-java" style="color: inherit; text-decoration: none;">
+					<h3>For Java</h3>
+				</a>
+				<p><strong>You need to set the new API Key in PHP before doing this!</strong></p>
+				<pre><code class="language-java">XenAPI api = <span class="hljs-keyword">new</span> XenAPI(<span class="hljs-string">&quot;YOUR_API_KEY&quot;</span>); <span class="hljs-comment">// Setted in api.php</span>
+
+XenAPI api = <span class="hljs-keyword">new</span> XenAPI(<span class="hljs-string">&quot;YOUR_API_KEY&quot;</span>, <span class="hljs-string">&quot;YOUR_FORUM_URL&quot;</span>); <span class="hljs-comment">// Setted in api.php / Must have http:// | https://</span></code></pre>
+				<p>Then, you will use that Key in the program.</p>
+				<a href="#dependencies" id="dependencies" style="color: inherit; text-decoration: none;">
+					<h2>Dependencies</h2>
+				</a>
+				<p>The XenAPI (Java) has the following dependencies:</p>
+				<ul>
+					<li><a href="https://mvnrepository.com/artifact/com.google.code.gson/gson">Google Gson library</a></li>
+					<li><a href="https://projectlombok.org">Project Lombok</a></li>
+					<li><a href="https://hc.apache.org">Apache HttpClient</a></li>
+				</ul>
+				<a href="#license-amp-copyright" id="license-amp-copyright" style="color: inherit; text-decoration: none;">
+					<h2>License &amp; Copyright</h2>
+				</a>
+				<p>XenAPI is licensed under <a href="LICENSE.md">GNU LESSER GENERAL PUBLIC LICENSE Version 3</a>.</p>
+				<p>The logo and some parts of the PHP Code is property of <a href="https://github.com/Contex/XenAPI">Contex</a>.</p>
+				<p>Cadox8 updated the code and created the Java API.</p>
+				<p><a href="https://github.com/Contex">Contex</a> © 2012-2014</p>
+				<p><a href="https://cadox8.github.io">Cadox8</a> © 2018-2020</p>
+				<a href="#donations" id="donations" style="color: inherit; text-decoration: none;">
+					<h2>Donations</h2>
+				</a>
+				<p>Building an Open Source Project is hard. You have to invert time and resources. :money_with_wings: :money_with_wings:</p>
+				<a href="#todo" id="todo" style="color: inherit; text-decoration: none;">
+					<h2>TODO</h2>
+				</a>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> Add a proper copyright header to all files.</li>
+					<li><input checked="" disabled="" type="checkbox"> Deploy to a public maven repo.</li>
+					<li><input disabled="" type="checkbox"> Update to Xenforo 2.0</li>
+					<li><input checked="" disabled="" type="checkbox"> Better and more documentation</li>
+					<li><input disabled="" type="checkbox"> Build a full Java-api</li>
+					<li><input checked="" disabled="" type="checkbox"> Feed the Cat</li>
+				</ul>
+				<a href="#todo-docs" id="todo-docs" style="color: inherit; text-decoration: none;">
+					<h3>TODO Docs</h3>
+				</a>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> Authenticate</li>
+					<li><input checked="" disabled="" type="checkbox"> Create Alert</li>
+					<li><input checked="" disabled="" type="checkbox"> Create Conversation</li>
+					<li><input checked="" disabled="" type="checkbox"> Create Conversation Reply</li>
+					<li><input checked="" disabled="" type="checkbox"> Create Post</li>
+					<li><input disabled="" type="checkbox"> Create Profile Post</li>
+					<li><input disabled="" type="checkbox"> Create Profile Post Reply</li>
+					<li><input checked="" disabled="" type="checkbox"> Create Thread</li>
+					<li><input checked="" disabled="" type="checkbox"> Delete Post</li>
+					<li><input disabled="" type="checkbox"> Delete User</li>
+					<li><input disabled="" type="checkbox"> Downgrade User</li>
+					<li><input disabled="" type="checkbox"> Edit Post</li>
+					<li><input disabled="" type="checkbox"> Edit Thread</li>
+					<li><input checked="" disabled="" type="checkbox"> Edit User</li>
+					<li><input checked="" disabled="" type="checkbox"> Get Actions</li>
+					<li><input checked="" disabled="" type="checkbox"> Get Addon</li>
+					<li><input checked="" disabled="" type="checkbox"> Get Addons</li>
+					<li><input checked="" disabled="" type="checkbox"> Get Alerts</li>
+					<li><input checked="" disabled="" type="checkbox"> Get Avatar</li>
+					<li><input disabled="" type="checkbox"> Get Conversation</li>
+					<li><input disabled="" type="checkbox"> Get Conversations</li>
+					<li><input disabled="" type="checkbox"> Get Group</li>
+					<li><input checked="" disabled="" type="checkbox"> Get Node</li>
+					<li><input checked="" disabled="" type="checkbox"> Get Nodes</li>
+					<li><input checked="" disabled="" type="checkbox"> Get Post</li>
+					<li><input checked="" disabled="" type="checkbox"> Get Posts</li>
+					<li><input disabled="" type="checkbox"> Get Profile Post</li>
+					<li><input disabled="" type="checkbox"> Get Profile Posts</li>
+					<li><input disabled="" type="checkbox"> Get Resource</li>
+					<li><input disabled="" type="checkbox"> Get Resources</li>
+					<li><input disabled="" type="checkbox"> Get Resource Categories</li>
+					<li><input checked="" disabled="" type="checkbox"> Get Stats</li>
+					<li><input disabled="" type="checkbox"> Get Thread</li>
+					<li><input disabled="" type="checkbox"> Get Threads</li>
+					<li><input checked="" disabled="" type="checkbox"> Get User</li>
+					<li><input disabled="" type="checkbox"> Get Users</li>
+					<li><input disabled="" type="checkbox"> Get User Upgrade</li>
+					<li><input disabled="" type="checkbox"> Get User Upgrades</li>
+					<li><input checked="" disabled="" type="checkbox"> Login</li>
+					<li><input checked="" disabled="" type="checkbox"> Logout</li>
+					<li><input disabled="" type="checkbox"> Register</li>
+					<li><input disabled="" type="checkbox"> Search</li>
+					<li><input disabled="" type="checkbox"> Search Threads</li>
+					<li><input disabled="" type="checkbox"> Upgrade User</li>
+					<li><input disabled="" type="checkbox"> Get Unread Posts</li>
+					<li><input disabled="" type="checkbox"> Edit User Mod</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_xenapi_.html">&quot;<wbr>XenAPI&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_response_error_.html">&quot;response/<wbr>Error&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_response_user_.html">&quot;response/<wbr>User&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_response_users_.html">&quot;response/<wbr>Users&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

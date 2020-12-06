@@ -1,0 +1,4 @@
+.github
+xenapi-ts/package-lock.json
+xenapi-ts/node_modules
+.idea

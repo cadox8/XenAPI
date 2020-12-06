@@ -1,0 +1,41 @@
+{
+  "name": "xenapi",
+  "version": "1.0.0",
+  "description": "Simple Xenforo API for v1.X and 2.X",
+  "main": "XenAPI.js",
+  "scripts": {
+    "test": "npx ts-node Test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cadox8/XenAPI.git"
+  },
+  "keywords": [
+    "xenforo",
+    "cadox8",
+    "api",
+    "java",
+    "typescript",
+    "javascript",
+    "php"
+  ],
+  "author": {
+    "name": "cadox8",
+    "email": "cadox8@gmail.com",
+    "url": "https://cadox8.es"
+  },
+  "license": "GNU Lesser General Public License v3.0",
+  "bugs": {
+    "url": "https://github.com/cadox8/XenAPI/issues"
+  },
+  "homepage": "https://github.com/cadox8/XenAPI#readme",
+  "dependencies": {
+    "axios": "^0.21.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.2",
+    "@types/node": "^14.14.10",
+    "ts-node": "^9.1.0",
+    "typedoc": "^0.19.2"
+  }
+}

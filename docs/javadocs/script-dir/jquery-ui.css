@@ -1,8 +1,23 @@
-/*! jQuery UI - v1.12.1 - 2018-12-06
-* http://jqueryui.com
-* Includes: core.css, autocomplete.css, menu.css, theme.css
-* To view and modify this theme, visit http://jqueryui.com/themeroller/?scope=&folderName=custom-theme&bgImgOpacityError=95&bgImgOpacityHighlight=55&bgImgOpacityActive=65&bgImgOpacityHover=75&bgImgOpacityDefault=75&bgImgOpacityContent=75&bgImgOpacityHeader=75&cornerRadiusShadow=8px&offsetLeftShadow=-8px&offsetTopShadow=-8px&thicknessShadow=8px&opacityShadow=30&bgImgOpacityShadow=0&bgTextureShadow=flat&bgColorShadow=%23aaaaaa&opacityOverlay=30&bgImgOpacityOverlay=0&bgTextureOverlay=flat&bgColorOverlay=%23aaaaaa&iconColorError=%23cd0a0a&fcError=%23cd0a0a&borderColorError=%23cd0a0a&bgTextureError=glass&bgColorError=%23fef1ec&iconColorHighlight=%232e83ff&fcHighlight=%23363636&borderColorHighlight=%23fcefa1&bgTextureHighlight=glass&bgColorHighlight=%23fbf9ee&iconColorActive=%23454545&fcActive=%23212121&borderColorActive=%23aaaaaa&bgTextureActive=glass&bgColorActive=%23dadada&iconColorHover=%23454545&fcHover=%23212121&borderColorHover=%23999999&bgTextureHover=glass&bgColorHover=%23dadada&iconColorDefault=%23888888&fcDefault=%23555555&borderColorDefault=%23d3d3d3&bgTextureDefault=glass&bgColorDefault=%23e6e6e6&iconColorContent=%23222222&fcContent=%23222222&borderColorContent=%23aaaaaa&bgTextureContent=flat&bgColorContent=%23ffffff&iconColorHeader=%23222222&fcHeader=%23222222&borderColorHeader=%23aaaaaa&bgTextureHeader=highlight_soft&bgColorHeader=%23cccccc&cornerRadius=4px&fwDefault=normal&fsDefault=1.1em&ffDefault=Verdana%2CArial%2Csans-serif
-* Copyright jQuery Foundation and other contributors; Licensed MIT */
+/*
+ * Copyright (c) 2021-2021.
+ *
+ * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
+ *
+ * XenAPI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * XenAPI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
+ */
 
 /* Layout helpers
 ----------------------------------*/

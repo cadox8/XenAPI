@@ -21,33 +21,36 @@
 
 package es.cadox8.xenapi;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import lombok.Getter;
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
+import es.cadox8.xenapi.net.Client;
+import es.cadox8.xenapi.request.BaseRequest;
+import es.cadox8.xenapi.response.BaseResponse;
+import es.cadox8.xenapi.utils.Callback;
+import lombok.NonNull;
 
 public class XenAPI {
 
-    @Getter private static XenAPI instance;
-    private Gson gson;
-    private final HttpClient httpClient;
-
-    @Getter private final String token;
+    private final Client client;
+    private final String token;
 
     /**
      * Default constructor
      *
-     * @param token The API token
      * @param url The URL to the forum
+     * @param token The API token
      */
-    public XenAPI(String token, String url) {
-        instance = this;
-
+    public XenAPI(@NonNull String url, @NonNull String token) {
         if (!url.endsWith("/api")) url += "/api";
+
         this.token = token;
 
-        httpClient = HttpClientBuilder.create().build();
-        gson = new GsonBuilder().setPrettyPrinting().create();
+        this.client = new Client();
+    }
+
+    private <T extends BaseRequest<T, R>, R extends BaseResponse> R execute(BaseRequest<T, R> request) {
+        return this.client.send(request);
+    }
+
+    private  <T extends BaseRequest<T, R>, R extends BaseResponse> void execute(T request, Callback<T, R> callback) {
+        this.client.send(request, callback);
     }
 }

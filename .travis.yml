@@ -1,14 +1,21 @@
-language: java
+os:
+  - linux
 
-install: mvn clean install
+language: java
 
 jdk:
   - openjdk10
   - oraclejdk11
 
+cache:
+  directories:
+    - $HOME/.m2
+
+install: mvn clean install
+
+branches:
+  only:
+    - master
+
 notifications:
-  email:
-    recipients:
-      - cadox8@gmail.com
-    on_success: never
-    on_failure: always
+  email: false

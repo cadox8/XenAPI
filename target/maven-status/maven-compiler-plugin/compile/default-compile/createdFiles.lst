@@ -1,0 +1,16 @@
+es\cadox8\xenapi\exceptions\NotAuthorizedException.class
+es\cadox8\xenapi\net\XenForoUrl.class
+es\cadox8\xenapi\XenAPIBuilder.class
+es\cadox8\xenapi\net\XenForoClient.class
+es\cadox8\xenapi\api\User.class
+es\cadox8\xenapi\XenAPI.class
+es\cadox8\xenapi\utils\Utils.class
+es\cadox8\xenapi\exceptions\NotFoundException.class
+es\cadox8\xenapi\utils\Argument.class
+es\cadox8\xenapi\utils\Log.class
+es\cadox8\xenapi\net\UrlExpander.class
+es\cadox8\xenapi\exceptions\XenForoHttpException.class
+es\cadox8\xenapi\utils\Log$LogType.class
+es\cadox8\xenapi\exceptions\XenForoBadRequestException.class
+es\cadox8\xenapi\Launcher.class
+es\cadox8\xenapi\api\XenForoEntity.class

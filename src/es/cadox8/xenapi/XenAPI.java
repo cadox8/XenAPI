@@ -21,36 +21,15 @@
 
 package es.cadox8.xenapi;
 
-import es.cadox8.xenapi.net.Client;
-import es.cadox8.xenapi.request.BaseRequest;
-import es.cadox8.xenapi.response.BaseResponse;
-import es.cadox8.xenapi.utils.Callback;
-import lombok.NonNull;
+import es.cadox8.xenapi.api.User;
 
-public class XenAPI {
-
-    private final Client client;
-    private final String token;
+public interface XenAPI {
 
     /**
-     * Default constructor
+     * Gets the info about the current user (token user)
      *
-     * @param url The URL to the forum
-     * @param token The API token
+     * @return The user information
+     * @see User
      */
-    public XenAPI(@NonNull String url, @NonNull String token) {
-        if (!url.endsWith("/api")) url += "/api";
-
-        this.token = token;
-
-        this.client = new Client();
-    }
-
-    private <T extends BaseRequest<T, R>, R extends BaseResponse> R execute(BaseRequest<T, R> request) {
-        return this.client.send(request);
-    }
-
-    private  <T extends BaseRequest<T, R>, R extends BaseResponse> void execute(T request, Callback<T, R> callback) {
-        this.client.send(request, callback);
-    }
+    User me();
 }

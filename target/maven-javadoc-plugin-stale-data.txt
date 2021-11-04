@@ -1,0 +1,76 @@
+@options
+@argfile
+-classpath
+'C:/Users/admin/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.13.0/jackson-core-2.13.0.jar;C:/Users/admin/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.13.0/jackson-databind-2.13.0.jar;C:/Users/admin/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.13.0/jackson-annotations-2.13.0.jar;C:/Users/admin/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar;C:/Users/admin/.m2/repository/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar;C:/Users/admin/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar;C:/Users/admin/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar;C:/Users/admin/.m2/repository/org/apache/httpcomponents/httpmime/4.5.13/httpmime-4.5.13.jar;C:/Users/admin/.m2/repository/com/diogonunes/JCDP/4.0.2/JCDP-4.0.2.jar;C:/Users/admin/.m2/repository/net/java/dev/jna/jna/5.5.0/jna-5.5.0.jar;C:/Users/admin/.m2/repository/net/java/dev/jna/jna-platform/5.5.0/jna-platform-5.5.0.jar;C:/Users/admin/.m2/repository/org/projectlombok/lombok/1.18.22/lombok-1.18.22.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'1.8'
+-sourcepath
+'C:/Users/admin/Documents/proyectos/XenAPI/src'
+-author
+-bottom
+'Copyright &#169; 2021. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/admin/Documents/proyectos/XenAPI/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'XenAPI 0.1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' 'C:/Users/admin/Documents/proyectos/XenAPI/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'XenAPI 0.1.0-SNAPSHOT API'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/api/User.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/api/XenForoEntity.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/exceptions/NotAuthorizedException.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/exceptions/NotFoundException.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/exceptions/XenForoBadRequestException.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/exceptions/XenForoHttpException.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/Launcher.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/net/UrlExpander.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/net/XenForoClient.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/net/XenForoUrl.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/utils/Argument.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/utils/Log.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/utils/Utils.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/XenAPI.java'
+'C:/Users/admin/Documents/proyectos/XenAPI/src/es/cadox8/xenapi/XenAPIBuilder.java'
+C:\Users\admin\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.13.0\jackson-core-2.13.0.jar = 1636038583905
+C:\Users\admin\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.13.0\jackson-databind-2.13.0.jar = 1636038584025
+C:\Users\admin\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.13.0\jackson-annotations-2.13.0.jar = 1636038583877
+C:\Users\admin\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar = 1635967347876
+C:\Users\admin\.m2\repository\org\apache\httpcomponents\httpcore\4.4.13\httpcore-4.4.13.jar = 1635967347823
+C:\Users\admin\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar = 1635967347534
+C:\Users\admin\.m2\repository\commons-codec\commons-codec\1.11\commons-codec-1.11.jar = 1635967347811
+C:\Users\admin\.m2\repository\org\apache\httpcomponents\httpmime\4.5.13\httpmime-4.5.13.jar = 1636040505153
+C:\Users\admin\.m2\repository\com\diogonunes\JCDP\4.0.2\JCDP-4.0.2.jar = 1635967361081
+C:\Users\admin\.m2\repository\net\java\dev\jna\jna\5.5.0\jna-5.5.0.jar = 1635967348199
+C:\Users\admin\.m2\repository\net\java\dev\jna\jna-platform\5.5.0\jna-platform-5.5.0.jar = 1635967348505
+C:\Users\admin\.m2\repository\org\projectlombok\lombok\1.18.22\lombok-1.18.22.jar = 1635967361990
+C:\Users\admin\Documents\proyectos\XenAPI\src = 1635967353573
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\allclasses-index.html = 1636043742154
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\allpackages-index.html = 1636043742156
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\constant-values.html = 1636043742024
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\deprecated-list.html = 1636043742113
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\element-list = 1636043741988
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\help-doc.html = 1636043742162
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\index-all.html = 1636043742149
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\index.html = 1636043742117
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\jquery-ui.overrides.css = 1636043742188
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\member-search-index.js = 1636043742146
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\module-search-index.js = 1636043742143
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\overview-summary.html = 1636043742158
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\overview-tree.html = 1636043742110
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\package-search-index.js = 1636043742144
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\script.js = 1636043742166
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\search.js = 1636043742169
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\serialized-form.html = 1636043742032
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\stylesheet.css = 1636043742164
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\tag-search-index.js = 1636043742147
+C:\Users\admin\Documents\proyectos\XenAPI\target\apidocs\type-search-index.js = 1636043742145

@@ -5,6 +5,8 @@
   - [API](/api.md)
 - Actions 
   - [Auth](/auth.md)
+  - [Me]()
+    - [[GET] Me](/actions/me_get.md)
     
 
 - [Javadocs](https://cadox8.github.io/XenAPI/javadocs/index.html)

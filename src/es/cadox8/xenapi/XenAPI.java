@@ -21,6 +21,7 @@
 
 package es.cadox8.xenapi;
 
+import es.cadox8.xenapi.api.Me;
 import es.cadox8.xenapi.api.User;
 
 public interface XenAPI {
@@ -31,5 +32,9 @@ public interface XenAPI {
      * @return The user information
      * @see User
      */
-    User me();
+    Me me();
+
+    User findUserById();
+
+    User findUserById(int id);
 }

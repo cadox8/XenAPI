@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2021.
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -19,24 +19,15 @@
  * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
  */
 
-package es.cadox8.xenapi.api;
+package es.cadox8.xenapi.api.user;
 
-import com.google.gson.annotations.Expose;
-import es.cadox8.xenapi.XenAPI;
+import lombok.Data;
 
-public class XenForoEntity {
-
-    @Expose(serialize = false, deserialize = false)
-    protected XenAPI xenAPIService;
-
-    @SuppressWarnings("unchecked")
-    public <T extends XenForoEntity> T setInternalXenAPI(XenAPI xenAPIService) {
-        this.xenAPIService = xenAPIService;
-        return (T) this;
-    }
-
-    protected XenAPI getXenAPIService() {
-        if (xenAPIService == null) throw new IllegalStateException("The xenAPI not initialized. Please call setInternalXenAPI before.");
-        return xenAPIService;
-    }
+@Data
+public class AvatarUrls {
+    private String o;
+    private String h;
+    private String l;
+    private String m;
+    private String s;
 }

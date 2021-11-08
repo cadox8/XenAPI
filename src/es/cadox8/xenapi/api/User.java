@@ -22,6 +22,7 @@
 package es.cadox8.xenapi.api;
 
 import es.cadox8.xenapi.api.user.AvatarUrls;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -33,6 +34,7 @@ import java.util.Map;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@AllArgsConstructor
 public class User extends XenForoEntity {
 
     private String about;

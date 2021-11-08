@@ -122,7 +122,7 @@ public class XenForoClient {
 
             final HttpEntity httpEntity = httpResponse.getEntity();
             if (httpEntity != null) {
-                final String body = Utils.toString(httpEntity.getContent());
+                String body = Utils.toString(httpEntity.getContent());
                 if (httpResponse.getStatusLine().getStatusCode() == 400) {
                     throw new XenForoBadRequestException(body);
                 }
@@ -133,6 +133,10 @@ public class XenForoClient {
                     throw new NotFoundException("Resource not found: " + httpRequest.getURI());
                 }
                 try {
+                    final StringBuilder sb = new StringBuilder(body.substring(body.indexOf(":") + 1));
+                    sb.deleteCharAt(sb.length() - 1);
+                    body = sb.toString();
+                    System.out.println(body);
                     return this.gson.fromJson(body, objectClass);
                 } catch (JsonSyntaxException e) {
                     throw new XenForoHttpException("Cannot parse XenForo response. Expected to get a json string, but got: " + body);

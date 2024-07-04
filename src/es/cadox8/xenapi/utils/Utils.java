@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2024
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -21,18 +21,22 @@
 
 package es.cadox8.xenapi.utils;
 
+import es.cadox8.xenapi.net.XenforoPaths;
 import lombok.NonNull;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Utils {
 
     public static String toString(@NonNull InputStream in) {
-        try (Scanner scanner = new Scanner(in, StandardCharsets.UTF_8.name())) {
+        try (Scanner scanner = new Scanner(in, StandardCharsets.UTF_8)) {
             return scanner.useDelimiter("\\A").next();
         }
+    }
+
+    public static String createUrl(String api_url, final XenforoPaths baseUrl) {
+        return api_url + baseUrl.getPath();
     }
 }

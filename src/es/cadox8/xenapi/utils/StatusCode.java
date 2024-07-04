@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2021.
+ * Copyright (c) 2024
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -19,15 +19,16 @@
  * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
  */
 
-package es.cadox8.xenapi.api.user;
+package es.cadox8.xenapi.utils;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@Data
-public class AvatarUrls {
-    private String o;
-    private String h;
-    private String l;
-    private String m;
-    private String s;
+@RequiredArgsConstructor
+@Getter
+public enum StatusCode {
+
+    BadRequest(400), NotAuthorized(401), ResourceNotFound(404);
+
+    private final int status;
 }

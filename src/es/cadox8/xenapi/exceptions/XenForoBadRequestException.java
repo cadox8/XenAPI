@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2024
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -21,7 +21,7 @@
 
 package es.cadox8.xenapi.exceptions;
 
-public class XenForoBadRequestException extends RuntimeException {
+public class XenForoBadRequestException extends XenForoBaseException {
     public XenForoBadRequestException(String message, Throwable cause) {
         super(message, cause);
     }

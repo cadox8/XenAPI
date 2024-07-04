@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2024
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -20,8 +20,6 @@
  */
 
 package es.cadox8.xenapi.exceptions;
-
-import es.cadox8.xenapi.api.XenForoEntity;
 
 public class NotFoundException extends XenForoBadRequestException {
     public NotFoundException(String message, Throwable cause) {

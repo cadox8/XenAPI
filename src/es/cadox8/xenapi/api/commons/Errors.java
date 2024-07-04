@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2024
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -19,13 +19,28 @@
  * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
  */
 
-package es.cadox8.xenapi.utils;
+package es.cadox8.xenapi.api.commons;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import com.google.gson.annotations.Expose;
+import es.cadox8.xenapi.api.XenForoEntity;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
-@Data
-@AllArgsConstructor
-public class Argument {
-    private String argValue;
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@ToString
+public class Errors extends XenForoEntity {
+
+    @Expose private List<ErrorData> errors;
+
+    @Getter
+    @ToString
+    public static class ErrorData {
+        @Expose private String code;
+        @Expose private String message;
+        @Expose private List<String> params;
+    }
 }

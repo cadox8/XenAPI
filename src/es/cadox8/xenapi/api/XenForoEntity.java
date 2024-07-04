@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2024
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -23,20 +23,21 @@ package es.cadox8.xenapi.api;
 
 import com.google.gson.annotations.Expose;
 import es.cadox8.xenapi.XenAPI;
+import lombok.NonNull;
 
 public class XenForoEntity {
 
-    @Expose(serialize = false, deserialize = false)
-    protected XenAPI xenAPIService;
+    @Expose(serialize = false, deserialize = false) protected XenAPI xenAPIService;
 
     @SuppressWarnings("unchecked")
-    public <T extends XenForoEntity> T setInternalXenAPI(XenAPI xenAPIService) {
+    public <T extends XenForoEntity> T setInternalXenAPI(@NonNull final XenAPI xenAPIService) {
         this.xenAPIService = xenAPIService;
         return (T) this;
     }
 
     protected XenAPI getXenAPIService() {
-        if (xenAPIService == null) throw new IllegalStateException("The xenAPI not initialized. Please call setInternalXenAPI before.");
+        if (xenAPIService == null)
+            throw new IllegalStateException("The XenAPI is not initialized. Please call setInternalXenAPI before.");
         return xenAPIService;
     }
 }

@@ -1,4 +1,5 @@
 .idea
 
 # Used for testing
-src/es/cadox8/xenapi/Launcher.java
+/src/test/
+/target

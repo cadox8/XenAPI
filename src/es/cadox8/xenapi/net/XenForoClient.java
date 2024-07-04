@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2024
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -21,33 +21,38 @@
 
 package es.cadox8.xenapi.net;
 
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import es.cadox8.xenapi.api.Me;
-import es.cadox8.xenapi.exceptions.NotAuthorizedException;
-import es.cadox8.xenapi.exceptions.NotFoundException;
-import es.cadox8.xenapi.exceptions.XenForoBadRequestException;
-import es.cadox8.xenapi.exceptions.XenForoHttpException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import de.jupf.staticlog.Log;
+import de.jupf.staticlog.format.LogFormat;
+import es.cadox8.xenapi.api.commons.Errors;
+import es.cadox8.xenapi.exceptions.*;
+import es.cadox8.xenapi.utils.StatusCode;
 import es.cadox8.xenapi.utils.UrlExpander;
 import es.cadox8.xenapi.utils.Utils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.*;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.hc.client5.http.classic.HttpClient;
+import org.apache.hc.client5.http.classic.methods.*;
+import org.apache.hc.client5.http.entity.mime.FileBody;
+import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.core5.http.ClassicHttpResponse;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.NameValuePair;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.hc.core5.http.message.StatusLine;
+import org.apache.hc.core5.net.URIBuilder;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.lang.reflect.Type;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.Objects;
+
+import static de.jupf.staticlog.Log.FormatOperations.*;
 
 public class XenForoClient {
 
@@ -60,6 +65,7 @@ public class XenForoClient {
     public XenForoClient(String token) {
         this(token, "");
     }
+
     public XenForoClient(String token, String user) {
         this(token, user, HttpClientBuilder.create().build());
     }
@@ -69,15 +75,31 @@ public class XenForoClient {
         this.user = user;
         this.httpClient = Objects.requireNonNull(httpClient);
         this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
+
+        final LogFormat format = Log.newFormat();
+        format.line(date("yyyy-MM-dd HH:mm:ss.SSS"), space(1), text("["), level(), text("]"), space(2), message());
     }
 
-    public <T> T get(String url, Class<T> responseType, String... params) {
-        final HttpGet httpGet = new HttpGet(UrlExpander.expandUrl(url, params));
-        return getEntityAndReleaseConnection(responseType, httpGet);
+    public <T> T get(String url, Class<T> responseType, final NameValuePair... query) {
+        return this.get(url, responseType, "", query);
     }
 
-    public <T> T postForObject(String url, Object body, Class<T> responseType, String... params) {
-        final HttpPost httpPost = new HttpPost(UrlExpander.expandUrl(url, params));
+    public <T> T get(String url, Class<T> responseType, String params) {
+        return this.get(url, responseType, params, new NameValuePair[]{});
+    }
+
+    public <T> T get(String url, Class<T> responseType, String params, final NameValuePair... query) {
+        final HttpGet httpGet;
+        try {
+            httpGet = new HttpGet(new URIBuilder(UrlExpander.replaceParam(url, params)).addParameters(Arrays.asList(query)).build());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        return this.getEntityAndReleaseConnection(responseType, httpGet);
+    }
+
+    public <T> T postForObject(String url, Object body, Class<T> responseType, String params) {
+        final HttpPost httpPost = new HttpPost(UrlExpander.replaceParam(url, params));
 
         try {
             final HttpEntity entity = new StringEntity(this.gson.toJson(body), ContentType.APPLICATION_FORM_URLENCODED);
@@ -90,15 +112,15 @@ public class XenForoClient {
         }
     }
 
-    public <T> T postFileForObject(String url, File file, Class<T> objectClass, String... params) {
-        final HttpPost httpPost = new HttpPost(UrlExpander.expandUrl(url, params));
-        final HttpEntity entity = MultipartEntityBuilder.create().addPart("file", new FileBody(file)).addPart("filename", new StringBody(file.getName(), ContentType.TEXT_PLAIN)).build();
+    public <T> T postFileForObject(String url, File file, Class<T> objectClass, String params, String fileName) {
+        final HttpPost httpPost = new HttpPost(UrlExpander.replaceParam(url, params));
+        final HttpEntity entity = MultipartEntityBuilder.create().addPart(fileName, new FileBody(file)).build();
         httpPost.setEntity(entity);
         return getEntityAndReleaseConnection(objectClass, httpPost);
     }
 
-    public <T> T putForObject(String url, Object body, Class<T> responseType, String... params) {
-        final HttpPut put = new HttpPut(UrlExpander.expandUrl(url, params));
+    public <T> T putForObject(String url, Object body, Class<T> responseType, String params) {
+        final HttpPut put = new HttpPut(UrlExpander.replaceParam(url, params));
         try {
             final HttpEntity entity = new StringEntity(this.gson.toJson(body), ContentType.MULTIPART_FORM_DATA);
             put.setEntity(entity);
@@ -108,48 +130,79 @@ public class XenForoClient {
         }
     }
 
-    public <T> T delete(String url, Class<T> responseType, String... params) {
-        final HttpDelete delete = new HttpDelete(UrlExpander.expandUrl(url, params));
-        return getEntityAndReleaseConnection(responseType, delete);
+    public <T> T delete(String url, Class<T> responseType, final NameValuePair... query) {
+        return this.get(url, responseType, "", query);
     }
 
-    private <T> T getEntityAndReleaseConnection(Class<T> objectClass, HttpRequestBase httpRequest) {
+    public <T> T delete(String url, Class<T> responseType, String params) {
+        return this.get(url, responseType, params, new NameValuePair[]{});
+    }
+
+    public <T> T delete(String url, Class<T> responseType, String params, final NameValuePair... query) {
+        final HttpDelete delete;
+        try {
+            delete = new HttpDelete(new URIBuilder(UrlExpander.replaceParam(url, params)).addParameters(Arrays.asList(query)).build());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        return this.getEntityAndReleaseConnection(responseType, delete);
+    }
+
+    private <T> T getEntityAndReleaseConnection(Class<T> objectClass, HttpUriRequest httpRequest) {
         try {
             httpRequest.setHeader("Content-Type", "application/x-www-form-urlencoded");
             httpRequest.setHeader("XF-Api-User", this.user);
             httpRequest.setHeader("XF-Api-Key", this.token);
-            final HttpResponse httpResponse = this.httpClient.execute(httpRequest);
+            final ClassicHttpResponse httpResponse = this.httpClient.executeOpen(null, httpRequest, null);
 
             final HttpEntity httpEntity = httpResponse.getEntity();
-            if (httpEntity != null) {
-                String body = Utils.toString(httpEntity.getContent());
-                if (httpResponse.getStatusLine().getStatusCode() == 400) {
-                    throw new XenForoBadRequestException(body);
-                }
-                if (httpResponse.getStatusLine().getStatusCode() == 401) {
-                    throw new NotAuthorizedException(body);
-                }
-                if (httpResponse.getStatusLine().getStatusCode() == 404) {
-                    throw new NotFoundException("Resource not found: " + httpRequest.getURI());
-                }
-                try {
-                    final StringBuilder sb = new StringBuilder(body.substring(body.indexOf(":") + 1));
-                    sb.deleteCharAt(sb.length() - 1);
-                    body = sb.toString();
-                    System.out.println(body);
-                    return this.gson.fromJson(body, objectClass);
-                } catch (JsonSyntaxException e) {
-                    throw new XenForoHttpException("Cannot parse XenForo response. Expected to get a json string, but got: " + body);
-                }
-            } else {
+            if (httpEntity == null) {
                 throw new XenForoHttpException("Http entity returned by XenForo is null");
             }
-        } catch (XenForoHttpException e) {
-            throw e;
+
+            String body = Utils.toString(httpEntity.getContent());
+            final StatusLine status = new StatusLine(httpResponse);
+
+            if (status.getStatusCode() == StatusCode.BadRequest.getStatus()) {
+                throw new XenForoBadRequestException(body);
+            }
+            if (status.getStatusCode() == StatusCode.NotAuthorized.getStatus()) {
+                throw new NotAuthorizedException(body);
+            }
+            if (status.getStatusCode() == StatusCode.ResourceNotFound.getStatus()) {
+                throw new NotFoundException("Resource not found: " + httpRequest.getRequestUri());
+            }
+
+            try {
+                //Log.debug(body, "XenForoClient");
+                return this.gson.fromJson(body, objectClass);
+            } catch (JsonSyntaxException e) {
+                final Errors err = this.gson.fromJson(body, Errors.class);
+
+                Log.error("Retrieved the following errors: ", "XenForoClient");
+                err.getErrors().forEach(er -> {
+                    Log.error(er.getCode() + " - " + er.getMessage(), "XenForoClient");
+                });
+            }
+        } catch (XenForoBaseException e) {
+            Log.error("", "XenForoClient", e);
         } catch (IOException e) {
             throw new XenForoHttpException(e);
-        } finally {
-            httpRequest.releaseConnection();
+        }
+
+        httpRequest.abort();
+        return this.defaultError(objectClass);
+    }
+
+    private <T> T defaultError(Class<T> baseClass) {
+        try {
+            if (baseClass.equals(Boolean.class))
+                return (T) Boolean.FALSE;
+            final Constructor<T> constructor = baseClass.getDeclaredConstructor();
+            constructor.setAccessible(true);
+            return constructor.newInstance();
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            return null;
         }
     }
 }

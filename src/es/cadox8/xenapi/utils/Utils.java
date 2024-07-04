@@ -31,7 +31,7 @@ import java.util.Scanner;
 public class Utils {
 
     public static String toString(@NonNull InputStream in) {
-        try (Scanner scanner = new Scanner(in, StandardCharsets.UTF_8)) {
+        try (final Scanner scanner = new Scanner(in, StandardCharsets.UTF_8)) {
             return scanner.useDelimiter("\\A").next();
         }
     }

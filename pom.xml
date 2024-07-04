@@ -27,7 +27,7 @@
     <groupId>es.cadox8</groupId>
     <artifactId>XenAPI</artifactId>
     <packaging>jar</packaging>
-    <version>0.3.0-SNAPSHOT</version>
+    <version>0.3.1-SNAPSHOT</version>
 
     <distributionManagement>
         <repository>
@@ -67,8 +67,8 @@
     </developers>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
     <build>
@@ -111,17 +111,6 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.4.2</version>
                 <executions>
-                    <execution>
-                        <id>create-jar-1_8</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classesDirectory>${project.build.outputDirectory}_jdk8</classesDirectory>
-                            <classifier>jdk8</classifier>
-                        </configuration>
-                    </execution>
                     <execution>
                         <id>create-jar_11</id>
                         <phase>package</phase>
@@ -172,16 +161,8 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
                 <executions>
-                    <execution>
-                        <id>create-jar-1_8</id>
-                        <configuration>
-                            <source>1.8</source>
-                            <target>1.8</target>
-                            <fork>true</fork>
-                            <outputDirectory>${project.build.outputDirectory}_jdk8</outputDirectory>
-                        </configuration>
-                    </execution>
                     <execution>
                         <id>create-jar_11</id>
                         <configuration>
@@ -210,6 +191,10 @@
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

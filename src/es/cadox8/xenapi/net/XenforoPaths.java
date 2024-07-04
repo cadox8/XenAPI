@@ -34,7 +34,10 @@ public enum XenforoPaths {
     USER_AVATAR("/users/{id}/avatar"),
     PROFILE_POSTS("/users/{id}/profile-posts"),
     ALERTS("/alerts/{id}"),
-    ALERTS_MARK("/alerts/mark-all");
+    ALERTS_MARK("/alerts/mark-all"),
+    AUTH("/auth"),
+    AUTH_SESSION("/auth/from-session"),
+    LOGIN_TOKEN("/auth/login-token");
 
     private final String path;
 }

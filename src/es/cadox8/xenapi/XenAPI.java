@@ -21,13 +21,23 @@
 
 package es.cadox8.xenapi;
 
-import com.google.gson.JsonObject;
+import de.jupf.staticlog.Log;
+import de.jupf.staticlog.core.LogLevel;
 import es.cadox8.xenapi.api.XenForoEntity;
 import es.cadox8.xenapi.api.alerts.Alert;
 import es.cadox8.xenapi.api.alerts.Alerts;
+import es.cadox8.xenapi.api.auth.LoginToken;
+import es.cadox8.xenapi.api.models.User;
 import es.cadox8.xenapi.api.user.*;
 import es.cadox8.xenapi.net.XenForoClient;
 import es.cadox8.xenapi.net.XenforoPaths;
+import es.cadox8.xenapi.params.alerts.AlertsParams;
+import es.cadox8.xenapi.params.alerts.MarkAlertsParams;
+import es.cadox8.xenapi.params.alerts.SendAlertParams;
+import es.cadox8.xenapi.params.auth.AuthParams;
+import es.cadox8.xenapi.params.auth.AuthSessionParams;
+import es.cadox8.xenapi.params.auth.LoginTokenParams;
+import es.cadox8.xenapi.params.user.FindUserByIdParams;
 import es.cadox8.xenapi.utils.Utils;
 import lombok.NonNull;
 import org.apache.hc.core5.http.message.BasicNameValuePair;
@@ -66,9 +76,38 @@ public class XenAPI {
     public XenAPI(String url, String token, String user) {
         this.url = url.contains("/api") ? url : url + "/api";
         this.httpClient = new XenForoClient(token, user);
+        this.setDebug(false);
+    }
+
+    /**
+     * Sets the library to debug mode to see all logs. By default, this is False
+     *
+     * @param debug True/False
+     * @return This instance
+     */
+    public XenAPI setDebug(boolean debug) {
+        Log.setLogLevel(debug ? LogLevel.DEBUG : LogLevel.INFO);
+        return this;
     }
 
     // --- ---
+    public User auth(@NonNull final AuthParams params) {
+        final FindEmail user = this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.AUTH), params.body(), params.type());
+        user.setInternalXenAPI(this);
+        return user.getUser();
+    }
+
+    public User authSession(@NonNull final AuthSessionParams params) {
+        final FindEmail user = this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.AUTH_SESSION), params.body(), params.type());
+        user.setInternalXenAPI(this);
+        return user.getUser();
+    }
+
+    public LoginToken loginToken(@NonNull final LoginTokenParams token) {
+        final LoginToken user = this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.LOGIN_TOKEN), token.body(), token.type());
+        user.setInternalXenAPI(this);
+        return user;
+    }
 
     /**
      * Gets all users from the forum
@@ -88,13 +127,12 @@ public class XenAPI {
      *
      * @param email The email of the user
      * @return The User data
-     * @see FindEmail
-     * @see es.cadox8.xenapi.api.models.User
+     * @see User
      */
-    public FindEmail findUserByEmail(String email) {
+    public User findUserByEmail(String email) {
         final FindEmail user = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.GET_USERS_EMAIL), FindEmail.class, new BasicNameValuePair("email", email));
         user.setInternalXenAPI(this);
-        return user;
+        return user.getUser();
     }
 
     /**
@@ -111,33 +149,8 @@ public class XenAPI {
         return user;
     }
 
-    /**
-     * Finds a user by its id.
-     *
-     * @param id The id of the user
-     * @return The user data
-     * @see UserId
-     * @see es.cadox8.xenapi.api.models.User
-     */
-    public UserId findUserById(int id) {
-        final UserId user = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.USERS_ID), UserId.class, String.valueOf(id));
-        user.setInternalXenAPI(this);
-        return user;
-    }
-
-    /**
-     * Finds a user by its id. Adding with_posts (true or false), it will retrieve all posts by the user. Use paginator to
-     * retrieve all
-     *
-     * @param id         The id of the user
-     * @param with_posts True or False (if included, posts will be given)
-     * @param page       The page we are looking for
-     * @return The user data
-     * @see UserId
-     * @see es.cadox8.xenapi.api.models.User
-     */
-    public UserId findUserById(int id, boolean with_posts, int page) {
-        final UserId user = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.USERS_ID), UserId.class, String.valueOf(id), new BasicNameValuePair("with_posts", String.valueOf(with_posts)), new BasicNameValuePair("page", String.valueOf(page)));
+    public UserId findUserById(@NonNull final FindUserByIdParams params) {
+        final UserId user = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.USERS_ID), params.type(), params.guery(), params.params());
         user.setInternalXenAPI(this);
         return user;
     }
@@ -184,42 +197,18 @@ public class XenAPI {
         return alerts;
     }
 
-    public Alerts getAlerts() {
-        final Alerts alerts = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.ALERTS), Alerts.class);
+    public Alerts getAlerts(@NonNull final AlertsParams params) {
+        final Alerts alerts = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.ALERTS), params.type(), params.params());
         alerts.setInternalXenAPI(this);
         return alerts;
     }
 
-    public Alerts getAlerts(int page, int cutoff, boolean unviewed, boolean unread) {
-        final Alerts alerts = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.ALERTS), Alerts.class, new BasicNameValuePair("page", String.valueOf(page)), new BasicNameValuePair("cutoff", String.valueOf(cutoff)), new BasicNameValuePair("unviewed", String.valueOf(unviewed)), new BasicNameValuePair("unread", String.valueOf(unread)));
-        alerts.setInternalXenAPI(this);
-        return alerts;
+    public boolean sendAlert(@NonNull final SendAlertParams params) {
+        return this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS), params.body(), params.type());
     }
 
-    public boolean sendAlert(int toUserId, String alert) {
-        final JsonObject body = new JsonObject();
-        body.addProperty("to_user_id", toUserId);
-        body.addProperty("alert", alert);
-        return this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS), body, Boolean.class, "");
-    }
-
-    public boolean sendAlert(int toUserId, String alert, int fromUserId, String link, String title) {
-        final JsonObject body = new JsonObject();
-        body.addProperty("to_user_id", toUserId);
-        body.addProperty("alert", alert);
-        body.addProperty("from_user_id", fromUserId);
-        body.addProperty("link_url", link);
-        body.addProperty("link_title", title);
-        return this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS), body, Boolean.class, "");
-    }
-
-    public boolean markAlerts(boolean read, boolean viewed) {
-        final JsonObject body = new JsonObject();
-        if (read)
-            body.addProperty("read", true);
-        if (viewed)
-            body.addProperty("viewed", true);
-        return this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS_MARK), body, Boolean.class, "");
+    public boolean markAlerts(@NonNull final MarkAlertsParams params) {
+        return this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS_MARK), params.body(), params.type());
     }
 
     private <T extends XenForoEntity> List<T> asList(Supplier<T[]> responseSupplier) {

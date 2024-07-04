@@ -31,6 +31,7 @@ import es.cadox8.xenapi.exceptions.*;
 import es.cadox8.xenapi.utils.StatusCode;
 import es.cadox8.xenapi.utils.UrlExpander;
 import es.cadox8.xenapi.utils.Utils;
+import lombok.NonNull;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.classic.methods.*;
 import org.apache.hc.client5.http.entity.mime.FileBody;
@@ -50,7 +51,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
-import java.util.Objects;
 
 import static de.jupf.staticlog.Log.FormatOperations.*;
 
@@ -70,10 +70,10 @@ public class XenForoClient {
         this(token, user, HttpClientBuilder.create().build());
     }
 
-    public XenForoClient(String token, String user, HttpClient httpClient) {
+    public XenForoClient(String token, String user, @NonNull final HttpClient httpClient) {
         this.token = token;
         this.user = user;
-        this.httpClient = Objects.requireNonNull(httpClient);
+        this.httpClient = httpClient;
         this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
 
         final LogFormat format = Log.newFormat();
@@ -89,6 +89,7 @@ public class XenForoClient {
     }
 
     public <T> T get(String url, Class<T> responseType, String params, final NameValuePair... query) {
+        Log.debug("--> Sending to " + url, "XenForoClient");
         final HttpGet httpGet;
         try {
             httpGet = new HttpGet(new URIBuilder(UrlExpander.replaceParam(url, params)).addParameters(Arrays.asList(query)).build());
@@ -98,13 +99,18 @@ public class XenForoClient {
         return this.getEntityAndReleaseConnection(responseType, httpGet);
     }
 
+    public <T> T postForObject(String url, Object body, Class<T> responseType) {
+        return this.postForObject(url, body, responseType, "");
+    }
+
     public <T> T postForObject(String url, Object body, Class<T> responseType, String params) {
         final HttpPost httpPost = new HttpPost(UrlExpander.replaceParam(url, params));
 
         try {
+            Log.debug("--> Sending to " + url + " with body: " + body, "XenForoClient");
+
             final HttpEntity entity = new StringEntity(this.gson.toJson(body), ContentType.APPLICATION_FORM_URLENCODED);
             httpPost.setEntity(entity);
-
             return getEntityAndReleaseConnection(responseType, httpPost);
         } catch (JsonSyntaxException e) {
             // TODO : custom exception
@@ -174,7 +180,7 @@ public class XenForoClient {
             }
 
             try {
-                //Log.debug(body, "XenForoClient");
+                Log.debug("<-- Received body: " + body, "XenForoClient");
                 return this.gson.fromJson(body, objectClass);
             } catch (JsonSyntaxException e) {
                 final Errors err = this.gson.fromJson(body, Errors.class);

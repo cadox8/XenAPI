@@ -25,7 +25,7 @@ import com.google.gson.annotations.Expose;
 import es.cadox8.xenapi.XenAPI;
 import lombok.NonNull;
 
-public class XenForoEntity {
+public abstract class XenForoEntity {
 
     @Expose(serialize = false, deserialize = false) protected XenAPI xenAPIService;
 

@@ -24,7 +24,6 @@
 
 | JDK     | Name                        |
 |---------|-----------------------------|
-| Java 8  | XenAPI-0.3.0-SNAPSHOT-jdk8  |
-| Java 11 | XenAPI-0.3.0-SNAPSHOT-jdk11 |
-| Java 17 | XenAPI-0.3.0-SNAPSHOT-jdk17 |
-| Java 21 | XenAPI-0.3.0-SNAPSHOT-jdk21 |
+| Java 11 | XenAPI-X.X.X-SNAPSHOT-jdk11 |
+| Java 17 | XenAPI-X.X.X-SNAPSHOT-jdk17 |
+| Java 21 | XenAPI-X.X.X-SNAPSHOT-jdk21 |

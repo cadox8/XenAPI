@@ -24,6 +24,7 @@ package es.cadox8.xenapi.api.alerts;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import es.cadox8.xenapi.api.XenForoEntity;
+import es.cadox8.xenapi.api.commons.AlertData;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -34,5 +35,5 @@ import lombok.ToString;
 public class Alert extends XenForoEntity {
     @SerializedName("alert")
     @Expose
-    private Alerts.AlertData alert;
+    private AlertData alert;
 }

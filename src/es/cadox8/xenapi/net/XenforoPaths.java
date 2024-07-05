@@ -27,17 +27,28 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum XenforoPaths {
+    ALERTS("/alerts/{id}"),
+    ALERTS_MARK("/alerts/mark-all"),
+    ALERT_MARK("/alerts/{id}/mark"),
+    ATTACHMENTS("/attachments"),
+    ATTACHMENTS_NEW_KEY("/attachments/new-key"),
+    AUTH("/auth"),
+    AUTH_SESSION("/auth/from-session"),
+    LOGIN_TOKEN("/auth/login-token"),
+    CONVERSATION_MSG("/conversation-messages/{id}"),
+    CONVERSATION_MSG_REACT("/conversation-messages/{id}/react"),
+    CONVERSATIONS("/conversations/{id}"),
+    CONVERSATIONS_INVITE("/conversations/{id}/invite"),
+    CONVERSATIONS_MARK_READ("/conversations/{id}/mark-read"),
+    CONVERSATIONS_MARK_UNREAD("/conversations/{id}/mark-unread"),
+    CONVERSATIONS_MESSAGES("/conversations/{id}/messages"),
+    CONVERSATIONS_STAR("/conversations/{id}/star"),
     GET_USERS("/users"),
     GET_USERS_EMAIL("/users/find-email"),
     GET_USERS_NAME("/users/find-name"),
     USERS_ID("/users/{id}"),
     USER_AVATAR("/users/{id}/avatar"),
-    PROFILE_POSTS("/users/{id}/profile-posts"),
-    ALERTS("/alerts/{id}"),
-    ALERTS_MARK("/alerts/mark-all"),
-    AUTH("/auth"),
-    AUTH_SESSION("/auth/from-session"),
-    LOGIN_TOKEN("/auth/login-token");
+    PROFILE_POSTS("/users/{id}/profile-posts");
 
     private final String path;
 }

@@ -4,13 +4,15 @@ es.cadox8.xenapi.api.alerts
 es.cadox8.xenapi.api.attachment
 es.cadox8.xenapi.api.auth
 es.cadox8.xenapi.api.commons
+es.cadox8.xenapi.api.conversation
 es.cadox8.xenapi.api.media
-es.cadox8.xenapi.api.models
 es.cadox8.xenapi.api.user
 es.cadox8.xenapi.exceptions
 es.cadox8.xenapi.net
 es.cadox8.xenapi.params.alerts
+es.cadox8.xenapi.params.attachments
 es.cadox8.xenapi.params.auth
+es.cadox8.xenapi.params.conversation
 es.cadox8.xenapi.params.user
 es.cadox8.xenapi.utils
 test

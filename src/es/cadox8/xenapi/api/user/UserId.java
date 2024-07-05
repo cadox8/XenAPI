@@ -26,7 +26,7 @@ import com.google.gson.annotations.SerializedName;
 import es.cadox8.xenapi.api.XenForoEntity;
 import es.cadox8.xenapi.api.commons.Pagination;
 import es.cadox8.xenapi.api.commons.ProfilePost;
-import es.cadox8.xenapi.api.models.User;
+import es.cadox8.xenapi.api.commons.User;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

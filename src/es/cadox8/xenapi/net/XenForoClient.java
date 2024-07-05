@@ -34,7 +34,6 @@ import es.cadox8.xenapi.utils.Utils;
 import lombok.NonNull;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.classic.methods.*;
-import org.apache.hc.client5.http.entity.mime.FileBody;
 import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.core5.http.ClassicHttpResponse;
@@ -78,6 +77,8 @@ public class XenForoClient {
 
         final LogFormat format = Log.newFormat();
         format.line(date("yyyy-MM-dd HH:mm:ss.SSS"), space(1), text("["), level(), text("]"), space(2), message());
+
+        Log.info("Started client! Version: 2.4.0-SNAPSHOT", "XenforoClient");
     }
 
     public <T> T get(String url, Class<T> responseType, final NameValuePair... query) {
@@ -103,6 +104,10 @@ public class XenForoClient {
         return this.postForObject(url, body, responseType, "");
     }
 
+    public <T> T postForObject(String url, Class<T> responseType, String params) {
+        return this.postForObject(url, "", responseType, params);
+    }
+
     public <T> T postForObject(String url, Object body, Class<T> responseType, String params) {
         final HttpPost httpPost = new HttpPost(UrlExpander.replaceParam(url, params));
 
@@ -111,16 +116,23 @@ public class XenForoClient {
 
             final HttpEntity entity = new StringEntity(this.gson.toJson(body), ContentType.APPLICATION_FORM_URLENCODED);
             httpPost.setEntity(entity);
-            return getEntityAndReleaseConnection(responseType, httpPost);
+            return this.getEntityAndReleaseConnection(responseType, httpPost);
         } catch (JsonSyntaxException e) {
             // TODO : custom exception
             throw new RuntimeException(e);
         }
     }
 
+    public <T> T postFileForObject(String url, File file, Object body, Class<T> objectClass, String fileName) {
+        final HttpPost httpPost = new HttpPost(UrlExpander.replaceParam(url, ""));
+        final HttpEntity entity = MultipartEntityBuilder.create().addTextBody("", this.gson.toJson(body)).addBinaryBody(fileName, file).build();
+        httpPost.setEntity(entity);
+        return this.getEntityAndReleaseConnection(objectClass, httpPost);
+    }
+
     public <T> T postFileForObject(String url, File file, Class<T> objectClass, String params, String fileName) {
         final HttpPost httpPost = new HttpPost(UrlExpander.replaceParam(url, params));
-        final HttpEntity entity = MultipartEntityBuilder.create().addPart(fileName, new FileBody(file)).build();
+        final HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody(fileName, file).build();
         httpPost.setEntity(entity);
         return getEntityAndReleaseConnection(objectClass, httpPost);
     }

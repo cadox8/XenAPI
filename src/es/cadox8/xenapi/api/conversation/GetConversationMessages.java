@@ -19,65 +19,28 @@
  * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
  */
 
-package es.cadox8.xenapi.api.attachment;
+package es.cadox8.xenapi.api.conversation;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import es.cadox8.xenapi.api.XenForoEntity;
+import es.cadox8.xenapi.api.commons.ConversationMessage;
+import es.cadox8.xenapi.api.commons.Pagination;
 import lombok.Getter;
 import lombok.ToString;
 
-@Getter
+import java.util.List;
+
+
 @ToString
-public class Attachment {
-    @Expose
-    @SerializedName("filename")
-    private String filename;
+@Getter
+public class GetConversationMessages extends XenForoEntity {
 
     @Expose
-    @SerializedName("file_size")
-    private int fileSize;
+    @SerializedName("messages")
+    private List<ConversationMessage> messages;
 
     @Expose
-    @SerializedName("height")
-    private int height;
-
-    @Expose
-    @SerializedName("width")
-    private int width;
-
-    @Expose
-    @SerializedName("thumbnail_url")
-    private String thumbnailUrl;
-
-    @Expose
-    @SerializedName("direct_url")
-    private String directUrl;
-
-    @Expose
-    @SerializedName("is_video")
-    private boolean isVideo;
-
-    @Expose
-    @SerializedName("is_audio")
-    private boolean isAudio;
-
-    @Expose
-    @SerializedName("attachment_id")
-    private int attachmentId;
-
-    @Expose
-    @SerializedName("content_type")
-    private String contentType;
-
-    @Expose
-    @SerializedName("content_id")
-    private int contentId;
-
-    @Expose
-    @SerializedName("attach_date")
-    private long attachDate;
-
-    @Expose
-    @SerializedName("view_count")
-    private int viewCount;
+    @SerializedName("pagination")
+    private Pagination pagination;
 }

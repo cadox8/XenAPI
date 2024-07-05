@@ -21,25 +21,40 @@
 
 package es.cadox8.xenapi;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import de.jupf.staticlog.Log;
 import de.jupf.staticlog.core.LogLevel;
 import es.cadox8.xenapi.api.XenForoEntity;
 import es.cadox8.xenapi.api.alerts.Alert;
 import es.cadox8.xenapi.api.alerts.Alerts;
+import es.cadox8.xenapi.api.attachment.AttachmentGet;
+import es.cadox8.xenapi.api.attachment.AttachmentNewKey;
+import es.cadox8.xenapi.api.attachment.Attachments;
 import es.cadox8.xenapi.api.auth.LoginToken;
-import es.cadox8.xenapi.api.models.User;
+import es.cadox8.xenapi.api.commons.User;
+import es.cadox8.xenapi.api.conversation.*;
 import es.cadox8.xenapi.api.user.*;
 import es.cadox8.xenapi.net.XenForoClient;
 import es.cadox8.xenapi.net.XenforoPaths;
 import es.cadox8.xenapi.params.alerts.AlertsParams;
+import es.cadox8.xenapi.params.alerts.MarkAlertParams;
 import es.cadox8.xenapi.params.alerts.MarkAlertsParams;
 import es.cadox8.xenapi.params.alerts.SendAlertParams;
+import es.cadox8.xenapi.params.attachments.AttachmentsNewKeyParams;
+import es.cadox8.xenapi.params.attachments.AttachmentsParams;
 import es.cadox8.xenapi.params.auth.AuthParams;
 import es.cadox8.xenapi.params.auth.AuthSessionParams;
 import es.cadox8.xenapi.params.auth.LoginTokenParams;
+import es.cadox8.xenapi.params.conversation.ConversationCreateParams;
+import es.cadox8.xenapi.params.conversation.ConversationMsgsParams;
+import es.cadox8.xenapi.params.conversation.ConversationsParams;
+import es.cadox8.xenapi.params.conversation.UpdateConversationParams;
 import es.cadox8.xenapi.params.user.FindUserByIdParams;
 import es.cadox8.xenapi.utils.Utils;
 import lombok.NonNull;
+import org.apache.hc.core5.annotation.Experimental;
+import org.apache.hc.core5.http.NameValuePair;
 import org.apache.hc.core5.http.message.BasicNameValuePair;
 
 import java.io.File;
@@ -50,7 +65,7 @@ import java.util.stream.Collectors;
 
 public class XenAPI {
 
-    private final XenForoClient httpClient;
+    private final XenForoClient client;
     private final String url;
 
     /**
@@ -75,7 +90,7 @@ public class XenAPI {
      */
     public XenAPI(String url, String token, String user) {
         this.url = url.contains("/api") ? url : url + "/api";
-        this.httpClient = new XenForoClient(token, user);
+        this.client = new XenForoClient(token, user);
         this.setDebug(false);
     }
 
@@ -90,24 +105,181 @@ public class XenAPI {
         return this;
     }
 
-    // --- ---
+    // -- Alerts --
+    public Alert getAlert(int id) {
+        final Alert alerts = this.client.get(Utils.createUrl(this.url, XenforoPaths.ALERTS), Alert.class, String.valueOf(id));
+        return alerts.setInternalXenAPI(this);
+    }
+
+    public Alerts getAlerts(@NonNull final AlertsParams params) {
+        final Alerts alerts = this.client.get(Utils.createUrl(this.url, XenforoPaths.ALERTS), params.type(), params.params());
+        return alerts.setInternalXenAPI(this);
+    }
+
+    public boolean sendAlert(@NonNull final SendAlertParams params) {
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS), params.body(), params.type());
+    }
+
+    public boolean markAlerts(@NonNull final MarkAlertsParams params) {
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS_MARK), params.body(), params.type());
+    }
+
+    public boolean markAlert(@NonNull final MarkAlertParams params) {
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERT_MARK), params.body(), params.type(), params.query());
+    }
+
+    // -- --
+
+    // -- Attachments --
+    public Attachments getAttachments(@NonNull String key) {
+        final Attachments att = this.client.get(Utils.createUrl(this.url, XenforoPaths.ATTACHMENTS), Attachments.class, key);
+        return att.setInternalXenAPI(this);
+    }
+
+    @Experimental
+    public AttachmentNewKey newAttachmentKey(@NonNull final AttachmentsNewKeyParams params) {
+        final AttachmentNewKey newKey = this.client.postFileForObject(Utils.createUrl(this.url, XenforoPaths.ATTACHMENTS_NEW_KEY), params.getAttachment(), params.body(), params.type(), params.getAttachment().getName());
+        return newKey.setInternalXenAPI(this);
+    }
+
+    @Experimental
+    public AttachmentGet newAttachment(@NonNull final AttachmentsParams params) {
+        final AttachmentGet newKey = this.client.postFileForObject(Utils.createUrl(this.url, XenforoPaths.ATTACHMENTS_NEW_KEY), params.getAttachment(), params.body(), params.type(), params.getAttachment().getName());
+        return newKey.setInternalXenAPI(this);
+    }
+
+    // --- Auth ---
     public User auth(@NonNull final AuthParams params) {
-        final FindEmail user = this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.AUTH), params.body(), params.type());
+        final FindEmail user = this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.AUTH), params.body(), params.type());
         user.setInternalXenAPI(this);
         return user.getUser();
     }
 
     public User authSession(@NonNull final AuthSessionParams params) {
-        final FindEmail user = this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.AUTH_SESSION), params.body(), params.type());
+        final FindEmail user = this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.AUTH_SESSION), params.body(), params.type());
         user.setInternalXenAPI(this);
         return user.getUser();
     }
 
     public LoginToken loginToken(@NonNull final LoginTokenParams token) {
-        final LoginToken user = this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.LOGIN_TOKEN), token.body(), token.type());
-        user.setInternalXenAPI(this);
-        return user;
+        final LoginToken user = this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.LOGIN_TOKEN), token.body(), token.type());
+        return user.setInternalXenAPI(this);
     }
+
+    // -- --
+
+    // -- Conversations --
+
+    /**
+     * Replies to a conversation.
+     * <p>
+     * This method is the same as {@link #replyConversationId(ConversationMsgsParams)}  replyConversation}
+     *
+     * @param params
+     * @return
+     */
+    public ConversationMessages replyConversation(@NonNull final ConversationMsgsParams params) {
+        final ConversationMessages conv = this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATION_MSG), params.body(), params.type());
+        return conv.setInternalXenAPI(this);
+    }
+
+    public ConversationMessages getConversation(final int id) {
+        final ConversationMessages conv = this.client.get(Utils.createUrl(this.url, XenforoPaths.CONVERSATION_MSG), ConversationMessages.class, String.valueOf(id));
+        return conv.setInternalXenAPI(this);
+    }
+
+    /**
+     * Replies to a conversation.
+     * <p>
+     * This method is the same as {@link #replyConversation(ConversationMsgsParams)}  replyConversation}
+     *
+     * @param params
+     * @return
+     */
+    public ConversationMessages replyConversationId(@NonNull final ConversationMsgsParams params) {
+        final JsonObject body = new JsonObject();
+        body.addProperty("message", params.getMessage());
+        body.addProperty("attachment_key", params.getAttachment_key());
+
+        final ConversationMessages conv = this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATION_MSG), body, params.type(), String.valueOf(params.getConversationId()));
+        return conv.setInternalXenAPI(this);
+    }
+
+    /**
+     * Reacts to a conversation. If the reaction id is the same, it will be removed
+     *
+     * @param id       The id of the conversation
+     * @param reaction The Reaction id (refs to the reaction id on the forum, we can not get the list at the moment)
+     * @return A class with the information of the action and the status (always true)
+     * @see ConversationReact
+     */
+    public ConversationReact reactConversation(final int id, final int reaction) {
+        final JsonObject body = new JsonObject();
+        body.addProperty("reaction_id", reaction);
+        final ConversationReact conv = this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATION_MSG_REACT), body, ConversationReact.class, String.valueOf(id));
+        return conv.setInternalXenAPI(this);
+    }
+
+    public Conversations getConversations(@NonNull final ConversationsParams params) {
+        return this.client.get(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS), params.type(), params.query()).setInternalXenAPI(this);
+    }
+
+    public ConversationCreate createConversation(@NonNull final ConversationCreateParams params) {
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS), params.body(), params.getType()).setInternalXenAPI(this);
+    }
+
+    public ConversationInfo getConversationInfo(final int id, final boolean withMessages, final int page) {
+        final NameValuePair[] query = new NameValuePair[2];
+        if (withMessages)
+            query[0] = new BasicNameValuePair("with_messages", "true");
+        if (page > 1)
+            query[1] = new BasicNameValuePair("page", String.valueOf(page));
+
+        return this.client.get(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS), ConversationInfo.class, String.valueOf(id), query).setInternalXenAPI(this);
+    }
+
+    public ConversationCreate updateConversation(@NonNull final UpdateConversationParams params) {
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS), params.body(), params.type(), String.valueOf(params.getConversationId())).setInternalXenAPI(this);
+    }
+
+    public Boolean deleteConversation(final int id, final boolean ignore) {
+        return this.client.delete(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS), Boolean.class, String.valueOf(id), new BasicNameValuePair("ignore", String.valueOf(ignore)));
+    }
+
+    public Boolean inviteConversation(final int id, final Integer[] recipients) {
+        final JsonObject body = new JsonObject();
+        final JsonArray array = new JsonArray();
+        Arrays.asList(recipients).forEach(array::add);
+        body.add("recipient_ids", array);
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_INVITE), body, Boolean.class, String.valueOf(id));
+    }
+
+    public Boolean markConversationAsRead(final int id, final int date) {
+        final JsonObject body = new JsonObject();
+        body.addProperty("date", date);
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MARK_READ), body, Boolean.class, String.valueOf(id));
+    }
+
+    public Boolean markConversationAsUnread(final int id) {
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MARK_UNREAD), Boolean.class, String.valueOf(id));
+    }
+
+    public GetConversationMessages getMessagesFromConversation(final int id, final int page) {
+        return this.client.get(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MESSAGES), GetConversationMessages.class, String.valueOf(id), new BasicNameValuePair("page", String.valueOf(page))).setInternalXenAPI(this);
+    }
+
+    public Boolean markConversationAsStar(final int id, final boolean star) {
+        final JsonObject body = new JsonObject();
+        body.addProperty("star", star);
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MESSAGES), body, Boolean.class, String.valueOf(id));
+    }
+    // -- --
+
+    // -- Forums --
+
+    // -- --
+
+    // -- Users --
 
     /**
      * Gets all users from the forum
@@ -117,7 +289,7 @@ public class XenAPI {
      * @see Users
      */
     public Users getUsers(int page) {
-        final Users user = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.GET_USERS), Users.class, new BasicNameValuePair("page", String.valueOf(page)));
+        final Users user = this.client.get(Utils.createUrl(this.url, XenforoPaths.GET_USERS), Users.class, new BasicNameValuePair("page", String.valueOf(page)));
         user.setInternalXenAPI(this);
         return user;
     }
@@ -130,7 +302,7 @@ public class XenAPI {
      * @see User
      */
     public User findUserByEmail(String email) {
-        final FindEmail user = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.GET_USERS_EMAIL), FindEmail.class, new BasicNameValuePair("email", email));
+        final FindEmail user = this.client.get(Utils.createUrl(this.url, XenforoPaths.GET_USERS_EMAIL), FindEmail.class, new BasicNameValuePair("email", email));
         user.setInternalXenAPI(this);
         return user.getUser();
     }
@@ -141,16 +313,16 @@ public class XenAPI {
      * @param name The name to search for
      * @return The User or a list of Recommendations
      * @see FindName
-     * @see es.cadox8.xenapi.api.models.User
+     * @see User
      */
     public FindName findUserByName(String name) {
-        final FindName user = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.GET_USERS_NAME), FindName.class, new BasicNameValuePair("username", name));
+        final FindName user = this.client.get(Utils.createUrl(this.url, XenforoPaths.GET_USERS_NAME), FindName.class, new BasicNameValuePair("username", name));
         user.setInternalXenAPI(this);
         return user;
     }
 
     public UserId findUserById(@NonNull final FindUserByIdParams params) {
-        final UserId user = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.USERS_ID), params.type(), params.guery(), params.params());
+        final UserId user = this.client.get(Utils.createUrl(this.url, XenforoPaths.USERS_ID), params.type(), params.query(), params.params());
         user.setInternalXenAPI(this);
         return user;
     }
@@ -162,7 +334,7 @@ public class XenAPI {
      * @return True if the user was deleted successfully, false if not
      */
     public boolean deleteUser(int id) {
-        return this.httpClient.delete(Utils.createUrl(this.url, XenforoPaths.USERS_ID), Boolean.class, String.valueOf(id));
+        return this.client.delete(Utils.createUrl(this.url, XenforoPaths.USERS_ID), Boolean.class, String.valueOf(id));
     }
 
     /**
@@ -174,41 +346,21 @@ public class XenAPI {
      * @return True if the user was deleted successfully, false if not
      */
     public boolean deleteUser(int id, String renameTo) {
-        return this.httpClient.delete(Utils.createUrl(this.url, XenforoPaths.USERS_ID), Boolean.class, String.valueOf(id), new BasicNameValuePair("renameTo", renameTo));
+        return this.client.delete(Utils.createUrl(this.url, XenforoPaths.USERS_ID), Boolean.class, String.valueOf(id), new BasicNameValuePair("renameTo", renameTo));
     }
 
     public boolean updateAvatar(int id, @NonNull final File file) {
-        return this.httpClient.postFileForObject(Utils.createUrl(this.url, XenforoPaths.USER_AVATAR), file, Boolean.class, String.valueOf(id), "avatar");
+        return this.client.postFileForObject(Utils.createUrl(this.url, XenforoPaths.USER_AVATAR), file, Boolean.class, String.valueOf(id), "avatar");
     }
 
     public boolean deleteAvatar(int id) {
-        return this.httpClient.delete(Utils.createUrl(this.url, XenforoPaths.USER_AVATAR), Boolean.class, String.valueOf(id));
+        return this.client.delete(Utils.createUrl(this.url, XenforoPaths.USER_AVATAR), Boolean.class, String.valueOf(id));
     }
 
-    public GetProfilePosts getProfilePosts(int id) {
-        final GetProfilePosts user = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.PROFILE_POSTS), GetProfilePosts.class, String.valueOf(id));
+    public GetProfilePosts getProfilePosts(@NonNull int id) {
+        final GetProfilePosts user = this.client.get(Utils.createUrl(this.url, XenforoPaths.PROFILE_POSTS), GetProfilePosts.class, String.valueOf(id));
         user.setInternalXenAPI(this);
         return user;
-    }
-
-    public Alert getAlert(int id) {
-        final Alert alerts = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.ALERTS), Alert.class, String.valueOf(id));
-        alerts.setInternalXenAPI(this);
-        return alerts;
-    }
-
-    public Alerts getAlerts(@NonNull final AlertsParams params) {
-        final Alerts alerts = this.httpClient.get(Utils.createUrl(this.url, XenforoPaths.ALERTS), params.type(), params.params());
-        alerts.setInternalXenAPI(this);
-        return alerts;
-    }
-
-    public boolean sendAlert(@NonNull final SendAlertParams params) {
-        return this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS), params.body(), params.type());
-    }
-
-    public boolean markAlerts(@NonNull final MarkAlertsParams params) {
-        return this.httpClient.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS_MARK), params.body(), params.type());
     }
 
     private <T extends XenForoEntity> List<T> asList(Supplier<T[]> responseSupplier) {

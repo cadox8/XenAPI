@@ -19,13 +19,11 @@
  * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
  */
 
-package es.cadox8.xenapi.api.models;
+package es.cadox8.xenapi.api.commons;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import es.cadox8.xenapi.api.XenForoEntity;
-import es.cadox8.xenapi.api.commons.AvatarUrls;
-import es.cadox8.xenapi.api.commons.ProfileBannerUrls;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

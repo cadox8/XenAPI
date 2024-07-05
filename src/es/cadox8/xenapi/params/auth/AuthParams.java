@@ -24,6 +24,7 @@ package es.cadox8.xenapi.params.auth;
 import com.google.gson.JsonObject;
 import es.cadox8.xenapi.api.user.FindEmail;
 import lombok.Builder;
+import lombok.NonNull;
 
 @Builder
 public class AuthParams {
@@ -31,15 +32,15 @@ public class AuthParams {
     /**
      * Required
      */
-    private final String login;
+    @NonNull private final String login;
     /**
      * Required
      */
-    private final String password;
+    @NonNull private final String password;
     /**
      * Optional
      */
-    private final String limitIp;
+    @NonNull private final String limitIp;
 
     public Object body() {
         final JsonObject body = new JsonObject();

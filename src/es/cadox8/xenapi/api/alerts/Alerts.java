@@ -24,11 +24,10 @@ package es.cadox8.xenapi.api.alerts;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import es.cadox8.xenapi.api.XenForoEntity;
+import es.cadox8.xenapi.api.commons.AlertData;
 import es.cadox8.xenapi.api.commons.Pagination;
-import es.cadox8.xenapi.api.models.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 
 import java.util.List;
@@ -44,64 +43,4 @@ public class Alerts extends XenForoEntity {
     @SerializedName("pagination")
     @Expose
     private Pagination pagination;
-
-    @Getter
-    @ToString
-    public static class AlertData {
-        @Expose
-        @SerializedName("action")
-        private String action;
-
-        @Expose
-        @SerializedName("alert_id")
-        private int alertId;
-
-        @Expose
-        @SerializedName("alert_text")
-        private String alertText;
-
-        @Expose
-        @SerializedName("alert_url")
-        private String alertUrl;
-
-        @Expose
-        @SerializedName("alerted_user_id")
-        private int alertedUserId;
-
-        @Expose
-        @SerializedName("auto_read")
-        private boolean autoRead;
-
-        @Expose
-        @SerializedName("content_id")
-        private int contentId;
-
-        @Expose
-        @SerializedName("content_type")
-        private String contentType;
-
-        @Expose
-        @SerializedName("event_date")
-        private long eventDate;
-
-        @Expose
-        @SerializedName("read_date")
-        private long readDate;
-
-        @Expose
-        @SerializedName("User")
-        private User user;
-
-        @Expose
-        @SerializedName("user_id")
-        private int userId;
-
-        @Expose
-        @SerializedName("username")
-        private String username;
-
-        @Expose
-        @SerializedName("view_date")
-        private long viewDate;
-    }
 }

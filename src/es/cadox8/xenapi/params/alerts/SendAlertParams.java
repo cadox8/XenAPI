@@ -23,6 +23,7 @@ package es.cadox8.xenapi.params.alerts;
 
 import com.google.gson.JsonObject;
 import lombok.Builder;
+import lombok.NonNull;
 
 @Builder
 public class SendAlertParams {
@@ -30,11 +31,12 @@ public class SendAlertParams {
     /**
      * Required
      */
-    private final int toUserId;
+    @NonNull private final int toUserId;
     /**
      * Required
      */
-    private final String alert;
+    @NonNull private final String alert;
+
     private final int fromUserId;
     private final String link;
     private final String title;
@@ -52,7 +54,7 @@ public class SendAlertParams {
 
         if (!this.title.isEmpty())
             body.addProperty("link_title", this.title);
-        
+
         return body;
     }
 

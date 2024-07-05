@@ -23,7 +23,6 @@ package es.cadox8.xenapi.api.commons;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import es.cadox8.xenapi.api.models.User;
 import lombok.Getter;
 import lombok.ToString;
 

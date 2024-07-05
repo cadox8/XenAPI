@@ -23,6 +23,8 @@ package es.cadox8.xenapi.api.attachment;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import es.cadox8.xenapi.api.XenForoEntity;
+import es.cadox8.xenapi.api.commons.Attachment;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -30,7 +32,7 @@ import java.util.List;
 
 @Getter
 @ToString
-public class Attachments {
+public class Attachments extends XenForoEntity {
     @Expose
     @SerializedName("attachments")
     private List<Attachment> attachments;

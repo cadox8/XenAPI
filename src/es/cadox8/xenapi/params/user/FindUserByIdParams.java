@@ -23,6 +23,7 @@ package es.cadox8.xenapi.params.user;
 
 import es.cadox8.xenapi.api.user.UserId;
 import lombok.Builder;
+import lombok.NonNull;
 import org.apache.hc.core5.http.NameValuePair;
 import org.apache.hc.core5.http.message.BasicNameValuePair;
 
@@ -34,11 +35,15 @@ import org.apache.hc.core5.http.message.BasicNameValuePair;
 @Builder
 public class FindUserByIdParams {
 
-    private final int userId;
+    /**
+     * Required
+     */
+    @NonNull private final int userId;
+
     private final boolean withPosts;
     private final int page;
 
-    public String guery() {
+    public String query() {
         return String.valueOf(this.userId);
     }
 

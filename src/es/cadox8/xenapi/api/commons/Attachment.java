@@ -23,12 +23,13 @@ package es.cadox8.xenapi.api.commons;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import es.cadox8.xenapi.api.XenForoEntity;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @ToString
-public class Attachment {
+public class Attachment extends XenForoEntity {
 
     @Expose
     @SerializedName("filename")

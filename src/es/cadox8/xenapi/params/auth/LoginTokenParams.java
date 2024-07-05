@@ -24,11 +24,16 @@ package es.cadox8.xenapi.params.auth;
 import com.google.gson.JsonObject;
 import es.cadox8.xenapi.api.auth.LoginToken;
 import lombok.Builder;
+import lombok.NonNull;
 
 @Builder
 public class LoginTokenParams {
 
-    private final int userId;
+    /**
+     * Required
+     */
+    @NonNull private final int userId;
+    
     private final String limitIp;
     private final String returnUrl;
     private final boolean force = false;

@@ -22,6 +22,7 @@
 package es.cadox8.xenapi.params.alerts;
 
 import com.google.gson.JsonObject;
+import es.cadox8.xenapi.api.commons.Success;
 import lombok.Builder;
 
 @Builder
@@ -35,11 +36,11 @@ public class MarkAlertsParams {
             body.addProperty("read", true);
         if (this.viewed)
             body.addProperty("viewed", true);
-        
+
         return body;
     }
 
-    public Class<Boolean> type() {
-        return Boolean.class;
+    public Class<Success> type() {
+        return Success.class;
     }
 }

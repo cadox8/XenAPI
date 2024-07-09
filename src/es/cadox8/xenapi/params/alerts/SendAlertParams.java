@@ -22,6 +22,7 @@
 package es.cadox8.xenapi.params.alerts;
 
 import com.google.gson.JsonObject;
+import es.cadox8.xenapi.api.commons.Success;
 import lombok.Builder;
 import lombok.NonNull;
 
@@ -58,7 +59,7 @@ public class SendAlertParams {
         return body;
     }
 
-    public Class<Boolean> type() {
-        return Boolean.class;
+    public Class<Success> type() {
+        return Success.class;
     }
 }

@@ -32,8 +32,13 @@ import es.cadox8.xenapi.api.attachment.AttachmentGet;
 import es.cadox8.xenapi.api.attachment.AttachmentNewKey;
 import es.cadox8.xenapi.api.attachment.Attachments;
 import es.cadox8.xenapi.api.auth.LoginToken;
+import es.cadox8.xenapi.api.commons.Success;
 import es.cadox8.xenapi.api.commons.User;
 import es.cadox8.xenapi.api.conversation.*;
+import es.cadox8.xenapi.api.forums.Forums;
+import es.cadox8.xenapi.api.forums.Threads;
+import es.cadox8.xenapi.api.index.Index;
+import es.cadox8.xenapi.api.me.Me;
 import es.cadox8.xenapi.api.user.*;
 import es.cadox8.xenapi.net.XenForoClient;
 import es.cadox8.xenapi.net.XenforoPaths;
@@ -50,6 +55,9 @@ import es.cadox8.xenapi.params.conversation.ConversationCreateParams;
 import es.cadox8.xenapi.params.conversation.ConversationMsgsParams;
 import es.cadox8.xenapi.params.conversation.ConversationsParams;
 import es.cadox8.xenapi.params.conversation.UpdateConversationParams;
+import es.cadox8.xenapi.params.forums.ForumsParams;
+import es.cadox8.xenapi.params.forums.ThreadsParams;
+import es.cadox8.xenapi.params.me.MeParams;
 import es.cadox8.xenapi.params.user.FindUserByIdParams;
 import es.cadox8.xenapi.utils.Utils;
 import lombok.NonNull;
@@ -116,16 +124,16 @@ public class XenAPI {
         return alerts.setInternalXenAPI(this);
     }
 
-    public boolean sendAlert(@NonNull final SendAlertParams params) {
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS), params.body(), params.type());
+    public Success sendAlert(@NonNull final SendAlertParams params) {
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS), params.body(), params.type()).setInternalXenAPI(this);
     }
 
-    public boolean markAlerts(@NonNull final MarkAlertsParams params) {
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS_MARK), params.body(), params.type());
+    public Success markAlerts(@NonNull final MarkAlertsParams params) {
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERTS_MARK), params.body(), params.type()).setInternalXenAPI(this);
     }
 
-    public boolean markAlert(@NonNull final MarkAlertParams params) {
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERT_MARK), params.body(), params.type(), params.query());
+    public Success markAlert(@NonNull final MarkAlertParams params) {
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ALERT_MARK), params.body(), params.type(), params.query()).setInternalXenAPI(this);
     }
 
     // -- --
@@ -242,41 +250,69 @@ public class XenAPI {
         return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS), params.body(), params.type(), String.valueOf(params.getConversationId())).setInternalXenAPI(this);
     }
 
-    public Boolean deleteConversation(final int id, final boolean ignore) {
-        return this.client.delete(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS), Boolean.class, String.valueOf(id), new BasicNameValuePair("ignore", String.valueOf(ignore)));
+    public Success deleteConversation(final int id, final Success ignore) {
+        return this.client.delete(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS), Success.class, String.valueOf(id), new BasicNameValuePair("ignore", String.valueOf(ignore))).setInternalXenAPI(this);
     }
 
-    public Boolean inviteConversation(final int id, final Integer[] recipients) {
+    public Success inviteConversation(final int id, final Integer[] recipients) {
         final JsonObject body = new JsonObject();
         final JsonArray array = new JsonArray();
         Arrays.asList(recipients).forEach(array::add);
         body.add("recipient_ids", array);
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_INVITE), body, Boolean.class, String.valueOf(id));
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_INVITE), body, Success.class, String.valueOf(id)).setInternalXenAPI(this);
     }
 
-    public Boolean markConversationAsRead(final int id, final int date) {
+    public Success markConversationAsRead(final int id, final int date) {
         final JsonObject body = new JsonObject();
         body.addProperty("date", date);
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MARK_READ), body, Boolean.class, String.valueOf(id));
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MARK_READ), body, Success.class, String.valueOf(id)).setInternalXenAPI(this);
     }
 
-    public Boolean markConversationAsUnread(final int id) {
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MARK_UNREAD), Boolean.class, String.valueOf(id));
+    public Success markConversationAsUnread(final int id) {
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MARK_UNREAD), Success.class, String.valueOf(id)).setInternalXenAPI(this);
     }
 
     public GetConversationMessages getMessagesFromConversation(final int id, final int page) {
         return this.client.get(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MESSAGES), GetConversationMessages.class, String.valueOf(id), new BasicNameValuePair("page", String.valueOf(page))).setInternalXenAPI(this);
     }
 
-    public Boolean markConversationAsStar(final int id, final boolean star) {
+    public Success markConversationAsStar(final int id, final boolean star) {
         final JsonObject body = new JsonObject();
         body.addProperty("star", star);
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MESSAGES), body, Boolean.class, String.valueOf(id));
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MESSAGES), body, Success.class, String.valueOf(id)).setInternalXenAPI(this);
     }
     // -- --
 
     // -- Forums --
+    public Forums getForum(@NonNull final ForumsParams params) {
+        return this.client.get(Utils.createUrl(this.url, XenforoPaths.FORUMS), params.type(), String.valueOf(params.getForumId()), params.params()).setInternalXenAPI(this);
+    }
 
+    public Success markForumAsRead(final int forum, final int date) {
+        final JsonObject body = new JsonObject();
+        body.addProperty("date", date);
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.FORUMS_MARK_READ), body, Success.class, String.valueOf(forum)).setInternalXenAPI(this);
+    }
+
+    public Threads getForumThreads(@NonNull final ThreadsParams params) {
+        return this.client.get(Utils.createUrl(this.url, XenforoPaths.FORUMS), params.type(), String.valueOf(params.getForumId()), params.params()).setInternalXenAPI(this);
+    }
+    // -- --
+
+    // -- Index --
+    public Index getIndex() {
+        return this.client.get(Utils.createUrl(this.url, XenforoPaths.INDEX), Index.class).setInternalXenAPI(this);
+    }
+    // -- --
+
+    // -- Me --
+    public Me getMe() {
+        return this.client.get(Utils.createUrl(this.url, XenforoPaths.ME), Me.class).setInternalXenAPI(this);
+    }
+
+    public Success updateMe(@NonNull final MeParams params) {
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ME), params.body(), Success.class).setInternalXenAPI(this);
+    }
     // -- --
 
     // -- Users --
@@ -333,8 +369,8 @@ public class XenAPI {
      * @param id The id of the User to be deleted
      * @return True if the user was deleted successfully, false if not
      */
-    public boolean deleteUser(int id) {
-        return this.client.delete(Utils.createUrl(this.url, XenforoPaths.USERS_ID), Boolean.class, String.valueOf(id));
+    public Success deleteUser(int id) {
+        return this.client.delete(Utils.createUrl(this.url, XenforoPaths.USERS_ID), Success.class, String.valueOf(id));
     }
 
     /**
@@ -345,16 +381,16 @@ public class XenAPI {
      * @param renameTo The new name of the user
      * @return True if the user was deleted successfully, false if not
      */
-    public boolean deleteUser(int id, String renameTo) {
-        return this.client.delete(Utils.createUrl(this.url, XenforoPaths.USERS_ID), Boolean.class, String.valueOf(id), new BasicNameValuePair("renameTo", renameTo));
+    public Success deleteUser(int id, String renameTo) {
+        return this.client.delete(Utils.createUrl(this.url, XenforoPaths.USERS_ID), Success.class, String.valueOf(id), new BasicNameValuePair("renameTo", renameTo));
     }
 
-    public boolean updateAvatar(int id, @NonNull final File file) {
-        return this.client.postFileForObject(Utils.createUrl(this.url, XenforoPaths.USER_AVATAR), file, Boolean.class, String.valueOf(id), "avatar");
+    public Success updateAvatar(int id, @NonNull final File file) {
+        return this.client.postFileForObject(Utils.createUrl(this.url, XenforoPaths.USER_AVATAR), file, Success.class, String.valueOf(id), "avatar");
     }
 
-    public boolean deleteAvatar(int id) {
-        return this.client.delete(Utils.createUrl(this.url, XenforoPaths.USER_AVATAR), Boolean.class, String.valueOf(id));
+    public Success deleteAvatar(int id) {
+        return this.client.delete(Utils.createUrl(this.url, XenforoPaths.USER_AVATAR), Success.class, String.valueOf(id));
     }
 
     public GetProfilePosts getProfilePosts(@NonNull int id) {

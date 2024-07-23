@@ -33,6 +33,7 @@ import es.cadox8.xenapi.api.attachment.AttachmentNewKey;
 import es.cadox8.xenapi.api.attachment.Attachments;
 import es.cadox8.xenapi.api.auth.LoginToken;
 import es.cadox8.xenapi.api.commons.Success;
+import es.cadox8.xenapi.api.commons.UpdateEmail;
 import es.cadox8.xenapi.api.commons.User;
 import es.cadox8.xenapi.api.conversation.*;
 import es.cadox8.xenapi.api.forums.Forums;
@@ -106,11 +107,9 @@ public class XenAPI {
      * Sets the library to debug mode to see all logs. By default, this is False
      *
      * @param debug True/False
-     * @return This instance
      */
-    public XenAPI setDebug(boolean debug) {
+    public void setDebug(boolean debug) {
         Log.setLogLevel(debug ? LogLevel.DEBUG : LogLevel.INFO);
-        return this;
     }
 
     // -- Alerts --
@@ -137,7 +136,6 @@ public class XenAPI {
     }
 
     // -- --
-
     // -- Attachments --
     public Attachments getAttachments(@NonNull String key) {
         final Attachments att = this.client.get(Utils.createUrl(this.url, XenforoPaths.ATTACHMENTS), Attachments.class, key);
@@ -156,7 +154,8 @@ public class XenAPI {
         return newKey.setInternalXenAPI(this);
     }
 
-    // --- Auth ---
+    // -- --
+    // -- Auth --
     public User auth(@NonNull final AuthParams params) {
         final FindEmail user = this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.AUTH), params.body(), params.type());
         user.setInternalXenAPI(this);
@@ -173,9 +172,7 @@ public class XenAPI {
         final LoginToken user = this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.LOGIN_TOKEN), token.body(), token.type());
         return user.setInternalXenAPI(this);
     }
-
     // -- --
-
     // -- Conversations --
 
     /**
@@ -281,8 +278,8 @@ public class XenAPI {
         body.addProperty("star", star);
         return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MESSAGES), body, Success.class, String.valueOf(id)).setInternalXenAPI(this);
     }
-    // -- --
 
+    // -- --
     // -- Forums --
     public Forums getForum(@NonNull final ForumsParams params) {
         return this.client.get(Utils.createUrl(this.url, XenforoPaths.FORUMS), params.type(), String.valueOf(params.getForumId()), params.params()).setInternalXenAPI(this);
@@ -297,14 +294,14 @@ public class XenAPI {
     public Threads getForumThreads(@NonNull final ThreadsParams params) {
         return this.client.get(Utils.createUrl(this.url, XenforoPaths.FORUMS), params.type(), String.valueOf(params.getForumId()), params.params()).setInternalXenAPI(this);
     }
-    // -- --
 
+    // -- --
     // -- Index --
     public Index getIndex() {
         return this.client.get(Utils.createUrl(this.url, XenforoPaths.INDEX), Index.class).setInternalXenAPI(this);
     }
-    // -- --
 
+    // -- --
     // -- Me --
     public Me getMe() {
         return this.client.get(Utils.createUrl(this.url, XenforoPaths.ME), Me.class).setInternalXenAPI(this);
@@ -313,8 +310,26 @@ public class XenAPI {
     public Success updateMe(@NonNull final MeParams params) {
         return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ME), params.body(), Success.class).setInternalXenAPI(this);
     }
-    // -- --
 
+    public Success updateMeAvatar(@NonNull final File file) {
+        return this.client.postFileForObject(Utils.createUrl(this.url, XenforoPaths.ME_AVATAR), file, Success.class, "", "avatar").setInternalXenAPI(this);
+    }
+
+    public UpdateEmail updateMeEmail(final String currentPassword, final String new_email) {
+        final JsonObject body = new JsonObject();
+        body.addProperty("current_password", currentPassword);
+        body.addProperty("email", new_email);
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ME_EMAIL), body, UpdateEmail.class).setInternalXenAPI(this);
+    }
+
+    public Success updateMePassword(final String currentPassword, final String new_password) {
+        final JsonObject body = new JsonObject();
+        body.addProperty("current_password", currentPassword);
+        body.addProperty("new_password", new_password);
+
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ME_PASSWORD), body, Success.class).setInternalXenAPI(this);
+    }
+    // -- --
     // -- Users --
 
     /**

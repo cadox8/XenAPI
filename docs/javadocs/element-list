@@ -9,6 +9,7 @@ es.cadox8.xenapi.api.forums
 es.cadox8.xenapi.api.index
 es.cadox8.xenapi.api.me
 es.cadox8.xenapi.api.media
+es.cadox8.xenapi.api.nodes
 es.cadox8.xenapi.api.user
 es.cadox8.xenapi.exceptions
 es.cadox8.xenapi.net
@@ -18,6 +19,7 @@ es.cadox8.xenapi.params.auth
 es.cadox8.xenapi.params.conversation
 es.cadox8.xenapi.params.forums
 es.cadox8.xenapi.params.me
+es.cadox8.xenapi.params.nodes
 es.cadox8.xenapi.params.user
 es.cadox8.xenapi.utils
 test

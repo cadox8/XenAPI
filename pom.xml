@@ -160,5 +160,10 @@
             <version>1.18.34</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>am.ik.yavi</groupId>
+            <artifactId>yavi</artifactId>
+            <version>0.14.1</version>
+        </dependency>
     </dependencies>
 </project>

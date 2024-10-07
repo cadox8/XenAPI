@@ -21,6 +21,8 @@
 
 package es.cadox8.xenapi.params.alerts;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import es.cadox8.xenapi.api.commons.Success;
 import lombok.Builder;
@@ -42,7 +44,8 @@ public class SendAlertParams {
     private final String link;
     private final String title;
 
-    public Object body() {
+    public String body() {
+        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
         final JsonObject body = new JsonObject();
         body.addProperty("to_user_id", this.toUserId);
         body.addProperty("alert", this.alert);
@@ -56,7 +59,7 @@ public class SendAlertParams {
         if (!this.title.isEmpty())
             body.addProperty("link_title", this.title);
 
-        return body;
+        return gson.toJson(body);
     }
 
     public Class<Success> type() {

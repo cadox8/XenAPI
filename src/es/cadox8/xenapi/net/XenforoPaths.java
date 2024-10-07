@@ -51,6 +51,7 @@ public enum XenforoPaths {
     ME_AVATAR("/me/avatar"),
     ME_EMAIL("/me/email"),
     ME_PASSWORD("/me/password"),
+    NODES("/nodes"),
     GET_USERS("/users"),
     GET_USERS_EMAIL("/users/find-email"),
     GET_USERS_NAME("/users/find-name"),

@@ -21,6 +21,8 @@
 
 package es.cadox8.xenapi.params.conversation;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import es.cadox8.xenapi.api.conversation.ConversationCreate;
@@ -40,7 +42,8 @@ public class ConversationCreateParams {
     private final boolean open;
     private final boolean invite;
 
-    public Object body() {
+    public String body() {
+        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
         final JsonObject body = new JsonObject();
 
         final JsonArray recipientsArray = new JsonArray();
@@ -57,7 +60,7 @@ public class ConversationCreateParams {
         if (this.invite)
             body.addProperty("open_invite", true);
 
-        return body;
+        return gson.toJson(body);
     }
 
     public Class<ConversationCreate> getType() {

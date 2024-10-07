@@ -58,7 +58,7 @@ public class Node {
 
     @Expose
     @SerializedName("node_type_id")
-    private String nodeTypeId;
+    private TypeNodeId nodeTypeId;
 
     @Expose
     @SerializedName("parent_node_id")
@@ -85,6 +85,6 @@ public class Node {
 
         @Expose
         @SerializedName("node_type_id")
-        private int nodeTypeId;
+        private TypeNodeId nodeTypeId;
     }
 }

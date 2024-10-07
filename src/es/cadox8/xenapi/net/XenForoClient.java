@@ -76,7 +76,7 @@ public class XenForoClient {
         this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
 
         final LogFormat format = Log.newFormat();
-        format.line(date("yyyy-MM-dd HH:mm:ss.SSS"), space(1), text("["), level(), text("]"), space(2), message());
+        format.line(date("yyyy-MM-dd HH:mm:ss.SSS"), text(" | "), tag(), space(1), text("["), level(), text("]"), space(2), message());
 
         Log.info("Started client! Version: 2.4.0-SNAPSHOT", "XenforoClient");
     }
@@ -90,7 +90,7 @@ public class XenForoClient {
     }
 
     public <T> T get(String url, Class<T> responseType, String params, final NameValuePair... query) {
-        Log.debug("--> Sending to " + url, "XenForoClient");
+        Log.debug("--> GET Sending to " + url, "XenForoClient");
         final HttpGet httpGet;
         try {
             httpGet = new HttpGet(new URIBuilder(UrlExpander.replaceParam(url, params)).addParameters(Arrays.asList(query)).build());
@@ -100,7 +100,7 @@ public class XenForoClient {
         return this.getEntityAndReleaseConnection(responseType, httpGet);
     }
 
-    public <T> T postForObject(String url, Object body, Class<T> responseType) {
+    public <T> T postForObject(String url, String body, Class<T> responseType) {
         return this.postForObject(url, body, responseType, "");
     }
 
@@ -108,17 +108,16 @@ public class XenForoClient {
         return this.postForObject(url, "", responseType, params);
     }
 
-    public <T> T postForObject(String url, Object body, Class<T> responseType, String params) {
+    public <T> T postForObject(String url, String body, Class<T> responseType, String params) {
         final HttpPost httpPost = new HttpPost(UrlExpander.replaceParam(url, params));
 
         try {
-            Log.debug("--> Sending to " + url + " with body: " + body, "XenForoClient");
+            Log.debug("--> POST Sending to " + url + " with body: " + body, "XenForoClient");
 
-            final HttpEntity entity = new StringEntity(this.gson.toJson(body), ContentType.APPLICATION_FORM_URLENCODED);
+            final HttpEntity entity = new StringEntity(body, ContentType.APPLICATION_JSON);
             httpPost.setEntity(entity);
             return this.getEntityAndReleaseConnection(responseType, httpPost);
         } catch (JsonSyntaxException e) {
-            // TODO : custom exception
             throw new RuntimeException(e);
         }
     }
@@ -168,7 +167,7 @@ public class XenForoClient {
 
     private <T> T getEntityAndReleaseConnection(Class<T> objectClass, HttpUriRequest httpRequest) {
         try {
-            httpRequest.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            httpRequest.setHeader("Content-Type", "application/json");
             httpRequest.setHeader("XF-Api-User", this.user);
             httpRequest.setHeader("XF-Api-Key", this.token);
             final ClassicHttpResponse httpResponse = this.httpClient.executeOpen(null, httpRequest, null);
@@ -203,7 +202,7 @@ public class XenForoClient {
                 });
             }
         } catch (XenForoBaseException e) {
-            Log.error("", "XenForoClient", e);
+            Log.error(e.getMessage(), "XenForoClient");
         } catch (IOException e) {
             throw new XenForoHttpException(e);
         }

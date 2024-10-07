@@ -38,7 +38,7 @@ public class AlertsParams {
         final NameValuePair[] params = new NameValuePair[4];
 
         if (this.cutoff > 0)
-            params[0] = new BasicNameValuePair("cutoff", String.valueOf(cutoff));
+            params[0] = new BasicNameValuePair("cutoff", String.valueOf(this.cutoff));
 
         if (this.page > 0)
             params[1] = new BasicNameValuePair("page", String.valueOf(this.page));

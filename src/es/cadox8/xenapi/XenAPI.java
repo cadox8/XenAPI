@@ -21,6 +21,7 @@
 
 package es.cadox8.xenapi;
 
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import de.jupf.staticlog.Log;
@@ -40,6 +41,8 @@ import es.cadox8.xenapi.api.forums.Forums;
 import es.cadox8.xenapi.api.forums.Threads;
 import es.cadox8.xenapi.api.index.Index;
 import es.cadox8.xenapi.api.me.Me;
+import es.cadox8.xenapi.api.nodes.Nodes;
+import es.cadox8.xenapi.api.nodes.NodesPost;
 import es.cadox8.xenapi.api.user.*;
 import es.cadox8.xenapi.net.XenForoClient;
 import es.cadox8.xenapi.net.XenforoPaths;
@@ -59,6 +62,7 @@ import es.cadox8.xenapi.params.conversation.UpdateConversationParams;
 import es.cadox8.xenapi.params.forums.ForumsParams;
 import es.cadox8.xenapi.params.forums.ThreadsParams;
 import es.cadox8.xenapi.params.me.MeParams;
+import es.cadox8.xenapi.params.nodes.NodeParams;
 import es.cadox8.xenapi.params.user.FindUserByIdParams;
 import es.cadox8.xenapi.utils.Utils;
 import lombok.NonNull;
@@ -206,7 +210,7 @@ public class XenAPI {
         body.addProperty("message", params.getMessage());
         body.addProperty("attachment_key", params.getAttachment_key());
 
-        final ConversationMessages conv = this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATION_MSG), body, params.type(), String.valueOf(params.getConversationId()));
+        final ConversationMessages conv = this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATION_MSG), new GsonBuilder().setPrettyPrinting().create().toJson(body), params.type(), String.valueOf(params.getConversationId()));
         return conv.setInternalXenAPI(this);
     }
 
@@ -221,7 +225,7 @@ public class XenAPI {
     public ConversationReact reactConversation(final int id, final int reaction) {
         final JsonObject body = new JsonObject();
         body.addProperty("reaction_id", reaction);
-        final ConversationReact conv = this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATION_MSG_REACT), body, ConversationReact.class, String.valueOf(id));
+        final ConversationReact conv = this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATION_MSG_REACT), new GsonBuilder().setPrettyPrinting().create().toJson(body), ConversationReact.class, String.valueOf(id));
         return conv.setInternalXenAPI(this);
     }
 
@@ -256,13 +260,13 @@ public class XenAPI {
         final JsonArray array = new JsonArray();
         Arrays.asList(recipients).forEach(array::add);
         body.add("recipient_ids", array);
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_INVITE), body, Success.class, String.valueOf(id)).setInternalXenAPI(this);
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_INVITE), new GsonBuilder().setPrettyPrinting().create().toJson(body), Success.class, String.valueOf(id)).setInternalXenAPI(this);
     }
 
     public Success markConversationAsRead(final int id, final int date) {
         final JsonObject body = new JsonObject();
         body.addProperty("date", date);
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MARK_READ), body, Success.class, String.valueOf(id)).setInternalXenAPI(this);
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MARK_READ), new GsonBuilder().setPrettyPrinting().create().toJson(body), Success.class, String.valueOf(id)).setInternalXenAPI(this);
     }
 
     public Success markConversationAsUnread(final int id) {
@@ -276,7 +280,7 @@ public class XenAPI {
     public Success markConversationAsStar(final int id, final boolean star) {
         final JsonObject body = new JsonObject();
         body.addProperty("star", star);
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MESSAGES), body, Success.class, String.valueOf(id)).setInternalXenAPI(this);
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.CONVERSATIONS_MESSAGES), new GsonBuilder().setPrettyPrinting().create().toJson(body), Success.class, String.valueOf(id)).setInternalXenAPI(this);
     }
 
     // -- --
@@ -288,7 +292,7 @@ public class XenAPI {
     public Success markForumAsRead(final int forum, final int date) {
         final JsonObject body = new JsonObject();
         body.addProperty("date", date);
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.FORUMS_MARK_READ), body, Success.class, String.valueOf(forum)).setInternalXenAPI(this);
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.FORUMS_MARK_READ), new GsonBuilder().setPrettyPrinting().create().toJson(body), Success.class, String.valueOf(forum)).setInternalXenAPI(this);
     }
 
     public Threads getForumThreads(@NonNull final ThreadsParams params) {
@@ -319,7 +323,7 @@ public class XenAPI {
         final JsonObject body = new JsonObject();
         body.addProperty("current_password", currentPassword);
         body.addProperty("email", new_email);
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ME_EMAIL), body, UpdateEmail.class).setInternalXenAPI(this);
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ME_EMAIL), new GsonBuilder().setPrettyPrinting().create().toJson(body), UpdateEmail.class).setInternalXenAPI(this);
     }
 
     public Success updateMePassword(final String currentPassword, final String new_password) {
@@ -327,7 +331,31 @@ public class XenAPI {
         body.addProperty("current_password", currentPassword);
         body.addProperty("new_password", new_password);
 
-        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ME_PASSWORD), body, Success.class).setInternalXenAPI(this);
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.ME_PASSWORD), new GsonBuilder().setPrettyPrinting().create().toJson(body), Success.class).setInternalXenAPI(this);
+    }
+
+    // -- --
+    // -- Nodes --
+
+    /**
+     * Retrieves all the nodes in the Forum
+     *
+     * @return Nodes
+     * @see Nodes
+     */
+    public Nodes getNodes() {
+        return this.client.get(Utils.createUrl(this.url, XenforoPaths.NODES), Nodes.class).setInternalXenAPI(this);
+    }
+
+    /**
+     * Creates a node in the forum
+     *
+     * @param param The required params to create a node
+     * @return The new node
+     * @see NodesPost
+     */
+    public NodesPost createNode(@NonNull final NodeParams param) {
+        return this.client.postForObject(Utils.createUrl(this.url, XenforoPaths.NODES), param.body(), NodesPost.class).setInternalXenAPI(this);
     }
     // -- --
     // -- Users --

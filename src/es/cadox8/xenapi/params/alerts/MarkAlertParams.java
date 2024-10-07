@@ -21,25 +21,33 @@
 
 package es.cadox8.xenapi.params.alerts;
 
+import am.ik.yavi.builder.ValidatorBuilder;
+import am.ik.yavi.core.ConstraintViolations;
+import am.ik.yavi.core.Validator;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import es.cadox8.xenapi.api.commons.Success;
+import es.cadox8.xenapi.exceptions.XenForoMissingArgsException;
 import lombok.Builder;
-import lombok.NonNull;
 
 @Builder
 public class MarkAlertParams {
 
-    @NonNull private final int alertId;
+    private final int alertId;
 
     private final boolean read;
     private final boolean unread;
     private final boolean viewed;
 
     public String query() {
+        this.valid();
+
         return String.valueOf(this.alertId);
     }
 
-    public Object body() {
+    public String body() {
+        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
         final JsonObject body = new JsonObject();
         if (this.read)
             body.addProperty("read", true);
@@ -48,7 +56,20 @@ public class MarkAlertParams {
         if (this.unread)
             body.addProperty("viewed", true);
 
-        return body;
+        return gson.toJson(body);
+    }
+
+    private void valid() {
+        final Validator<MarkAlertParams> val = ValidatorBuilder.<MarkAlertParams>of()._integer(x -> x.alertId, "alertId", c -> c.greaterThanOrEqual(1)).build();
+        final ConstraintViolations violations = val.validate(this);
+
+        if (!violations.isEmpty()) {
+            final StringBuilder sb = new StringBuilder("An error occurred while validating: " + this.getClass().getSimpleName());
+            sb.append('\n');
+            violations.forEach(a -> sb.append(a.message()).append(" | "));
+            sb.deleteCharAt(sb.length() - 2);
+            throw new XenForoMissingArgsException(sb.toString());
+        }
     }
 
     public Class<Success> type() {

@@ -21,6 +21,8 @@
 
 package es.cadox8.xenapi.params.me;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import lombok.Builder;
@@ -59,7 +61,8 @@ public class MeParams {
     private final String custom_title;
     private final List<String> custom_fields;
 
-    public Object body() {
+    public String body() {
+        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
         final JsonObject body = new JsonObject();
         final JsonObject options = new JsonObject();
         final JsonObject profile = new JsonObject();
@@ -124,6 +127,6 @@ public class MeParams {
             body.add("custom_fields", array);
         }
 
-        return body;
+        return gson.toJson(body);
     }
 }

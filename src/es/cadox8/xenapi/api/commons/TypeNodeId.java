@@ -29,7 +29,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum TypeNodeId {
     @SerializedName("Forum") FORUM("Forum"),
-    @SerializedName("Category") CATEGORY("Category");
+    @SerializedName("Category") CATEGORY("Category"),
+    @SerializedName("LinkForum") LINK_FORUM("LinkForum"),
+    @SerializedName("SearchForum") SEARCH_FORUM("SearchForum"),
+    @SerializedName("Page") PAGE("Page");
 
     private final String nodeType;
 }

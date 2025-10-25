@@ -22,15 +22,14 @@
 package es.cadox8.xenapi.api.user;
 
 import com.google.gson.annotations.Expose;
-import es.cadox8.xenapi.api.XenForoEntity;
-import es.cadox8.xenapi.api.commons.User;
-import lombok.EqualsAndHashCode;
+import es.cadox8.xenapi.api.auth.UserResponse;
+import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Getter;
 import lombok.ToString;
 
 @ToString
 @Getter
-@EqualsAndHashCode(callSuper = true)
-public class FindEmail extends XenForoEntity {
-    @Expose private User user;
+
+public class FindEmail implements ApiResponse {
+    @Expose private UserResponse user;
 }

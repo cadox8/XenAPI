@@ -23,21 +23,20 @@ package es.cadox8.xenapi.api.user;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import es.cadox8.xenapi.api.XenForoEntity;
 import es.cadox8.xenapi.api.commons.AvatarUrls;
 import es.cadox8.xenapi.api.commons.Pagination;
 import es.cadox8.xenapi.api.commons.ProfileBannerUrls;
-import lombok.EqualsAndHashCode;
+import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.util.List;
 import java.util.Map;
 
-@EqualsAndHashCode(callSuper = true)
+
 @Getter
 @ToString
-public class Users extends XenForoEntity {
+public class Users implements ApiResponse {
     @Expose private List<UsersData> users;
     @Expose private Pagination pagination;
 

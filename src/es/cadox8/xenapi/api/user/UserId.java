@@ -23,11 +23,10 @@ package es.cadox8.xenapi.api.user;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import es.cadox8.xenapi.api.XenForoEntity;
+import es.cadox8.xenapi.api.auth.UserResponse;
 import es.cadox8.xenapi.api.commons.Pagination;
 import es.cadox8.xenapi.api.commons.ProfilePost;
-import es.cadox8.xenapi.api.commons.User;
-import lombok.EqualsAndHashCode;
+import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -35,11 +34,11 @@ import java.util.List;
 
 @Getter
 @ToString
-@EqualsAndHashCode(callSuper = true)
-public class UserId extends XenForoEntity {
+
+public class UserId implements ApiResponse {
     @SerializedName("user")
     @Expose
-    private User user;
+    private UserResponse user;
 
     @SerializedName("profile_posts")
     @Expose

@@ -28,14 +28,18 @@ import de.jupf.staticlog.Log;
 import de.jupf.staticlog.format.LogFormat;
 import es.cadox8.xenapi.api.commons.Errors;
 import es.cadox8.xenapi.exceptions.*;
-import es.cadox8.xenapi.utils.StatusCode;
+import es.cadox8.xenapi.updater.Updater;
 import es.cadox8.xenapi.utils.UrlExpander;
 import es.cadox8.xenapi.utils.Utils;
-import lombok.NonNull;
+import es.cadox8.xenapi.utils.Version;
+import es.cadox8.xenapi.utils.XenAPIExperimental;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.classic.methods.*;
-import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
-import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.client5.http.entity.UrlEncodedFormEntity;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.client5.http.protocol.HttpClientContext;
 import org.apache.hc.core5.http.ClassicHttpResponse;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpEntity;
@@ -46,180 +50,203 @@ import org.apache.hc.core5.net.URIBuilder;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import static de.jupf.staticlog.Log.FormatOperations.*;
 
 public class XenForoClient {
 
+    private final Updater updater;
+    private final Version version;
+
     private final HttpClient httpClient;
     private final Gson gson;
 
     private final String token;
-    private final String user;
+    private final int user;
+
+    @Setter
+    @Getter
+    @XenAPIExperimental(XenAPIExperimental.Status.TO_BE_DONE)
+    private boolean enableEnhancementAPI;
 
     public XenForoClient(String token) {
-        this(token, "");
+        this(token, -1);
     }
 
-    public XenForoClient(String token, String user) {
-        this(token, user, HttpClientBuilder.create().build());
-    }
-
-    public XenForoClient(String token, String user, @NonNull final HttpClient httpClient) {
+    public XenForoClient(String token, int user) {
         this.token = token;
         this.user = user;
-        this.httpClient = httpClient;
+        this.httpClient = HttpClients.createDefault();
         this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
+        this.enableEnhancementAPI = false;
 
         final LogFormat format = Log.newFormat();
         format.line(date("yyyy-MM-dd HH:mm:ss.SSS"), text(" | "), tag(), space(1), text("["), level(), text("]"), space(2), message());
 
-        Log.info("Started client! Version: 2.4.0-SNAPSHOT", "XenforoClient");
+        this.version = new Version(2, 0, 0);
+        this.updater = new Updater();
+
+        if (this.updater.isUpdateAvailable(this.version)) {
+            Log.warn("-------------------", "XenAPI");
+            Log.warn("New version available. " + this.updater.getVersionInfo(), "XenAPI");
+            Log.warn("-------------------", "XenAPI");
+        }
+
+        Log.info("Started XenAPI client! Version: " + this.version, "XenforoClient");
     }
 
-    public <T> T get(String url, Class<T> responseType, final NameValuePair... query) {
-        return this.get(url, responseType, "", query);
+    /**
+     * Send a GET request to the server
+     *
+     * @param url          The URL of the forum
+     * @param responseType The ResponseType
+     * @param params       Params required for get (defined in the Query class)
+     * @param <T>          The ResponseType
+     * @return The ResponseType
+     */
+    public <T extends ApiResponse> Response<T, Errors> get(String url, Class<T> responseType, final List<NameValuePair> params) {
+        return this.get(url, responseType, "", params);
     }
 
-    public <T> T get(String url, Class<T> responseType, String params) {
-        return this.get(url, responseType, params, new NameValuePair[]{});
+    /**
+     * Send a GET request to the server
+     *
+     * @param url          The URL of the forum
+     * @param responseType The ResponseType
+     * @param query        The query for the get (id)
+     * @param <T>          The ResponseType
+     * @return The ResponseType
+     */
+    public <T extends ApiResponse> Response<T, Errors> get(String url, Class<T> responseType, Object query) {
+        return this.get(url, responseType, query, new ArrayList<>());
     }
 
-    public <T> T get(String url, Class<T> responseType, String params, final NameValuePair... query) {
+    /**
+     * Send a GET request to the server
+     *
+     * @param url          The URL of the forum
+     * @param responseType The ResponseType
+     * @param query        The query for the get (id)
+     * @param params       Params required for get (defined in the Query class)
+     * @param <T>          The ResponseType
+     * @return The ResponseType
+     */
+    public <T extends ApiResponse> Response<T, Errors> get(String url, Class<T> responseType, Object query, final List<NameValuePair> params) {
+        final String finalURL = UrlExpander.replaceQuery(url, query);
         Log.debug("--> GET Sending to " + url, "XenForoClient");
         final HttpGet httpGet;
         try {
-            httpGet = new HttpGet(new URIBuilder(UrlExpander.replaceParam(url, params)).addParameters(Arrays.asList(query)).build());
+            httpGet = new HttpGet(new URIBuilder(finalURL).addParameters(params).build());
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-        return this.getEntityAndReleaseConnection(responseType, httpGet);
+        return this.send(responseType, httpGet);
     }
 
-    public <T> T postForObject(String url, String body, Class<T> responseType) {
-        return this.postForObject(url, body, responseType, "");
-    }
+    public <T extends ApiResponse> Response<T, Errors> post(String url, Class<T> responseType, Object query, final List<NameValuePair> params) {
+        final String finalURL = UrlExpander.replaceQuery(url, query);
 
-    public <T> T postForObject(String url, Class<T> responseType, String params) {
-        return this.postForObject(url, "", responseType, params);
-    }
-
-    public <T> T postForObject(String url, String body, Class<T> responseType, String params) {
-        final HttpPost httpPost = new HttpPost(UrlExpander.replaceParam(url, params));
+        Log.debug("--> POST Sending to " + finalURL + " with params: " + params, "XenForoClient");
+        final HttpPost httpPost;
 
         try {
-            Log.debug("--> POST Sending to " + url + " with body: " + body, "XenForoClient");
-
-            final HttpEntity entity = new StringEntity(body, ContentType.APPLICATION_JSON);
-            httpPost.setEntity(entity);
-            return this.getEntityAndReleaseConnection(responseType, httpPost);
-        } catch (JsonSyntaxException e) {
+            httpPost = new HttpPost(new URIBuilder(finalURL).build());
+            httpPost.setEntity(new UrlEncodedFormEntity(params));
+            httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            return this.send(responseType, httpPost);
+        } catch (JsonSyntaxException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public <T> T postFileForObject(String url, File file, Object body, Class<T> objectClass, String fileName) {
-        final HttpPost httpPost = new HttpPost(UrlExpander.replaceParam(url, ""));
-        final HttpEntity entity = MultipartEntityBuilder.create().addTextBody("", this.gson.toJson(body)).addBinaryBody(fileName, file).build();
-        httpPost.setEntity(entity);
-        return this.getEntityAndReleaseConnection(objectClass, httpPost);
+    public <T extends ApiResponse> Response<T, Errors> postFile(String url, Class<T> responseType, Object query, final List<NameValuePair> params, File file) {
+        final String finalURL = UrlExpander.replaceQuery(url, query);
+        Log.debug("--> POST Sending to " + url + " with params: " + params, "XenForoClient");
+        final HttpPost httpPost;
+
+        try {
+            httpPost = new HttpPost(new URIBuilder(finalURL).build());
+            httpPost.setEntity(new UrlEncodedFormEntity(params));
+            return this.send(responseType, httpPost);
+        } catch (JsonSyntaxException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public <T> T postFileForObject(String url, File file, Class<T> objectClass, String params, String fileName) {
-        final HttpPost httpPost = new HttpPost(UrlExpander.replaceParam(url, params));
-        final HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody(fileName, file).build();
-        httpPost.setEntity(entity);
-        return getEntityAndReleaseConnection(objectClass, httpPost);
-    }
-
-    public <T> T putForObject(String url, Object body, Class<T> responseType, String params) {
-        final HttpPut put = new HttpPut(UrlExpander.replaceParam(url, params));
+    public <T extends ApiResponse> Response<T, Errors> put(String url, Object body, Class<T> responseType, Object query) {
+        final HttpPut put = new HttpPut(UrlExpander.replaceQuery(url, query));
         try {
             final HttpEntity entity = new StringEntity(this.gson.toJson(body), ContentType.MULTIPART_FORM_DATA);
             put.setEntity(entity);
-            return getEntityAndReleaseConnection(responseType, put);
+            put.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            return send(responseType, put);
         } catch (JsonSyntaxException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public <T> T delete(String url, Class<T> responseType, final NameValuePair... query) {
-        return this.get(url, responseType, "", query);
-    }
-
-    public <T> T delete(String url, Class<T> responseType, String params) {
-        return this.get(url, responseType, params, new NameValuePair[]{});
-    }
-
-    public <T> T delete(String url, Class<T> responseType, String params, final NameValuePair... query) {
+    public <T extends ApiResponse> Response<T, Errors> delete(String url, Class<T> responseType, Object query, final List<NameValuePair> params) {
         final HttpDelete delete;
         try {
-            delete = new HttpDelete(new URIBuilder(UrlExpander.replaceParam(url, params)).addParameters(Arrays.asList(query)).build());
+            delete = new HttpDelete(new URIBuilder(UrlExpander.replaceQuery(url, query)).build());
+            delete.setEntity(new UrlEncodedFormEntity(params));
+            delete.setHeader("Content-Type", "application/x-www-form-urlencoded");
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-        return this.getEntityAndReleaseConnection(responseType, delete);
+        return this.send(responseType, delete);
     }
 
-    private <T> T getEntityAndReleaseConnection(Class<T> objectClass, HttpUriRequest httpRequest) {
+    private <T extends ApiResponse> Response<T, Errors> send(Class<T> objectClass, HttpUriRequestBase httpRequest) {
         try {
-            httpRequest.setHeader("Content-Type", "application/json");
-            httpRequest.setHeader("XF-Api-User", this.user);
             httpRequest.setHeader("XF-Api-Key", this.token);
-            final ClassicHttpResponse httpResponse = this.httpClient.executeOpen(null, httpRequest, null);
+            if (this.user != -1)
+                httpRequest.setHeader("XF-Api-User", String.valueOf(this.user));
 
-            final HttpEntity httpEntity = httpResponse.getEntity();
-            if (httpEntity == null) {
-                throw new XenForoHttpException("Http entity returned by XenForo is null");
-            }
+            final HttpClientContext context = HttpClientContext.create();
+            try (ClassicHttpResponse httpResponse = this.httpClient.executeOpen(null, httpRequest, context)) {
+                final var httpEntity = httpResponse.getEntity();
+                if (httpEntity == null) {
+                    throw new XenForoHttpException("Http entity returned by XenForo is null");
+                }
 
-            String body = Utils.toString(httpEntity.getContent());
-            final StatusLine status = new StatusLine(httpResponse);
+                final String body = Utils.toString(httpEntity.getContent());
+                final StatusLine status = new StatusLine(httpResponse);
 
-            if (status.getStatusCode() == StatusCode.BadRequest.getStatus()) {
-                throw new XenForoBadRequestException(body);
-            }
-            if (status.getStatusCode() == StatusCode.NotAuthorized.getStatus()) {
-                throw new NotAuthorizedException(body);
-            }
-            if (status.getStatusCode() == StatusCode.ResourceNotFound.getStatus()) {
-                throw new NotFoundException("Resource not found: " + httpRequest.getRequestUri());
-            }
+                switch (StatusCode.fromStatus(status.getStatusCode())) {
+                    case BadRequest:
+                        throw new XenForoBadRequestException(body);
+                    case NotAuthorized:
+                        throw new XenforoNotAuthorizedException(body);
+                    case Forbidden:
+                        throw new XenForoForbiddenException(body);
+                    case ResourceNotFound:
+                        throw new XenforoNotFoundException("Resource not found: " + httpRequest.getRequestUri());
+                    case Unknown:
+                        throw new XenForoBaseException(body);
+                }
 
-            try {
-                Log.debug("<-- Received body: " + body, "XenForoClient");
-                return this.gson.fromJson(body, objectClass);
-            } catch (JsonSyntaxException e) {
-                final Errors err = this.gson.fromJson(body, Errors.class);
-
-                Log.error("Retrieved the following errors: ", "XenForoClient");
-                err.getErrors().forEach(er -> {
-                    Log.error(er.getCode() + " - " + er.getMessage(), "XenForoClient");
-                });
+                try {
+                    Log.debug("<-- Received body: " + body, "XenForoClient");
+                    T parsed = this.gson.fromJson(body, objectClass);
+                    return Response.success(parsed);
+                } catch (JsonSyntaxException je) {
+                    Errors err = this.gson.fromJson(body, Errors.class);
+                    Log.error("Retrieved the following errors: ", "XenForoClient");
+                    err.getErrors().forEach(er -> Log.error(er.getCode() + " - " + er.getMessage(), "XenForoClient"));
+                    return Response.error(err);
+                }
             }
         } catch (XenForoBaseException e) {
             Log.error(e.getMessage(), "XenForoClient");
+            httpRequest.abort();
+            Errors err = this.gson.fromJson(e.getMessage(), Errors.class);
+            return Response.error(err);
         } catch (IOException e) {
             throw new XenForoHttpException(e);
-        }
-
-        httpRequest.abort();
-        return this.defaultError(objectClass);
-    }
-
-    private <T> T defaultError(Class<T> baseClass) {
-        try {
-            if (baseClass.equals(Boolean.class))
-                return (T) Boolean.FALSE;
-            final Constructor<T> constructor = baseClass.getDeclaredConstructor();
-            constructor.setAccessible(true);
-            return constructor.newInstance();
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            return null;
         }
     }
 }

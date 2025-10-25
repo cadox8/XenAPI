@@ -23,18 +23,14 @@ package es.cadox8.xenapi.api.nodes;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import es.cadox8.xenapi.api.XenForoEntity;
 import es.cadox8.xenapi.api.commons.Node;
+import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Getter;
 import lombok.ToString;
 
 @ToString
 @Getter
-public class NodesPost extends XenForoEntity {
-
-    @Expose
-    @SerializedName("success")
-    private boolean success;
+public class NodesPost implements ApiResponse {
 
     @Expose
     @SerializedName("node")

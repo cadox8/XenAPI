@@ -23,16 +23,15 @@ package es.cadox8.xenapi.api.media;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import es.cadox8.xenapi.api.XenForoEntity;
 import es.cadox8.xenapi.api.commons.Pagination;
-import lombok.EqualsAndHashCode;
+import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Getter;
 import lombok.ToString;
 
 @ToString
 @Getter
-@EqualsAndHashCode(callSuper = true)
-public class Media extends XenForoEntity {
+
+public class Media implements ApiResponse {
 
     @SerializedName("media")
     @Expose

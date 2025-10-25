@@ -23,6 +23,7 @@ package es.cadox8.xenapi.api.commons;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -30,7 +31,7 @@ import java.util.List;
 
 @ToString
 @Getter
-public class Node {
+public class Node implements ApiResponse {
 
     @Expose
     @SerializedName("breadcrumbs")

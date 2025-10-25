@@ -23,7 +23,9 @@ package es.cadox8.xenapi.api.commons;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import es.cadox8.xenapi.api.attachment.Attachments;
+import es.cadox8.xenapi.api.attachment.AttachmentResponse;
+import es.cadox8.xenapi.api.auth.UserResponse;
+import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -31,7 +33,7 @@ import java.util.List;
 
 @ToString
 @Getter
-public class ConversationMessage {
+public class ConversationMessage implements ApiResponse {
 
     @Expose
     @SerializedName("username")
@@ -63,7 +65,7 @@ public class ConversationMessage {
 
     @Expose
     @SerializedName("Attachments")
-    private List<Attachments> attachments;
+    private List<AttachmentResponse> attachments;
 
     @Expose
     @SerializedName("is_reacted_to")
@@ -103,5 +105,5 @@ public class ConversationMessage {
 
     @Expose
     @SerializedName("User")
-    private User user;
+    private UserResponse user;
 }

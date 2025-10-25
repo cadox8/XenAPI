@@ -23,8 +23,8 @@ package es.cadox8.xenapi.api.forums;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import es.cadox8.xenapi.api.XenForoEntity;
 import es.cadox8.xenapi.api.commons.Pagination;
+import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -32,7 +32,7 @@ import java.util.List;
 
 @Getter
 @ToString
-public class Threads extends XenForoEntity {
+public class Threads implements ApiResponse {
 
     @Expose
     @SerializedName("threads")

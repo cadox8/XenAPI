@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 public final class UrlExpander {
     private static final Pattern NAMES_PATTERN = Pattern.compile("\\{([^/]+?)}");
 
-    public static String replaceParam(String url, String param) {
+    public static String replaceQuery(String url, Object param) {
         if (url == null)
             return null;
         if (url.indexOf('{') == -1)
@@ -36,7 +36,7 @@ public final class UrlExpander {
         final StringBuilder sb = new StringBuilder();
 
         if (matcher.find()) { // Must find only one
-            final String replacement = Matcher.quoteReplacement(param);
+            final String replacement = Matcher.quoteReplacement(String.valueOf(param));
             matcher.appendReplacement(sb, replacement);
         }
 

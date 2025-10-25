@@ -1,5 +1,4 @@
 es.cadox8.xenapi
-es.cadox8.xenapi.api
 es.cadox8.xenapi.api.alerts
 es.cadox8.xenapi.api.attachment
 es.cadox8.xenapi.api.auth
@@ -13,13 +12,6 @@ es.cadox8.xenapi.api.nodes
 es.cadox8.xenapi.api.user
 es.cadox8.xenapi.exceptions
 es.cadox8.xenapi.net
-es.cadox8.xenapi.params.alerts
-es.cadox8.xenapi.params.attachments
-es.cadox8.xenapi.params.auth
-es.cadox8.xenapi.params.conversation
-es.cadox8.xenapi.params.forums
-es.cadox8.xenapi.params.me
-es.cadox8.xenapi.params.nodes
-es.cadox8.xenapi.params.user
+es.cadox8.xenapi.updater
 es.cadox8.xenapi.utils
 test

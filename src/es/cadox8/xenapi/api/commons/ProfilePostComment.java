@@ -23,6 +23,8 @@ package es.cadox8.xenapi.api.commons;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import es.cadox8.xenapi.api.attachment.AttachmentResponse;
+import es.cadox8.xenapi.api.auth.UserResponse;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -60,7 +62,7 @@ public class ProfilePostComment {
 
     @Expose
     @SerializedName("Attachments")
-    private Attachment[] attachments;
+    private AttachmentResponse[] attachments;
 
     @Expose
     @SerializedName("ProfilePost")
@@ -108,5 +110,5 @@ public class ProfilePostComment {
 
     @Expose
     @SerializedName("User")
-    private User user;
+    private UserResponse user;
 }

@@ -23,9 +23,8 @@ package es.cadox8.xenapi.api.user;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import es.cadox8.xenapi.api.XenForoEntity;
-import es.cadox8.xenapi.api.commons.User;
-import lombok.EqualsAndHashCode;
+import es.cadox8.xenapi.api.auth.UserResponse;
+import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -33,14 +32,14 @@ import java.util.List;
 
 @ToString
 @Getter
-@EqualsAndHashCode(callSuper = true)
-public class FindName extends XenForoEntity {
+
+public class FindName implements ApiResponse {
 
     @SerializedName("exact")
     @Expose
-    private User user;
+    private UserResponse user;
 
     @Expose
     @SerializedName("recommendations")
-    private List<User> recommendations;
+    private List<UserResponse> recommendations;
 }

@@ -27,7 +27,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum XenforoPaths {
-    ALERTS("/alerts/{id}"),
+    ALERTS("/alerts"),
+    ALERT("/alerts/{id}"),
     ALERTS_MARK("/alerts/mark-all"),
     ALERT_MARK("/alerts/{id}/mark"),
     ATTACHMENTS("/attachments"),
@@ -35,9 +36,11 @@ public enum XenforoPaths {
     AUTH("/auth"),
     AUTH_SESSION("/auth/from-session"),
     LOGIN_TOKEN("/auth/login-token"),
-    CONVERSATION_MSG("/conversation-messages/{id}"),
+    CONVERSATION_MSG("/conversation-messages"),
+    CONVERSATION_MSG_GET("/conversation-messages/{id}"),
     CONVERSATION_MSG_REACT("/conversation-messages/{id}/react"),
-    CONVERSATIONS("/conversations/{id}"),
+    CONVERSATIONS("/conversations"),
+    CONVERSATIONS_ID("/conversations/{id}"),
     CONVERSATIONS_INVITE("/conversations/{id}/invite"),
     CONVERSATIONS_MARK_READ("/conversations/{id}/mark-read"),
     CONVERSATIONS_MARK_UNREAD("/conversations/{id}/mark-unread"),
@@ -52,6 +55,8 @@ public enum XenforoPaths {
     ME_EMAIL("/me/email"),
     ME_PASSWORD("/me/password"),
     NODES("/nodes"),
+    NODES_FLAT("/nodes/flattened"),
+    NODES_ACTIONS("/nodes/{id}"),
     GET_USERS("/users"),
     GET_USERS_EMAIL("/users/find-email"),
     GET_USERS_NAME("/users/find-name"),

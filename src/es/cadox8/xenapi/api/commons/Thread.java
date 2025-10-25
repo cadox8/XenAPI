@@ -23,6 +23,7 @@ package es.cadox8.xenapi.api.commons;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import es.cadox8.xenapi.api.auth.UserResponse;
 import kotlin.Pair;
 import lombok.Getter;
 import lombok.ToString;
@@ -203,5 +204,5 @@ public class Thread {
 
     @Expose
     @SerializedName("User")
-    private User user;
+    private UserResponse user;
 }

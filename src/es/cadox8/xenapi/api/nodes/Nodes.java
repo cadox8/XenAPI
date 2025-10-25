@@ -23,9 +23,8 @@ package es.cadox8.xenapi.api.nodes;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import es.cadox8.xenapi.api.XenForoEntity;
 import es.cadox8.xenapi.api.commons.Node;
-import lombok.EqualsAndHashCode;
+import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -34,8 +33,8 @@ import java.util.List;
 
 @ToString
 @Getter
-@EqualsAndHashCode(callSuper = true)
-public class Nodes extends XenForoEntity {
+
+public class Nodes implements ApiResponse {
 
     @Expose
     @SerializedName("tree_map")

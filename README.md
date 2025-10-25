@@ -1,4 +1,4 @@
-![Logo](docs/img/svg/logo-no-background.svg)
+![Logo](docs/logo/svg/logo-no-background.svg)
 
 [![Build Status](https://github.com/cadox8/XenAPI/actions/workflows/build.yml/badge.svg)](https://github.com/cadox8/XenAPI/actions)
 
@@ -31,6 +31,8 @@ from [here](https://github.com/cadox8/XenAPI/releases/tag/Xenforo_v1.X).
 
 All downloads are hosted in [this repo](https://repo.cadox8.es/#/).
 
+Alternatively, you can download files [here on Github](https://github.com/cadox8/XenAPI/releases/latest).
+
 For the Java-API, you can add it on Maven:
 
 ```xml
@@ -46,13 +48,13 @@ For the Java-API, you can add it on Maven:
 <dependency>
     <groupId>es.cadox8</groupId>
     <artifactId>XenAPI</artifactId>
-    <version>RELEASE</version>
+    <version>LATEST</version>
 </dependency>
 </dependencies>
 ```
 
-**NOTE:** You can use ``RELEASE`` as version, or you can use the version number (you can check all
-versions [here](https://repo.cadox8.es/#/) or at Changelog.md).
+**NOTE:** You can use ``LATEST`` as version, or you can use the version number (you can check all
+versions [here](https://repo.cadox8.es/#/) or [on the docs](https://)).
 
 ## Documentation
 
@@ -80,6 +82,7 @@ The XenAPI (Java) has the following dependencies:
 * [Google Gson library](https://mvnrepository.com/artifact/com.google.code.gson/gson)
 * [Project Lombok](https://projectlombok.org)
 * [Apache HttpClient](https://hc.apache.org)
+* [StaticLog](https://github.com/jupf/staticlog)
 
 ## License & Copyright
 
@@ -91,4 +94,4 @@ Cadox8 updated the code and created the Java API.
 
 [Contex](https://github.com/Contex) © 2012-2014
 
-[Cadox8](https://cadox8.es) © 2018-2024
+[Cadox8](https://cadox8.es) © 2018-2025

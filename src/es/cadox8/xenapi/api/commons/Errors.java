@@ -22,22 +22,23 @@
 package es.cadox8.xenapi.api.commons;
 
 import com.google.gson.annotations.Expose;
-import es.cadox8.xenapi.api.XenForoEntity;
-import lombok.EqualsAndHashCode;
+import es.cadox8.xenapi.net.ApiResponse;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
+
 @Getter
 @ToString
-public class Errors extends XenForoEntity {
+public class Errors implements ApiResponse {
 
     @Expose private List<ErrorData> errors;
 
     @Getter
     @ToString
+    @Builder
     public static class ErrorData {
         @Expose private String code;
         @Expose private String message;

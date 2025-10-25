@@ -23,9 +23,9 @@ package es.cadox8.xenapi.api.forums;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import es.cadox8.xenapi.api.XenForoEntity;
 import es.cadox8.xenapi.api.commons.Forum;
 import es.cadox8.xenapi.api.commons.Pagination;
+import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -33,7 +33,7 @@ import java.util.List;
 
 @Getter
 @ToString
-public class Forums extends XenForoEntity {
+public class Forums implements ApiResponse {
 
     @Expose
     @SerializedName("forum")

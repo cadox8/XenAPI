@@ -19,16 +19,18 @@
  * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
  */
 
-package es.cadox8.xenapi.api.alerts;
+package es.cadox8.xenapi.api.posts;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import es.cadox8.xenapi.api.commons.Post;
 import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Data;
 
 @Data
-public class OneAlertResponse implements ApiResponse {
-    @SerializedName("alert")
+public class PostResponse implements ApiResponse {
+
     @Expose
-    private AlertResponse alert;
+    @SerializedName("post")
+    private Post post = null;
 }

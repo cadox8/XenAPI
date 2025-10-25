@@ -24,11 +24,11 @@ package es.cadox8.xenapi.api.commons;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import es.cadox8.xenapi.api.auth.UserResponse;
-import kotlin.Pair;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.util.List;
+import java.util.Map;
 
 @ToString
 @Getter
@@ -52,7 +52,7 @@ public class Thread {
 
     @Expose
     @SerializedName("custom_fields")
-    private List<Pair<String, String>> customFields;
+    private Map<String, String> customFields;
 
     @Expose
     @SerializedName("tags")

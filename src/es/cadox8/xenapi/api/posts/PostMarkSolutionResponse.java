@@ -19,16 +19,37 @@
  * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
  */
 
-package es.cadox8.xenapi.api.alerts;
+package es.cadox8.xenapi.api.posts;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import es.cadox8.xenapi.api.commons.Post;
 import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Data;
 
+/**
+ * The response is different from the official documentation
+ * <p>
+ * --- The official documentation says the following as response
+ * true 	mixed 	Success
+ * new_solution_post 	Post|null 	A post that was marked as the solution
+ * old_solution_post 	Post|null 	A post that was un-marked as the solution
+ * <p>
+ * --- In my tests, the result you get is
+ * success boolean
+ * post     Post
+ * <p>
+ * https://xenforo.com/community/pages/api-endpoints/#route_post_posts_id_mark_solution
+ */
 @Data
-public class OneAlertResponse implements ApiResponse {
-    @SerializedName("alert")
+public class PostMarkSolutionResponse implements ApiResponse {
+
     @Expose
-    private AlertResponse alert;
+    @SerializedName("success")
+    private Boolean success;
+
+    @Expose
+    @SerializedName("post")
+    private Post post;
+
 }

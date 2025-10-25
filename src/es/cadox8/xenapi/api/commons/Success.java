@@ -24,11 +24,9 @@ package es.cadox8.xenapi.api.commons;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import es.cadox8.xenapi.net.ApiResponse;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@ToString
+@Data
 public class Success implements ApiResponse {
 
     @Expose

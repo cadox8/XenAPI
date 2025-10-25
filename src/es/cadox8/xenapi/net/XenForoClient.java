@@ -28,7 +28,7 @@ import de.jupf.staticlog.Log;
 import de.jupf.staticlog.format.LogFormat;
 import es.cadox8.xenapi.api.commons.Errors;
 import es.cadox8.xenapi.exceptions.*;
-import es.cadox8.xenapi.updater.Updater;
+import es.cadox8.xenapi.updater.UpdateChecker;
 import es.cadox8.xenapi.utils.UrlExpander;
 import es.cadox8.xenapi.utils.Utils;
 import es.cadox8.xenapi.utils.Version;
@@ -58,7 +58,7 @@ import static de.jupf.staticlog.Log.FormatOperations.*;
 
 public class XenForoClient {
 
-    private final Updater updater;
+    private final UpdateChecker updateChecker;
     private final Version version;
 
     private final HttpClient httpClient;
@@ -86,14 +86,9 @@ public class XenForoClient {
         final LogFormat format = Log.newFormat();
         format.line(date("yyyy-MM-dd HH:mm:ss.SSS"), text(" | "), tag(), space(1), text("["), level(), text("]"), space(2), message());
 
-        this.version = new Version(2, 0, 0);
-        this.updater = new Updater();
-
-        if (this.updater.isUpdateAvailable(this.version)) {
-            Log.warn("-------------------", "XenAPI");
-            Log.warn("New version available. " + this.updater.getVersionInfo(), "XenAPI");
-            Log.warn("-------------------", "XenAPI");
-        }
+        this.version = new Version(2, 0, 0, "8-SNAPSHOT");
+        this.updateChecker = new UpdateChecker(this.version.toString());
+        this.updateChecker.sendVersionUpdate();
 
         Log.info("Started XenAPI client! Version: " + this.version, "XenforoClient");
     }
@@ -136,7 +131,7 @@ public class XenForoClient {
      */
     public <T extends ApiResponse> Response<T, Errors> get(String url, Class<T> responseType, Object query, final List<NameValuePair> params) {
         final String finalURL = UrlExpander.replaceQuery(url, query);
-        Log.debug("--> GET Sending to " + url, "XenForoClient");
+        Log.debug("--> GET Sending to " + finalURL, "XenForoClient");
         final HttpGet httpGet;
         try {
             httpGet = new HttpGet(new URIBuilder(finalURL).addParameters(params).build());
@@ -209,9 +204,9 @@ public class XenForoClient {
             final HttpClientContext context = HttpClientContext.create();
             try (ClassicHttpResponse httpResponse = this.httpClient.executeOpen(null, httpRequest, context)) {
                 final var httpEntity = httpResponse.getEntity();
-                if (httpEntity == null) {
+
+                if (httpEntity == null)
                     throw new XenForoHttpException("Http entity returned by XenForo is null");
-                }
 
                 final String body = Utils.toString(httpEntity.getContent());
                 final StatusLine status = new StatusLine(httpResponse);
@@ -234,6 +229,7 @@ public class XenForoClient {
                     T parsed = this.gson.fromJson(body, objectClass);
                     return Response.success(parsed);
                 } catch (JsonSyntaxException je) {
+                    Log.error("", "XenForoClient", je);
                     Errors err = this.gson.fromJson(body, Errors.class);
                     Log.error("Retrieved the following errors: ", "XenForoClient");
                     err.getErrors().forEach(er -> Log.error(er.getCode() + " - " + er.getMessage(), "XenForoClient"));

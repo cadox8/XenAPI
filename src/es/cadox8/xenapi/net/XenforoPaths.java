@@ -62,7 +62,12 @@ public enum XenforoPaths {
     GET_USERS_NAME("/users/find-name"),
     USERS_ID("/users/{id}"),
     USER_AVATAR("/users/{id}/avatar"),
-    PROFILE_POSTS("/users/{id}/profile-posts");
+    PROFILE_POSTS("/users/{id}/profile-posts"),
+    POSTS("/posts"),
+    POSTS_GET("/posts/{id}"),
+    POST_MARK_SOLUTION("/posts/{id}/mark-solution"),
+    POST_REACT("/posts/{id}/react"),
+    POST_VOTE("/posts/{id}/vote");
 
     private final String path;
 }

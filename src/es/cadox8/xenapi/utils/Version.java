@@ -26,11 +26,17 @@ public class Version implements Comparable<Version> {
     private final int major;
     private final int minor;
     private final int patch;
+    private final String build;
 
     public Version(int major, int minor, int patch) {
+        this(major, minor, patch, "");
+    }
+
+    public Version(int major, int minor, int patch, String build) {
         this.major = major;
         this.minor = minor;
         this.patch = patch;
+        this.build = build;
     }
 
     public static Version parse(String versionStr) {
@@ -38,7 +44,8 @@ public class Version implements Comparable<Version> {
         int major = parts.length > 0 ? Integer.parseInt(parts[0]) : 0;
         int minor = parts.length > 1 ? Integer.parseInt(parts[1]) : 0;
         int patch = parts.length > 2 ? Integer.parseInt(parts[2]) : 0;
-        return new Version(major, minor, patch);
+        String build = parts.length > 3 ? parts[3] : "";
+        return new Version(major, minor, patch, build);
     }
 
     @Override
@@ -47,11 +54,14 @@ public class Version implements Comparable<Version> {
             return this.major - other.major;
         if (this.minor != other.minor)
             return this.minor - other.minor;
-        return this.patch - other.patch;
+        if (this.patch != other.patch)
+            return this.patch - other.patch;
+
+        return this.build.compareTo(other.build);
     }
 
     @Override
     public String toString() {
-        return major + "." + minor + "." + patch;
+        return major + "." + minor + "." + patch + (this.build.isEmpty() ? "" : "-" + build);
     }
 }

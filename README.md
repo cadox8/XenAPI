@@ -27,6 +27,9 @@ This repo contains only a framework for Xenforo 2.X.
 v1.X of Xenforo will not be developed anymore. If you need the old API you can grab it
 from [here](https://github.com/cadox8/XenAPI/releases/tag/Xenforo_v1.X).
 
+> [!CAUTION]
+> The v1.X is deprecated
+
 ## Downloads & Repo
 
 All downloads are hosted in [this repo](https://repo.cadox8.es/#/).
@@ -58,9 +61,11 @@ versions [here](https://repo.cadox8.es/#/) or [on the docs](https://)).
 
 ## Documentation
 
-**Web-API & Java-API:** You can get the documentation [here](https://cadox8.github.io/XenAPI/#/).
+**XenAPI Docs:** You can get the documentation [here](https://cadox8.github.io/XenAPI/#/).
 
 **Javadocs:** You can check the Javadocs [here](https://cadox8.github.io/XenAPI/javadocs).
+
+I use [Yaak](https://yaak.app/) to check/tests the endpoints, you can import it from [here](docs/yaak.xenforo.json)
 
 ## Bug Reporting
 

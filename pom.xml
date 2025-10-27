@@ -34,20 +34,12 @@
             <id>cadox8-repository</id>
             <name>Cadox8 Repository</name>
             <url>https://repo.cadox8.es/releases</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
         </repository>
         <snapshotRepository>
             <id>cadox8-repository</id>
             <name>Cadox8 Repository</name>
-            <url>https://repo.cadox8.es/snapshots</url>
-            <layout>default</layout>
             <uniqueVersion>false</uniqueVersion>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+            <url>https://repo.cadox8.es/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -103,6 +95,7 @@
                         </goals>
                         <configuration>
                             <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+                            <sourceFileExcludes>**/*Test.java</sourceFileExcludes>
                         </configuration>
                     </execution>
                 </executions>

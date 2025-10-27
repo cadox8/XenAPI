@@ -61,11 +61,16 @@ versions [here](https://repo.cadox8.es/#/) or [on the docs](https://)).
 
 ## Documentation
 
-**XenAPI Docs:** You can get the documentation [here](https://cadox8.github.io/XenAPI/#/).
+**XenAPI Docs**: You can get the documentation [here](https://cadox8.github.io/XenAPI/#/).
 
-**Javadocs:** You can check the Javadocs [here](https://cadox8.github.io/XenAPI/javadocs).
+**Javadocs**:
+Now you can see the javadocs by version!
 
-I use [Yaak](https://yaak.app/) to check/tests the endpoints, you can import it from [here](docs/yaak.xenforo.json)
+Just go to https://repo.cadox8.es/javadoc/snapshots/es/cadox8/XenAPI/<version>
+
+*Replace <version> with the version you want to check! Example: 2.0.0-9-SNAPSHOT*
+
+**Endpoints**: I use [Yaak](https://yaak.app/) to check/tests the endpoints, you can import it from [here](docs/yaak.xenforo.json)
 
 ## Bug Reporting
 

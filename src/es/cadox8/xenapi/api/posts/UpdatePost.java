@@ -24,7 +24,7 @@ package es.cadox8.xenapi.api.posts;
 import es.cadox8.xenapi.exceptions.XenForoMissingArgsException;
 import es.cadox8.xenapi.net.ApiRequest;
 import es.cadox8.xenapi.net.HttpMethod;
-import es.cadox8.xenapi.net.XenforoPaths;
+import es.cadox8.xenapi.utils.XenforoPaths;
 import es.cadox8.xenapi.utils.XenNameValuePair;
 import lombok.Builder;
 
@@ -64,7 +64,7 @@ public class UpdatePost implements ApiRequest<PostReplyResponse> {
     @Override
     public Object query() {
         if (this.postId == null || this.postId <= 0)
-            throw new XenForoMissingArgsException("postId is missing!");
+            throw new XenForoMissingArgsException("postId!");
 
         return this.postId;
     }
@@ -79,11 +79,11 @@ public class UpdatePost implements ApiRequest<PostReplyResponse> {
         final List<XenNameValuePair> list = new ArrayList<>();
 
         if (this.message == null || this.message.isEmpty())
-            throw new XenForoMissingArgsException("message is missing!");
+            throw new XenForoMissingArgsException("message!");
 
         list.add(new XenNameValuePair("message", this.message));
         list.add(new XenNameValuePair("silent", this.silent));
-        
+
         if (this.clearEdit && !this.silent)
             throw new XenForoMissingArgsException("For clearEdit you need silent");
 

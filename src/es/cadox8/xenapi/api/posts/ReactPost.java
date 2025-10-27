@@ -21,17 +21,18 @@
 
 package es.cadox8.xenapi.api.posts;
 
+import es.cadox8.xenapi.api.commons.ReactResponse;
 import es.cadox8.xenapi.exceptions.XenForoMissingArgsException;
 import es.cadox8.xenapi.net.ApiRequest;
 import es.cadox8.xenapi.net.HttpMethod;
-import es.cadox8.xenapi.net.XenforoPaths;
+import es.cadox8.xenapi.utils.XenforoPaths;
 import es.cadox8.xenapi.utils.XenNameValuePair;
 import lombok.Builder;
 
 import java.util.List;
 
 @Builder
-public class ReactPost implements ApiRequest<ReactPostResponse> {
+public class ReactPost implements ApiRequest<ReactResponse> {
 
     /**
      * Required
@@ -69,13 +70,13 @@ public class ReactPost implements ApiRequest<ReactPostResponse> {
     @Override
     public List<XenNameValuePair> body() {
         if (this.reactionId == null || this.reactionId <= 0)
-            throw new XenForoMissingArgsException("reactionId is missing");
+            throw new XenForoMissingArgsException("reactionId");
 
         return List.of(new XenNameValuePair("reaction_id", this.reactionId));
     }
 
     @Override
-    public Class<ReactPostResponse> response() {
-        return ReactPostResponse.class;
+    public Class<ReactResponse> response() {
+        return ReactResponse.class;
     }
 }

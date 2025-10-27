@@ -21,27 +21,37 @@
 
 package es.cadox8.xenapi.updater;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import de.jupf.staticlog.Log;
+import es.cadox8.xenapi.utils.Version;
 import lombok.NonNull;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class UpdateChecker {
 
-    private final String currentVersion;
+    private final Version currentVersion;
     private final URL url;
+    private final boolean checkPreReleases;
 
-    private transient CompletableFuture<String> latestVersionFuture = null;
+    private String latestVersionUrl;
 
-    public UpdateChecker(@NonNull String currentVersion) {
+    private transient CompletableFuture<Version> latestVersionFuture = null;
+
+    public UpdateChecker(@NonNull Version currentVersion, boolean checkPreReleases) {
         this.currentVersion = currentVersion;
+        this.checkPreReleases = checkPreReleases;
         try {
-            this.url = new URL("https://github.com/cadox8/XenAPI/releases/latest");
+            this.url = new URL("https://api.github.com/repos/cadox8/XenAPI/releases");
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -51,28 +61,42 @@ public class UpdateChecker {
         latestVersionFuture = CompletableFuture.supplyAsync(this::fetchLatestVersion);
     }
 
-    private synchronized String getLatestVersion() {
+    private synchronized Version getLatestVersion() {
         if (latestVersionFuture == null)
             this.check();
         return latestVersionFuture.join();
     }
 
-    private String fetchLatestVersion() {
+    private Version fetchLatestVersion() {
         try {
-            HttpURLConnection con;
-            con = (HttpURLConnection) url.openConnection();
-            con.setInstanceFollowRedirects(false);
+            final JsonArray jsonArray = JsonParser.parseReader(new InputStreamReader(url.openStream())).getAsJsonArray();
 
-            String newUrl = con.getHeaderField("Location");
+            if (jsonArray.isEmpty())
+                return this.currentVersion;
 
-            if (newUrl == null)
-                throw new IOException("Did not get a redirect");
+            for (final JsonElement v : jsonArray) {
+                final JsonObject o = v.getAsJsonObject();
+                final Version repoVersion = Version.parse(o.get("tag_name").getAsString());
+                final boolean isPreRelease = o.get("prerelease").getAsBoolean();
+                this.latestVersionUrl = o.get("html_url").getAsString();
 
-            String[] split = newUrl.split("/");
-            return split[split.length - 1];
+                if (this.checkPreReleases) {
+                    if (isPreRelease)
+                        return repoVersion;
+                } else {
+                    if (!isPreRelease)
+                        return repoVersion;
+                }
+            }
         } catch (IOException ex) {
-            throw new CompletionException("Exception trying to fetch the latest version", ex);
+            Log.error("Exception trying to fetch the latest version. Falling back to the current version", "XenAPI", ex);
         }
+        return this.currentVersion;
+    }
+
+    public void scheduleCheckVersion() {
+        final Runnable task = this::sendVersionUpdate;
+        Executors.newScheduledThreadPool(1).scheduleAtFixedRate(task, 0, 5, TimeUnit.HOURS);
     }
 
     public void sendVersionUpdate() {
@@ -81,12 +105,11 @@ public class UpdateChecker {
 
         Log.warn("-------------------", "XenAPI");
         Log.warn("New version available: v" + this.getLatestVersion() + " (current: v" + this.currentVersion + ")", "XenAPI");
-        Log.warn("Download it at " + this.url, "XenAPI");
+        Log.warn("Download it at " + this.latestVersionUrl, "XenAPI");
         Log.warn("-------------------", "XenAPI");
-
     }
 
     private boolean isUpdateAvailable() {
-        return !this.getLatestVersion().equals(this.currentVersion);
+        return this.getLatestVersion().compareTo(this.currentVersion) > 0;
     }
 }

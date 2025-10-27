@@ -9,6 +9,10 @@ es.cadox8.xenapi.api.index
 es.cadox8.xenapi.api.me
 es.cadox8.xenapi.api.media
 es.cadox8.xenapi.api.nodes
+es.cadox8.xenapi.api.posts
+es.cadox8.xenapi.api.profile
+es.cadox8.xenapi.api.profile.comments
+es.cadox8.xenapi.api.stats
 es.cadox8.xenapi.api.user
 es.cadox8.xenapi.exceptions
 es.cadox8.xenapi.net

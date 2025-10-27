@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024
+ * Copyright (c) 2024-2025
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -19,7 +19,7 @@
  * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
  */
 
-package es.cadox8.xenapi.net;
+package es.cadox8.xenapi.utils;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -63,11 +63,21 @@ public enum XenforoPaths {
     USERS_ID("/users/{id}"),
     USER_AVATAR("/users/{id}/avatar"),
     PROFILE_POSTS("/users/{id}/profile-posts"),
+
     POSTS("/posts"),
     POSTS_GET("/posts/{id}"),
     POST_MARK_SOLUTION("/posts/{id}/mark-solution"),
     POST_REACT("/posts/{id}/react"),
-    POST_VOTE("/posts/{id}/vote");
+    POST_VOTE("/posts/{id}/vote"),
+
+    PROFILE_POST("/profile-posts"),
+    PROFILE_POST_ID("/profile-posts/{id}"),
+    PROFILE_POST_ID_COMMENTS("/profile-posts/{id}"),
+    PROFILE_POST_COMMENTS("/profile-post-comments"),
+    PROFILE_POST_COMMENTS_ID("/profile-post-comments/{id}"),
+    PROFILE_POST_COMMENTS_REACT("/profile-post-comments/{id}/react"),
+
+    STATS("/stats");
 
     private final String path;
 }

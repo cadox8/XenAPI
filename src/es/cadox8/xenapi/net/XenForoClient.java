@@ -28,16 +28,14 @@ import de.jupf.staticlog.Log;
 import de.jupf.staticlog.format.LogFormat;
 import es.cadox8.xenapi.api.commons.Errors;
 import es.cadox8.xenapi.exceptions.*;
-import es.cadox8.xenapi.updater.UpdateChecker;
-import es.cadox8.xenapi.utils.UrlExpander;
 import es.cadox8.xenapi.utils.Utils;
-import es.cadox8.xenapi.utils.Version;
 import es.cadox8.xenapi.utils.XenAPIExperimental;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.classic.methods.*;
 import org.apache.hc.client5.http.entity.UrlEncodedFormEntity;
+import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.client5.http.protocol.HttpClientContext;
 import org.apache.hc.core5.http.ClassicHttpResponse;
@@ -45,6 +43,7 @@ import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.NameValuePair;
 import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.hc.core5.http.message.BasicNameValuePair;
 import org.apache.hc.core5.http.message.StatusLine;
 import org.apache.hc.core5.net.URIBuilder;
 
@@ -57,9 +56,6 @@ import java.util.List;
 import static de.jupf.staticlog.Log.FormatOperations.*;
 
 public class XenForoClient {
-
-    private final UpdateChecker updateChecker;
-    private final Version version;
 
     private final HttpClient httpClient;
     private final Gson gson;
@@ -85,12 +81,6 @@ public class XenForoClient {
 
         final LogFormat format = Log.newFormat();
         format.line(date("yyyy-MM-dd HH:mm:ss.SSS"), text(" | "), tag(), space(1), text("["), level(), text("]"), space(2), message());
-
-        this.version = new Version(2, 0, 0, "8-SNAPSHOT");
-        this.updateChecker = new UpdateChecker(this.version.toString());
-        this.updateChecker.sendVersionUpdate();
-
-        Log.info("Started XenAPI client! Version: " + this.version, "XenforoClient");
     }
 
     /**
@@ -130,7 +120,7 @@ public class XenForoClient {
      * @return The ResponseType
      */
     public <T extends ApiResponse> Response<T, Errors> get(String url, Class<T> responseType, Object query, final List<NameValuePair> params) {
-        final String finalURL = UrlExpander.replaceQuery(url, query);
+        final String finalURL = Utils.replaceQuery(url, query);
         Log.debug("--> GET Sending to " + finalURL, "XenForoClient");
         final HttpGet httpGet;
         try {
@@ -142,8 +132,7 @@ public class XenForoClient {
     }
 
     public <T extends ApiResponse> Response<T, Errors> post(String url, Class<T> responseType, Object query, final List<NameValuePair> params) {
-        final String finalURL = UrlExpander.replaceQuery(url, query);
-
+        final String finalURL = Utils.replaceQuery(url, query);
         Log.debug("--> POST Sending to " + finalURL + " with params: " + params, "XenForoClient");
         final HttpPost httpPost;
 
@@ -158,13 +147,17 @@ public class XenForoClient {
     }
 
     public <T extends ApiResponse> Response<T, Errors> postFile(String url, Class<T> responseType, Object query, final List<NameValuePair> params, File file) {
-        final String finalURL = UrlExpander.replaceQuery(url, query);
+        final String finalURL = Utils.replaceQuery(url, query);
         Log.debug("--> POST Sending to " + url + " with params: " + params, "XenForoClient");
         final HttpPost httpPost;
 
         try {
+            final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+            builder.addBinaryBody("avatar", file);
+            params.forEach(p -> builder.addParameter(new BasicNameValuePair(p.getName(), p.getValue())));
+
             httpPost = new HttpPost(new URIBuilder(finalURL).build());
-            httpPost.setEntity(new UrlEncodedFormEntity(params));
+            httpPost.setEntity(builder.build());
             return this.send(responseType, httpPost);
         } catch (JsonSyntaxException | URISyntaxException e) {
             throw new RuntimeException(e);
@@ -172,7 +165,7 @@ public class XenForoClient {
     }
 
     public <T extends ApiResponse> Response<T, Errors> put(String url, Object body, Class<T> responseType, Object query) {
-        final HttpPut put = new HttpPut(UrlExpander.replaceQuery(url, query));
+        final HttpPut put = new HttpPut(Utils.replaceQuery(url, query));
         try {
             final HttpEntity entity = new StringEntity(this.gson.toJson(body), ContentType.MULTIPART_FORM_DATA);
             put.setEntity(entity);
@@ -186,7 +179,7 @@ public class XenForoClient {
     public <T extends ApiResponse> Response<T, Errors> delete(String url, Class<T> responseType, Object query, final List<NameValuePair> params) {
         final HttpDelete delete;
         try {
-            delete = new HttpDelete(new URIBuilder(UrlExpander.replaceQuery(url, query)).build());
+            delete = new HttpDelete(new URIBuilder(Utils.replaceQuery(url, query)).build());
             delete.setEntity(new UrlEncodedFormEntity(params));
             delete.setHeader("Content-Type", "application/x-www-form-urlencoded");
         } catch (URISyntaxException e) {

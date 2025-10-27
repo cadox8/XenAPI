@@ -39,6 +39,6 @@ public class XenForoMissingArgsException extends XenForoBaseException {
     }
 
     public XenForoMissingArgsException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
+        super(message + " is missing or empty", cause, enableSuppression, writableStackTrace);
     }
 }

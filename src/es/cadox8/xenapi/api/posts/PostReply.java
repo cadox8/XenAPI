@@ -24,7 +24,7 @@ package es.cadox8.xenapi.api.posts;
 import es.cadox8.xenapi.exceptions.XenForoMissingArgsException;
 import es.cadox8.xenapi.net.ApiRequest;
 import es.cadox8.xenapi.net.HttpMethod;
-import es.cadox8.xenapi.net.XenforoPaths;
+import es.cadox8.xenapi.utils.XenforoPaths;
 import es.cadox8.xenapi.utils.XenNameValuePair;
 import lombok.Builder;
 
@@ -73,10 +73,10 @@ public class PostReply implements ApiRequest<PostReplyResponse> {
         final List<XenNameValuePair> list = new ArrayList<>();
 
         if (this.threadId == null || this.threadId <= 0)
-            throw new XenForoMissingArgsException("threadId is missing!");
+            throw new XenForoMissingArgsException("threadId!");
 
         if (this.message == null || this.message.isEmpty())
-            throw new XenForoMissingArgsException("message is missing!");
+            throw new XenForoMissingArgsException("message!");
 
         list.add(new XenNameValuePair("thread_id", this.threadId));
         list.add(new XenNameValuePair("message", this.message));

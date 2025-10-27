@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2024
+ * Copyright (c) 2025
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -19,28 +19,30 @@
  * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
  */
 
-package es.cadox8.xenapi.utils;
+package es.cadox8.xenapi.api.profile;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import es.cadox8.xenapi.api.commons.Pagination;
+import es.cadox8.xenapi.api.commons.ProfilePost;
+import es.cadox8.xenapi.api.commons.ProfilePostComment;
+import es.cadox8.xenapi.net.ApiResponse;
+import lombok.Data;
 
-public final class UrlExpander {
-    private static final Pattern NAMES_PATTERN = Pattern.compile("\\{([^/]+?)}");
+import java.util.List;
 
-    public static String replaceQuery(String url, Object param) {
-        if (url == null)
-            return null;
-        if (url.indexOf('{') == -1)
-            return url;
-        final Matcher matcher = NAMES_PATTERN.matcher(url);
-        final StringBuilder sb = new StringBuilder();
+@Data
+public class GetProfilePostsResponse implements ApiResponse {
 
-        if (matcher.find()) { // Must find only one
-            final String replacement = Matcher.quoteReplacement(String.valueOf(param));
-            matcher.appendReplacement(sb, replacement);
-        }
+    @Expose
+    @SerializedName("profile_post")
+    private ProfilePost profilePost;
 
-        matcher.appendTail(sb);
-        return sb.toString();
-    }
+    @Expose
+    @SerializedName("comments")
+    private List<ProfilePostComment> profilePostComments;
+
+    @Expose
+    @SerializedName("pagination")
+    private Pagination pagination;
 }

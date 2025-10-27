@@ -19,7 +19,7 @@
  * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
  */
 
-package es.cadox8.xenapi.api.posts;
+package es.cadox8.xenapi.api.me;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -27,13 +27,13 @@ import es.cadox8.xenapi.net.ApiResponse;
 import lombok.Data;
 
 @Data
-public class ReactPostResponse implements ApiResponse {
+public class UpdateMailResponse implements ApiResponse {
 
     @Expose
     @SerializedName("success")
-    private Boolean success;
-    
+    private final boolean success;
+
     @Expose
-    @SerializedName("action")
-    private String action;
+    @SerializedName("confirmation_required")
+    private final boolean confirmationRequired;
 }

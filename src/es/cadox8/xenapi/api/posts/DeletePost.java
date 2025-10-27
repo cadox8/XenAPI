@@ -25,7 +25,7 @@ import es.cadox8.xenapi.api.commons.Success;
 import es.cadox8.xenapi.exceptions.XenForoMissingArgsException;
 import es.cadox8.xenapi.net.ApiRequest;
 import es.cadox8.xenapi.net.HttpMethod;
-import es.cadox8.xenapi.net.XenforoPaths;
+import es.cadox8.xenapi.utils.XenforoPaths;
 import es.cadox8.xenapi.utils.XenNameValuePair;
 import lombok.Builder;
 
@@ -63,7 +63,7 @@ public class DeletePost implements ApiRequest<Success> {
     @Override
     public Object query() {
         if (this.postId == null || this.postId <= 0)
-            throw new XenForoMissingArgsException("postId is missing!");
+            throw new XenForoMissingArgsException("postId!");
 
         return this.postId;
     }
@@ -78,7 +78,7 @@ public class DeletePost implements ApiRequest<Success> {
         final List<XenNameValuePair> list = new ArrayList<>();
 
         if (this.reason == null || this.reason.isEmpty())
-            throw new XenForoMissingArgsException("reason is missing!");
+            throw new XenForoMissingArgsException("reason!");
 
         list.add(new XenNameValuePair("reason", this.reason));
         list.add(new XenNameValuePair("hard_delete", this.hardDelete));

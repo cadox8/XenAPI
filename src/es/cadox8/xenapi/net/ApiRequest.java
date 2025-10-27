@@ -22,6 +22,7 @@
 package es.cadox8.xenapi.net;
 
 import es.cadox8.xenapi.utils.XenNameValuePair;
+import es.cadox8.xenapi.utils.XenforoPaths;
 
 import java.util.List;
 
@@ -37,4 +38,8 @@ public interface ApiRequest<T extends ApiResponse> {
     List<XenNameValuePair> body();
 
     Class<T> response();
+
+    default boolean containsFile() {
+        return false;
+    }
 }

@@ -40,12 +40,27 @@ public class Version implements Comparable<Version> {
     }
 
     public static Version parse(String versionStr) {
-        final String[] parts = versionStr.split("\\.");
-        int major = parts.length > 0 ? Integer.parseInt(parts[0]) : 0;
-        int minor = parts.length > 1 ? Integer.parseInt(parts[1]) : 0;
-        int patch = parts.length > 2 ? Integer.parseInt(parts[2]) : 0;
-        String build = parts.length > 3 ? parts[3] : "";
-        return new Version(major, minor, patch, build);
+        try {
+            String build = "";
+            if (versionStr.contains("-")) {
+                String[] versionAndBuild = versionStr.split("-", 2);
+                versionStr = versionAndBuild[0];
+                build = versionAndBuild[1];
+            }
+
+            final String[] parts = versionStr.split("\\.");
+            int major = parts.length > 0 ? Integer.parseInt(parts[0]) : 0;
+            int minor = parts.length > 1 ? Integer.parseInt(parts[1]) : 0;
+            int patch = parts.length > 2 ? Integer.parseInt(parts[2]) : 0;
+
+            return new Version(major, minor, patch, build);
+        } catch (NumberFormatException e) {
+            return new Version(0, 0, 0);
+        }
+    }
+
+    public boolean isPreRelease() {
+        return !this.build.isEmpty() && this.build.contains("-SNAPSHOT");
     }
 
     @Override
@@ -57,8 +72,27 @@ public class Version implements Comparable<Version> {
         if (this.patch != other.patch)
             return this.patch - other.patch;
 
-        return this.build.compareTo(other.build);
+        if (this.build == null && other.build != null)
+            return 1;
+        if (this.build != null && other.build == null)
+            return -1;
+        if (this.build == null)
+            return 0;
+
+        String[] thisParts = this.build.split("-", 2);
+        String[] otherParts = other.build.split("-", 2);
+
+        try {
+            int thisNum = Integer.parseInt(thisParts[0]);
+            int otherNum = Integer.parseInt(otherParts[0]);
+            if (thisNum != otherNum)
+                return thisNum - otherNum;
+        } catch (NumberFormatException ignored) {
+        }
+
+        return this.build.compareToIgnoreCase(other.build);
     }
+
 
     @Override
     public String toString() {

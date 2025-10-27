@@ -25,12 +25,11 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import es.cadox8.xenapi.api.attachment.AttachmentResponse;
 import es.cadox8.xenapi.api.auth.UserResponse;
-import lombok.Getter;
-import lombok.ToString;
+import es.cadox8.xenapi.net.ApiResponse;
+import lombok.Data;
 
-@Getter
-@ToString
-public class ProfilePostComment {
+@Data
+public class ProfilePostComment implements ApiResponse {
 
     @Expose
     @SerializedName("username")

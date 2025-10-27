@@ -21,11 +21,9 @@
 
 package es.cadox8.xenapi.api.commons;
 
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@ToString
+@Data
 public class AvatarUrls {
     private String o;
     private String h;

@@ -24,7 +24,7 @@ package es.cadox8.xenapi.api.nodes;
 import es.cadox8.xenapi.api.commons.TypeNodeId;
 import es.cadox8.xenapi.net.ApiRequest;
 import es.cadox8.xenapi.net.HttpMethod;
-import es.cadox8.xenapi.net.XenforoPaths;
+import es.cadox8.xenapi.utils.XenforoPaths;
 import es.cadox8.xenapi.utils.XenNameValuePair;
 import lombok.Builder;
 

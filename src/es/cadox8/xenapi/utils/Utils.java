@@ -21,14 +21,15 @@
 
 package es.cadox8.xenapi.utils;
 
-import es.cadox8.xenapi.net.XenforoPaths;
 import lombok.NonNull;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class Utils {
+public final class Utils {
 
     public static String toString(@NonNull InputStream in) {
         try (final Scanner scanner = new Scanner(in, StandardCharsets.UTF_8)) {
@@ -38,5 +39,22 @@ public class Utils {
 
     public static String createUrl(String api_url, final XenforoPaths baseUrl) {
         return api_url + baseUrl.getPath();
+    }
+
+    public static String replaceQuery(String url, Object param) {
+        if (url == null)
+            return null;
+        if (url.indexOf('{') == -1)
+            return url;
+        final Matcher matcher = Pattern.compile("\\{([^/]+?)}").matcher(url);
+        final StringBuilder sb = new StringBuilder();
+
+        if (matcher.find()) { // Must find only one
+            final String replacement = Matcher.quoteReplacement(String.valueOf(param));
+            matcher.appendReplacement(sb, replacement);
+        }
+
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 }

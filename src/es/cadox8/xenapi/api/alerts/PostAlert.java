@@ -25,7 +25,7 @@ import es.cadox8.xenapi.api.commons.Success;
 import es.cadox8.xenapi.exceptions.XenForoMissingArgsException;
 import es.cadox8.xenapi.net.ApiRequest;
 import es.cadox8.xenapi.net.HttpMethod;
-import es.cadox8.xenapi.net.XenforoPaths;
+import es.cadox8.xenapi.utils.XenforoPaths;
 import es.cadox8.xenapi.utils.XenNameValuePair;
 import lombok.Builder;
 
@@ -75,7 +75,7 @@ public class PostAlert implements ApiRequest<Success> {
         final List<XenNameValuePair> params = new ArrayList<>();
 
         if (this.to_user_id == -1 || this.alert.isEmpty())
-            throw new XenForoMissingArgsException("to_user_id or alert is missing!");
+            throw new XenForoMissingArgsException("to_user_id or alert!");
 
         params.add(new XenNameValuePair("to_user_id", this.to_user_id));
         params.add(new XenNameValuePair("alert", this.alert));

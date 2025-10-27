@@ -24,7 +24,7 @@ package es.cadox8.xenapi.api.posts;
 import es.cadox8.xenapi.exceptions.XenForoMissingArgsException;
 import es.cadox8.xenapi.net.ApiRequest;
 import es.cadox8.xenapi.net.HttpMethod;
-import es.cadox8.xenapi.net.XenforoPaths;
+import es.cadox8.xenapi.utils.XenforoPaths;
 import es.cadox8.xenapi.utils.XenNameValuePair;
 import lombok.Builder;
 import lombok.Getter;
@@ -69,7 +69,7 @@ public class VotePost implements ApiRequest<VotePostResponse> {
     @Override
     public List<XenNameValuePair> body() {
         if (this.vote == null)
-            throw new XenForoMissingArgsException("vote is missing");
+            throw new XenForoMissingArgsException("vote");
 
         return List.of(new XenNameValuePair("type", this.vote.getVote()));
     }

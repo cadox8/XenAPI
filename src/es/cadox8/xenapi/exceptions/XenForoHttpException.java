@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2024
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -21,9 +21,10 @@
 
 package es.cadox8.xenapi.exceptions;
 
-public class XenForoHttpException extends RuntimeException {
+public class XenForoHttpException extends XenForoBaseException {
 
-    public XenForoHttpException() {}
+    public XenForoHttpException() {
+    }
 
     public XenForoHttpException(String message) {
         super(message);

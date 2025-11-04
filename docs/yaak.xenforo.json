@@ -1,0 +1,980 @@
+{
+  "yaakVersion": "2025.7.2",
+  "yaakSchema": 4,
+  "timestamp": "2025-10-25T01:36:36.747658800",
+  "resources": {
+    "workspaces": [
+      {
+        "model": "workspace",
+        "id": "wk_tgjhVbtgis",
+        "createdAt": "2023-11-13T21:56:55.758",
+        "updatedAt": "2025-10-24T18:59:26.602978800",
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "XenForo",
+        "encryptionKeyChallenge": null,
+        "settingValidateCertificates": true,
+        "settingFollowRedirects": true,
+        "settingRequestTimeout": 0
+      }
+    ],
+    "environments": [],
+    "folders": [
+      {
+        "model": "folder",
+        "id": "fl_WeqtPcMhog",
+        "createdAt": "2025-10-24T22:50:32.314013200",
+        "updatedAt": "2025-10-24T22:50:39.692566100",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Nodes",
+        "sortPriority": 3333.3333
+      },
+      {
+        "model": "folder",
+        "id": "fl_9jak9PFxgY",
+        "createdAt": "2025-10-01T18:41:58.701",
+        "updatedAt": "2025-10-24T22:50:37.137473800",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Conversation",
+        "sortPriority": 0.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_WLKEBN2LBv",
+        "createdAt": "2025-10-01T13:06:16.497",
+        "updatedAt": "2025-10-24T22:50:37.155387700",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Index",
+        "sortPriority": 1000.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_VuNRyeDnab",
+        "createdAt": "2025-09-29T19:02:01.567",
+        "updatedAt": "2025-10-24T22:50:37.158786200",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Me",
+        "sortPriority": 2000.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_NqiTp3xjEB",
+        "createdAt": "2025-09-29T18:35:25.509",
+        "updatedAt": "2025-10-24T22:50:37.162282",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Alerts",
+        "sortPriority": 3000.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_CcMqXVxBwm",
+        "createdAt": "2025-09-29T18:21:39.987",
+        "updatedAt": "2025-10-24T22:50:37.165424200",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Auth",
+        "sortPriority": 4000.0
+      }
+    ],
+    "httpRequests": [
+      {
+        "model": "http_request",
+        "id": "rq_ygUSvvokFn",
+        "createdAt": "2025-10-24T23:26:13.840545500",
+        "updatedAt": "2025-10-25T00:18:37.485343800",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_WeqtPcMhog",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "form": [
+            {
+              "enabled": true,
+              "id": "dsHdbjAVjM",
+              "name": "node[title]",
+              "value": "TestTitle"
+            },
+            {
+              "enabled": true,
+              "id": "zUUBBwreYI",
+              "name": "node_type_id",
+              "value": "Category"
+            },
+            {
+              "enabled": true,
+              "id": "xAEwfZGsDt",
+              "name": "node[node_name]",
+              "value": "Test Node"
+            },
+            {
+              "enabled": true,
+              "id": "vMIjqPHt0k",
+              "name": "node[parent_node_id]",
+              "value": "0"
+            },
+            {
+              "enabled": true,
+              "id": "nUrDg95Avv",
+              "name": "",
+              "value": ""
+            }
+          ]
+        },
+        "bodyType": "multipart/form-data",
+        "description": "Gets the API user's list of alerts",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": "TiE7mNYWwx"
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": "x5yq0FDwHi"
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": "Kv3gRYxDMw"
+          },
+          {
+            "enabled": true,
+            "name": "",
+            "value": "",
+            "id": "AXxM4qQaDh"
+          },
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "multipart/form-data",
+            "id": "sPIfDn24y7"
+          }
+        ],
+        "method": "POST",
+        "name": "Post Node",
+        "sortPriority": 0.0012,
+        "url": "${[base ]}/nodes",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_AP6xxXJNDs",
+        "createdAt": "2025-10-24T22:58:20.965930800",
+        "updatedAt": "2025-10-24T22:58:26.676685300",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_WeqtPcMhog",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": ""
+        },
+        "bodyType": "application/json",
+        "description": "Gets the API user's list of alerts",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Node",
+        "sortPriority": 0.0021999999999999997,
+        "url": "${[base ]}/nodes/1",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_PCf9YKa2Nv",
+        "createdAt": "2025-10-24T22:55:28.740601600",
+        "updatedAt": "2025-10-24T22:55:41.534120",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_WeqtPcMhog",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": ""
+        },
+        "bodyType": "application/json",
+        "description": "Gets the API user's list of alerts",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Flattenedd Nodes",
+        "sortPriority": 0.0011,
+        "url": "${[base ]}/nodes/flattened",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_5rhE47J92r",
+        "createdAt": "2025-10-24T22:51:07.321845800",
+        "updatedAt": "2025-10-24T22:51:21.603331200",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_WeqtPcMhog",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": ""
+        },
+        "bodyType": "application/json",
+        "description": "Gets the API user's list of alerts",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Nodes",
+        "sortPriority": 0.0,
+        "url": "${[base ]}/nodes",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_pFRuRLDHXM",
+        "createdAt": "2025-10-01T18:45:54.405",
+        "updatedAt": "2025-10-01T18:46:59.556",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_9jak9PFxgY",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n\t\"recipient_ids\": [1, 3],\n\t\"title\": \"Conversation Test title\",\n\t\"message\": \"Conversation Test body\",\n\t\"conversation_open\": true,\n\t\"open_invite\": false\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Tests a login and password for validity. Only available to super user keys. We strongly recommend the login and password parameters are passed into the request body rather than the query string.",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Create Conversation",
+        "sortPriority": -1759326153053.8125,
+        "url": "${[base ]}/conversations",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_dmkXKtuzHk",
+        "createdAt": "2025-10-01T18:45:17.828",
+        "updatedAt": "2025-10-01T19:24:51.014",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_9jak9PFxgY",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": ""
+        },
+        "bodyType": "application/json",
+        "description": "Tests a login and password for validity. Only available to super user keys. We strongly recommend the login and password parameters are passed into the request body rather than the query string.",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Get Conversations",
+        "sortPriority": -1759332145670.875,
+        "url": "${[base ]}/conversations",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_PyPadTqUdZ",
+        "createdAt": "2025-10-01T18:44:56.636",
+        "updatedAt": "2025-10-01T18:45:10.239",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_9jak9PFxgY",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n\t\"reaction_id\": 1\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Tests a login and password for validity. Only available to super user keys. We strongly recommend the login and password parameters are passed into the request body rather than the query string.",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "React Conversation",
+        "sortPriority": -1759308175202.625,
+        "url": "${[base ]}/conversation-messages/1/react",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_c8hV9svA5g",
+        "createdAt": "2025-10-01T18:44:26.336",
+        "updatedAt": "2025-10-01T18:44:42.645",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_9jak9PFxgY",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n\t\"message\": \"Updated conversation\"\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Tests a login and password for validity. Only available to super user keys. We strongly recommend the login and password parameters are passed into the request body rather than the query string.",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Update Conversation",
+        "sortPriority": -1759320160436.75,
+        "url": "${[base ]}/conversation-messages/1",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_jxA9rtC2eV",
+        "createdAt": "2025-10-01T18:42:15.414",
+        "updatedAt": "2025-10-01T18:47:47.262",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_9jak9PFxgY",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n\t\"conversation_id\": 1,\n\t\"message\": \"Test reply\"\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Tests a login and password for validity. Only available to super user keys. We strongly recommend the login and password parameters are passed into the request body rather than the query string.",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Reply Conversation",
+        "sortPriority": -1759296189968.5,
+        "url": "${[base ]}/conversation-messages/",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_LjdBkgortc",
+        "createdAt": "2025-10-01T18:42:05.888",
+        "updatedAt": "2025-10-01T18:43:26.283",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_9jak9PFxgY",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": ""
+        },
+        "bodyType": "application/json",
+        "description": "Tests a login and password for validity. Only available to super user keys. We strongly recommend the login and password parameters are passed into the request body rather than the query string.",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Get Conversation",
+        "sortPriority": -1759344130905.0,
+        "url": "${[base ]}/conversation-messages/1",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_Xrg77HooDR",
+        "createdAt": "2025-10-01T13:06:23.315",
+        "updatedAt": "2025-10-01T18:51:02.121",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_WLKEBN2LBv",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": ""
+        },
+        "bodyType": "application/json",
+        "description": "Tests a login and password for validity. Only available to super user keys. We strongly recommend the login and password parameters are passed into the request body rather than the query string.",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Index",
+        "sortPriority": -1759344662087.0,
+        "url": "${[base ]}/index",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_FYbJ6E7UyZ",
+        "createdAt": "2025-09-29T19:02:06.961",
+        "updatedAt": "2025-10-01T18:50:57.087",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_VuNRyeDnab",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": ""
+        },
+        "bodyType": "application/json",
+        "description": "Tests a login and password for validity. Only available to super user keys. We strongly recommend the login and password parameters are passed into the request body rather than the query string.",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Me",
+        "sortPriority": -1759344657045.0,
+        "url": "${[base ]}/me",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_xbo9fVfEYY",
+        "createdAt": "2025-09-29T19:01:16.480",
+        "updatedAt": "2025-09-29T19:01:28.904",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_NqiTp3xjEB",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n\t\"read\": true,\n\t\"viewed\": true\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Sends an alert to the specified user. Only available to super user keys.",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Mark One Alert",
+        "sortPriority": -1759170214003.875,
+        "url": "${[base ]}/alerts/${[alertId ]}/mark",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_4QwBSGTqVQ",
+        "createdAt": "2025-09-29T18:50:39.154",
+        "updatedAt": "2025-10-25T00:36:42.439729200",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_NqiTp3xjEB",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": ""
+        },
+        "bodyType": "application/json",
+        "description": "Gets the API user's list of alerts",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Get Alert Id",
+        "sortPriority": -1759170726398.25,
+        "url": "${[base ]}/alerts/32",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_FtuazSQ4Vm",
+        "createdAt": "2025-09-29T18:49:51.013",
+        "updatedAt": "2025-09-29T18:50:23.031",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_NqiTp3xjEB",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n\t\"read\": true,\n\t\"viewed\": true\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Sends an alert to the specified user. Only available to super user keys.",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Mark All Alerts",
+        "sortPriority": -1759170316482.75,
+        "url": "${[base ]}/alerts/mark-all ",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_MqtVCS3Xwh",
+        "createdAt": "2025-09-29T18:40:06.923",
+        "updatedAt": "2025-09-29T18:45:40.467",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_NqiTp3xjEB",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n\t\"to_user_id\": 1, \n\t\"alert\": \"Test alert\", \n\t\"from_user_id\": 1\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Sends an alert to the specified user. Only available to super user keys.",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Post Alerts",
+        "sortPriority": -1759170521440.5,
+        "url": "${[base ]}/alerts",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_hmA3ihpUvV",
+        "createdAt": "2025-09-29T18:35:54.974",
+        "updatedAt": "2025-09-29T18:40:13.580",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_NqiTp3xjEB",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": ""
+        },
+        "bodyType": "application/json",
+        "description": "Gets the API user's list of alerts",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Get Alerts",
+        "sortPriority": -1759170931356.0,
+        "url": "${[base ]}/alerts",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_HMLiCmfJ9B",
+        "createdAt": "2025-09-29T18:21:51.525",
+        "updatedAt": "2025-09-29T18:34:40.518",
+        "workspaceId": "wk_tgjhVbtgis",
+        "folderId": "fl_CcMqXVxBwm",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n\t\"login\": \"cadox8\",\n\t\"password\": \"123abc4d\"\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Tests a login and password for validity. Only available to super user keys. We strongly recommend the login and password parameters are passed into the request body rather than the query string.",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "User-Agent",
+            "value": "insomnia/2023.5.8",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-Key",
+            "value": "eEg2u9RcroO9LiFyZpIzgZthB489WYHh",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "XF-Api-User",
+            "value": "1",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Auth",
+        "sortPriority": -1759170111525.0,
+        "url": "${[base ]}/auth",
+        "urlParameters": []
+      }
+    ],
+    "grpcRequests": [],
+    "websocketRequests": []
+  }
+}

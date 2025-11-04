@@ -1,0 +1,31 @@
+name: XenAPI CI
+
+on:
+  push:
+    branches: [ dev, master ]
+  pull_request:
+    types: [ opened ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '11', '17', '21' ]
+    name: Java ${{ matrix.Java }} sample
+
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java }}
+          cache: maven
+      - name: Cache the Maven packages to speed up build
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - run: mvn clean install --file pom.xml

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024
+ * Copyright (c) 2025
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -19,32 +19,33 @@
  * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
  */
 
-package es.cadox8.xenapi.api.media;
+package es.cadox8.xenapi.api.search;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import es.cadox8.xenapi.api.commons.Pagination;
+import es.cadox8.xenapi.api.forums.Threads;
 import es.cadox8.xenapi.net.ApiResponse;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 
-@ToString
-@Getter
+import java.util.List;
 
-public class Media implements ApiResponse {
+@Data
+public class SearchForumResponse implements ApiResponse {
 
-    @SerializedName("media")
     @Expose
-    private MediaData media;
+    @SerializedName("search_forum")
+    private Search search;
 
+    @Expose
+    @SerializedName("threads")
+    private List<Threads> threads;
 
+    @Expose
     @SerializedName("pagination")
-    @Expose
     private Pagination pagination;
 
-    @ToString
-    @Getter
-    public static class MediaData {
-
-    }
+    @Expose
+    @SerializedName("sticky")
+    private List<Threads> sticky;
 }

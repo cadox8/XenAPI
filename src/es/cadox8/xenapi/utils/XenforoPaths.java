@@ -77,7 +77,14 @@ public enum XenforoPaths {
     PROFILE_POST_COMMENTS_ID("/profile-post-comments/{id}"),
     PROFILE_POST_COMMENTS_REACT("/profile-post-comments/{id}/react"),
 
-    STATS("/stats");
+    STATS("/stats"),
+
+    SEARCH("/search"),
+    SEARCH_MEMBER("/search/member"),
+    SEARCH_ID("/search/{id}"),
+    SEARCH_ID_OLDER("/search/{id}/older"),
+    SEARCH_FORUMS("/search-forums/{id}"),
+    SEARCH_FORUMS_THREADS("/search-forums/{id}/threads");
 
     private final String path;
 }

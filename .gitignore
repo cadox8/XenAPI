@@ -2,3 +2,15 @@
 target
 # Used for testing
 /src/test/
+# Docs
+/docs/docs
+/docs/src
+/docs/static
+/docs/node_modules
+/docs/docusaurus.config.ts
+/docs/package-lock.json
+/docs/pnpm-workspace.yaml
+/docs/package.json
+/docs/pnpm-lock.yaml
+/docs/sidebars.ts
+/docs/tsconfig.json

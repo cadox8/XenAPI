@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024
+ * Copyright (c) 2025
  *
  * This file is part of XenAPI <https://github.com/cadox8/XenAPI>.
  *
@@ -19,27 +19,33 @@
  * If you have any question feel free to ask at <https://cadox8.es> or <mailto:cadox8@gmail.com>
  */
 
-package es.cadox8.xenapi.api.auth;
+package es.cadox8.xenapi.api.search;
 
+import es.cadox8.xenapi.exceptions.XenForoMissingArgsException;
 import es.cadox8.xenapi.net.ApiRequest;
 import es.cadox8.xenapi.net.HttpMethod;
-import es.cadox8.xenapi.utils.XenforoPaths;
+import es.cadox8.xenapi.utils.XenAPIExperimental;
 import es.cadox8.xenapi.utils.XenNameValuePair;
+import es.cadox8.xenapi.utils.XenforoPaths;
 import lombok.Builder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Builder
-public class Auth implements ApiRequest<UserResponse> {
+@XenAPIExperimental(XenAPIExperimental.Status.UNTESTED)
+public class SearchByIdOlder implements ApiRequest<BasicSearch> {
 
-    private final String login;
-    private final String password;
-    private final String limit_ip;
+    /**
+     * Not very sure the Id of what
+     */
+    private final Integer id;
+
+    private final Integer before;
 
     @Override
     public XenforoPaths getPath() {
-        return XenforoPaths.AUTH;
+        return XenforoPaths.SEARCH_ID_OLDER;
     }
 
     @Override
@@ -49,29 +55,32 @@ public class Auth implements ApiRequest<UserResponse> {
 
     @Override
     public Object query() {
-        return null;
+        if (this.id == null)
+            throw new XenForoMissingArgsException("id");
+        return this.id;
     }
 
     @Override
     public List<XenNameValuePair> params() {
-        return List.of();
+        if (this.id == null)
+            return List.of();
+
+        final List<XenNameValuePair> list = new ArrayList<>();
+        list.add(new XenNameValuePair("search_id", this.id));
+
+        if (this.before != null)
+            list.add(new XenNameValuePair("before", this.before));
+
+        return list;
     }
 
     @Override
     public List<XenNameValuePair> body() {
-        final List<XenNameValuePair> body = new ArrayList<>();
-
-        body.add(new XenNameValuePair("login", this.login));
-        body.add(new XenNameValuePair("password", this.password));
-
-        if (this.limit_ip != null)
-            body.add(new XenNameValuePair("limit_ip", this.limit_ip));
-
-        return body;
+        return List.of();
     }
 
     @Override
-    public Class<UserResponse> response() {
-        return UserResponse.class;
+    public Class<BasicSearch> response() {
+        return BasicSearch.class;
     }
 }

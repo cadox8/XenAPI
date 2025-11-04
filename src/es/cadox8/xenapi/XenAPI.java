@@ -72,7 +72,7 @@ public class XenAPI {
 
         this.enableDebug(false);
 
-        final Version version = new Version(2, 0, 0, "9-SNAPSHOT");
+        final Version version = new Version(2, 0, 0, "10-SNAPSHOT");
         final UpdateChecker updateChecker = new UpdateChecker(version, true);
         updateChecker.sendVersionUpdate();
         updateChecker.scheduleCheckVersion();
